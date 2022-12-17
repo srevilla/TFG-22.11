@@ -46,37 +46,19 @@ public class Pregunta {
 			if(!totalConjuntos.contains(conjuntoNuevo)) {
 				totalConjuntos.add(conjuntoNuevo);
 			}
-		}
-		
-//		ordenarTotalConjuntos();
+		}		
+		ordenarTotalConjuntos();
 	}
 	
 	public void ordenarTotalConjuntos() {
-//		int i, j, k;
-//		List<Character> aux;
-//        for (i=0; i<totalConjuntos.size()-1; i++) {
-//            for (j = 0; j < totalConjuntos.size() - i - 1; j++) { 
-//            	for (k=0; k < totalConjuntos.get(j).size(); k++) {
-//                    if (totalConjuntos.get(j + 1).get(k) < totalConjuntos.get(j).get(k)) {
-//                        aux = totalConjuntos.get(j + 1);
-//                        totalConjuntos.set(j + 1, totalConjuntos.get(j));
-//                        totalConjuntos.set(j, aux);
-//                    }
-//            	}
-//            }
-//        }
-//		Collections.sort(totalConjuntos, new Comparator<List<Character>>() {
-//            public int compare(List<Character> conjunto1, List<Character> conjunto2) {
-//            	for (int i=0; i<getNumItemSets(); i++) {
-//                    return conjunto1.get(i).compareTo(conjunto2.get(i));
-//            	}
-//            	return 0;
-//            }
-//
-//        });
-//		for (List<Character> conjuntosOrdenados : totalConjuntos) {
-//            System.out.println(ArrayList.toString(conjuntosOrdenados));
-//        }
+        totalConjuntos.sort((x, y) -> {
+            for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
+                if (x.get(i) != y.get(i)) {
+                    return x.get(i) - y.get(i);
+                }
+            }
+            return x.size() - y.size();
+        });
 	}
 
 	public int getNumItemSets() {

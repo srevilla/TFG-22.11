@@ -11,12 +11,23 @@ public class Main {
 		final int MaxTamItemSets = 4;
 		final int MinTamItemSets = 3;
 		
+		int contador = 0;
 		int tamItemSets = 0;
+		int numItemSets;
+		int numPreguntas = 0;
+		int numRespuestasFalsas = 0;
+		int numRespuestasVerdaderas = 0;
 		boolean repetir = true;
+		boolean tieneSolucion = false;
 
 		System.out.println("**************CONFIGURACION**************");
+		System.out.println("Elige cantidad de preguntas a generar");
+		numPreguntas = leer.nextInt();
+		System.out.println("Elige cantidad de opciones de respuesta verdaderas");
+		numRespuestasVerdaderas = leer.nextInt();
+		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
 		System.out.println("Elige cantidad de item sets:");
-		final int numItemSets = leer.nextInt();
+		numItemSets = leer.nextInt();
 		while(repetir) {
 			System.out.println("Elige tamaño de los item sets:");
 			tamItemSets = leer.nextInt();
@@ -30,20 +41,21 @@ public class Main {
 		Pregunta p = new Pregunta(numItemSets, tamItemSets);
 		System.out.println("Se dispone de los siguientes " + tamItemSets + "-item sets:");
 
-		boolean tieneSolucion = false;
-		while(!tieneSolucion) {
+		while(!tieneSolucion || contador<numPreguntas) {
 			p.generarTotalConjuntos();
 			
 			List<List<Character>> totalConjuntos = p.getTotalConjuntos();
 			Solucion s = new Solucion(totalConjuntos);
 			s.generarSoluciones();
-			tieneSolucion = s.tieneSolucion();
+			tieneSolucion = s.tieneSolucion(numRespuestasVerdaderas);
 			if(tieneSolucion) {
+//		        p.getTotalConjuntos().stream().forEach(System.out::println);
 				for (int i=0; i<p.getTotalConjuntos().size(); i++) {
 					System.out.print(p.getTotalConjuntos().get(i));
 				}
-				System.out.println("Cuales de las siguientes opciones son correctas?");
-				s.imprimirOpciones();
+				System.out.println("\nCuales de las siguientes opciones son correctas?");
+				s.imprimirOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
+				contador++;
 			}
 		}
 		

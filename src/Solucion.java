@@ -113,10 +113,10 @@ public class Solucion {
         return index;
 	}
 	
-	private void generarOpciones() {
+	private void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
 		opciones = new ArrayList<List<Character>>();
 		
-		for (int i=0; i<2; i++) {
+		for (int i=0; i<numRespuestasFalsas; i++) {
 			List<Character> solucionAñadir = getSolucionesFalsas().get(generarIndex(getSolucionesFalsas().size()));
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
@@ -125,7 +125,7 @@ public class Solucion {
 			}
 		}
 		
-		for (int i=0; i<2; i++) {
+		for (int i=0; i<numRespuestasVerdaderas; i++) {
 			List<Character> solucionAñadir = getSolucionesVerdaderas().get(generarIndex(getSolucionesVerdaderas().size()));
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
@@ -134,8 +134,8 @@ public class Solucion {
 			}
 		}
 	}
-	public void imprimirOpciones() {
-		generarOpciones();
+	public void imprimirOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
+		generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
 		for (int i=0; i<4; i++) {
 			switch(i) {
 			case 0: 
@@ -154,8 +154,8 @@ public class Solucion {
 		}
 	}
 	
-	public boolean tieneSolucion() {
-		if (getSolucionesVerdaderas().size()>=2) {
+	public boolean tieneSolucion(int numRespuestasVerdaderas) {
+		if (getSolucionesVerdaderas().size()>=numRespuestasVerdaderas) {
 			return true;
 		} else {
 			return false;
