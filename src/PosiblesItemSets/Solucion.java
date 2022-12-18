@@ -1,3 +1,4 @@
+package PosiblesItemSets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -113,7 +114,7 @@ public class Solucion {
         return index;
 	}
 	
-	private void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
+	public void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
 		opciones = new ArrayList<List<Character>>();
 		
 		for (int i=0; i<numRespuestasFalsas; i++) {
@@ -134,25 +135,25 @@ public class Solucion {
 			}
 		}
 	}
-	public void imprimirOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
-		generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
-		for (int i=0; i<4; i++) {
-			switch(i) {
-			case 0: 
-				System.out.println("a) " + getOpciones().remove(generarIndex(4-i)));
-				break;
-			case 1: 
-				System.out.println("b) " + getOpciones().remove(generarIndex(4-i)));
-				break;
-			case 2: 
-				System.out.println("c) " + getOpciones().remove(generarIndex(4-i)));
-				break;
-			case 3: 
-				System.out.println("d) " + getOpciones().remove(generarIndex(4-i)));
-				break;
-			}
-		}
-	}
+//	public void imprimirOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
+//		generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
+//		for (int i=0; i<4; i++) {
+//			switch(i) {
+//			case 0: 
+//				System.out.println("a) " + getOpciones().remove(generarIndex(4-i)));
+//				break;
+//			case 1: 
+//				System.out.println("b) " + getOpciones().remove(generarIndex(4-i)));
+//				break;
+//			case 2: 
+//				System.out.println("c) " + getOpciones().remove(generarIndex(4-i)));
+//				break;
+//			case 3: 
+//				System.out.println("d) " + getOpciones().remove(generarIndex(4-i)));
+//				break;
+//			}
+//		}
+//	}
 	
 	public boolean tieneSolucion(int numRespuestasVerdaderas) {
 		if (getSolucionesVerdaderas().size()>=numRespuestasVerdaderas) {

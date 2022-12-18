@@ -1,4 +1,9 @@
+package PosiblesItemSets;
 import java.util.Scanner;
+
+import Traductor.Traductor;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +19,18 @@ public class Main {
 		int contador = 0;
 		int tamItemSets = 0;
 		int numItemSets;
-		int numPreguntas = 0;
-		int numRespuestasFalsas = 0;
-		int numRespuestasVerdaderas = 0;
+		int numPreguntas = 1;
+		int numRespuestasFalsas = 2;
+		int numRespuestasVerdaderas = 2;
 		boolean repetir = true;
 		boolean tieneSolucion = false;
 
 		System.out.println("**************CONFIGURACION**************");
-		System.out.println("Elige cantidad de preguntas a generar");
-		numPreguntas = leer.nextInt();
-		System.out.println("Elige cantidad de opciones de respuesta verdaderas");
-		numRespuestasVerdaderas = leer.nextInt();
-		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
+//		System.out.println("Elige cantidad de preguntas a generar");
+//		numPreguntas = leer.nextInt();
+//		System.out.println("Elige cantidad de opciones de respuesta verdaderas");
+//		numRespuestasVerdaderas = leer.nextInt();
+//		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
 		System.out.println("Elige cantidad de item sets:");
 		numItemSets = leer.nextInt();
 		while(repetir) {
@@ -39,7 +44,7 @@ public class Main {
 		}		
 		System.out.println("Hay " + numItemSets + " item sets de tamaño " + tamItemSets);
 		Pregunta p = new Pregunta(numItemSets, tamItemSets);
-		System.out.println("Se dispone de los siguientes " + tamItemSets + "-item sets:");
+//		System.out.println("Se dispone de los siguientes " + tamItemSets + "-item sets:");
 
 		while(!tieneSolucion || contador<numPreguntas) {
 			p.generarTotalConjuntos();
@@ -50,14 +55,23 @@ public class Main {
 			tieneSolucion = s.tieneSolucion(numRespuestasVerdaderas);
 			if(tieneSolucion) {
 //		        p.getTotalConjuntos().stream().forEach(System.out::println);
-				for (int i=0; i<p.getTotalConjuntos().size(); i++) {
-					System.out.print(p.getTotalConjuntos().get(i));
+//				for (int i=0; i<p.getTotalConjuntos().size(); i++) {
+//					System.out.print(p.getTotalConjuntos().get(i));
+//				}
+//				System.out.println("\nCuales de las siguientes opciones son correctas?");
+//				s.imprimirOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
+				s.generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
+				Traductor t = new Traductor();
+				try {
+					t.exportarXML(s);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				System.out.println("\nCuales de las siguientes opciones son correctas?");
-				s.imprimirOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
 				contador++;
 			}
 		}
+		
 		
 //		List<List<Character>> totalConjuntos = new ArrayList<List<Character>>();
 //		

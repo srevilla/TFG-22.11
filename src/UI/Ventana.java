@@ -2,6 +2,8 @@ package UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -65,14 +67,31 @@ public class Ventana extends JFrame {
 	}
 	
 	private void colocarBotones() {
-		JButton boton1 = new JButton();
-		boton1.setText("Continuar");
-		boton1.setBounds(200,400,100,40);
-		boton1.setEnabled(true);
-		boton1.setMnemonic('a'); //alt + letra
-		boton1.setForeground(Color.BLACK);
+		colocarBotonPortada();
+	}
+	
+	private void colocarBotonPortada() {
+		JButton botonPortada = new JButton();
+		botonPortada.setText("Continuar");
+		botonPortada.setBounds(200,400,100,40);
+		botonPortada.setEnabled(true);
+		botonPortada.setMnemonic('a'); //alt + letra
+		botonPortada.setForeground(Color.BLACK);
 //		boton1.setFont(new Font());
-		portada.add(boton1);
+		portada.add(botonPortada);
+		
+		ActionListener botonPortadaAL = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+
+			}
+		};
+		
+		botonPortada.addActionListener(botonPortadaAL);
+		
+		
+		
 	}
 	
 	private void colocarRadioBotones() {
