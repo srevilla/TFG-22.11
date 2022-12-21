@@ -28,13 +28,13 @@ public class Main {
 		System.out.println("**************CONFIGURACION**************");
 //		System.out.println("Elige cantidad de preguntas a generar");
 //		numPreguntas = leer.nextInt();
-//		System.out.println("Elige cantidad de opciones de respuesta verdaderas");
-//		numRespuestasVerdaderas = leer.nextInt();
-//		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
+		System.out.println("Elige cantidad de opciones de respuesta verdaderas (Min:1, Max: 4");
+		numRespuestasVerdaderas = leer.nextInt();
+		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
 		System.out.println("Elige cantidad de item sets:");
 		numItemSets = leer.nextInt();
 		while(repetir) {
-			System.out.println("Elige tamaño de los item sets:");
+			System.out.println("Elige tamaño de los item sets (Min: 3, Max: 4):");
 			tamItemSets = leer.nextInt();
 			if(tamItemSets < MinTamItemSets || tamItemSets > MaxTamItemSets) {
 				System.out.println("El tamaño del item set tiene que ser 3 o 4");
@@ -71,6 +71,7 @@ public class Main {
 				contador++;
 			}
 		}
+		System.out.println("Finalizado");
 		
 		
 //		List<List<Character>> totalConjuntos = new ArrayList<List<Character>>();

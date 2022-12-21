@@ -13,6 +13,8 @@ public class Solucion {
 	private List<List<Character>> solucionesVerdaderas;
 	private List<List<Character>> solucionesFalsas;
 	private List<List<Character>> opciones;
+	private int numOpcionesVerdaderas;
+	private int numOpcionesFalsas;
 
 	public Solucion(List<List<Character>> totalConjuntos) {
 		this.totalConjuntos = totalConjuntos;
@@ -116,9 +118,11 @@ public class Solucion {
 	
 	public void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
 		opciones = new ArrayList<List<Character>>();
+		numOpcionesVerdaderas = numRespuestasVerdaderas;
+		numOpcionesFalsas = numRespuestasFalsas;
 		
-		for (int i=0; i<numRespuestasFalsas; i++) {
-			List<Character> solucionAñadir = getSolucionesFalsas().get(generarIndex(getSolucionesFalsas().size()));
+		for (int i=0; i<numRespuestasVerdaderas; i++) {
+			List<Character> solucionAñadir = getSolucionesVerdaderas().get(generarIndex(getSolucionesVerdaderas().size()));
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
 			} else {
@@ -126,8 +130,8 @@ public class Solucion {
 			}
 		}
 		
-		for (int i=0; i<numRespuestasVerdaderas; i++) {
-			List<Character> solucionAñadir = getSolucionesVerdaderas().get(generarIndex(getSolucionesVerdaderas().size()));
+		for (int i=0; i<numRespuestasFalsas; i++) {
+			List<Character> solucionAñadir = getSolucionesFalsas().get(generarIndex(getSolucionesFalsas().size()));
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
 			} else {
@@ -202,4 +206,21 @@ public class Solucion {
 	public void setOpciones(List<List<Character>> opciones) {
 		this.opciones = opciones;
 	}
+
+	public int getNumOpcionesVerdaderas() {
+		return numOpcionesVerdaderas;
+	}
+
+	public void setNumOpcionesVerdaderas(int numOpcionesVerdaderas) {
+		this.numOpcionesVerdaderas = numOpcionesVerdaderas;
+	}
+
+	public int getNumOpcionesFalsas() {
+		return numOpcionesFalsas;
+	}
+
+	public void setNumOpcionesFalsas(int numOpcionesFalsas) {
+		this.numOpcionesFalsas = numOpcionesFalsas;
+	}
+	
 }

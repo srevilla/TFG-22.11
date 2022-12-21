@@ -30,25 +30,25 @@
       <text>Respuesta incorrecta.</text>
     </incorrectfeedback>
     <shownumcorrect/>
-    <answer fraction="50" format="html">
+    <answer fraction="{puntuacionA}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionA}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="50" format="html">
+    <answer fraction="{puntuacionB}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionB}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="-50" format="html">
+    <answer fraction="{puntuacionC}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionC}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="-50" format="html">
+    <answer fraction="{puntuacionD}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionD}<br></p>]]></text>
       <feedback format="html">
         <text></text>
