@@ -21,9 +21,9 @@ public class Traductor {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void exportarXML(Solucion problema) throws IOException {
+	public void exportarXML(Solucion problema, String ruta) throws IOException {
 
-		String ruta = "C:\\Users\\revi\\Desktop\\TFG 2.0\\PreguntaMoodle.xml";
+//		String ruta = "C:\\Users\\revi\\Desktop\\TFG 2.0\\PreguntaMoodle.xml";
 
 		guardar(ruta, traduceProblemaPosiblesItemSets(problema));
 	}

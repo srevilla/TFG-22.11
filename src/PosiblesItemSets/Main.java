@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import Traductor.Traductor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Main {
 		final int MinTamItemSets = 3;
 		
 		int contador = 0;
+		int indice = 0;
 		int tamItemSets = 0;
 		int numItemSets;
 		int numPreguntas = 1;
@@ -24,11 +26,13 @@ public class Main {
 		int numRespuestasVerdaderas = 2;
 		boolean repetir = true;
 		boolean tieneSolucion = false;
+		String ruta;
+		String nombreFichero;
 
 		System.out.println("**************CONFIGURACION**************");
-//		System.out.println("Elige cantidad de preguntas a generar");
-//		numPreguntas = leer.nextInt();
-		System.out.println("Elige cantidad de opciones de respuesta verdaderas (Min:1, Max: 4");
+		System.out.println("Elige cantidad de preguntas a generar");
+		numPreguntas = leer.nextInt();
+		System.out.println("Elige cantidad de opciones de respuesta verdaderas (Min:1, Max: 4)");
 		numRespuestasVerdaderas = leer.nextInt();
 		numRespuestasFalsas = 4 - numRespuestasVerdaderas;
 		System.out.println("Elige cantidad de item sets:");
@@ -42,8 +46,12 @@ public class Main {
 				repetir = false;
 			}
 		}		
-		System.out.println("Hay " + numItemSets + " item sets de tamaño " + tamItemSets);
+//		System.out.println("Hay " + numItemSets + " item sets de tamaño " + tamItemSets);
 		Pregunta p = new Pregunta(numItemSets, tamItemSets);
+		
+		System.out.println("Especifica la ruta donde van a ser creados los archivos:");
+		ruta = leer.next();
+
 //		System.out.println("Se dispone de los siguientes " + tamItemSets + "-item sets:");
 
 		while(!tieneSolucion || contador<numPreguntas) {
@@ -61,14 +69,29 @@ public class Main {
 //				System.out.println("\nCuales de las siguientes opciones son correctas?");
 //				s.imprimirOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
 				s.generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
+				
+				nombreFichero = ruta + "\\PosiblesItemSets_" + indice + ".xml";
+				
+				File file = new File(nombreFichero);
+	            if (!file.exists()) {
+	                try {
+						file.createNewFile();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
+				indice++;
+			
 				Traductor t = new Traductor();
 				try {
-					t.exportarXML(s);
+					t.exportarXML(s, nombreFichero);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				contador++;
+				nombreFichero = null;
 			}
 		}
 		System.out.println("Finalizado");
