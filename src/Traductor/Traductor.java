@@ -1,10 +1,12 @@
 package Traductor;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 //import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,28 +14,47 @@ import java.util.List;
 import java.util.Set;
 
 import PosiblesItemSets.Solucion;
+//import es.ubu.inf.tfg.doc.datos.Plantilla;
 
 public class Traductor {
 
+	Plantilla plantillaFinal = new Plantilla("plantilla.xml");
 	Plantilla plantilla;
+	List<Plantilla> totalPlantillas = new ArrayList<Plantilla>();
+
+	int numPregunta = 1; 
 	
 	public Traductor() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void exportarXML(Solucion problema, String ruta) throws IOException {
+	public void generarPlantillas(List<Solucion> totalProblemas) {
+		for (Solucion s : totalProblemas) {
+			totalPlantillas.add(traduceProblemaPosiblesItemSets(s));
+		}
+		generarDocumento();
+	}
+	
+	public void exportarXML(String ruta) throws IOException {
 
-//		String ruta = "C:\\Users\\revi\\Desktop\\TFG 2.0\\PreguntaMoodle.xml";
-
-		guardar(ruta, traduceProblemaPosiblesItemSets(problema));
+		guardar(ruta, plantillaFinal);
+	}
+	
+	private void generarDocumento() {
+		
+		StringBuilder documento = new StringBuilder();
+		
+		for (Plantilla plantilla : totalPlantillas) {
+			documento.append(plantilla.toString());
+		}
+		plantillaFinal.set("documento", documento.toString());
 	}
 	
 	public Plantilla traduceProblemaPosiblesItemSets(Solucion problema) {
 		plantilla = new Plantilla("plantillaPosiblesItemSets.xml");
 
 		List<List<Character>> alternativas = problema.getOpciones();
-
-		plantilla.set("numero", "16");
+		plantilla.set("numero", String.valueOf(numPregunta));
 		plantilla.set("conjunto", problema.getTotalConjuntos().toString());
 		plantilla.set("tamItemSets", String.valueOf(problema.getTotalConjuntos().get(0).size()));
 		plantilla.set("tamItemSets+1", String.valueOf(problema.getTotalConjuntos().get(0).size()+1));
@@ -44,6 +65,8 @@ public class Traductor {
 		plantilla.set("opcionB", alternativas.get(1).toString());
 		plantilla.set("opcionC", alternativas.get(2).toString());
 		plantilla.set("opcionD", alternativas.get(3).toString());
+		
+		numPregunta++;
 		
 		return plantilla;
 	}

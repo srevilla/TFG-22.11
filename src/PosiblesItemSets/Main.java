@@ -18,7 +18,6 @@ public class Main {
 		final int MinTamItemSets = 3;
 		
 		int contador = 0;
-		int indice = 0;
 		int tamItemSets = 0;
 		int numItemSets;
 		int numPreguntas = 1;
@@ -28,6 +27,7 @@ public class Main {
 		boolean tieneSolucion = false;
 		String ruta;
 		String nombreFichero;
+		List<Solucion> totalProblemas = new ArrayList<Solucion>();
 
 		System.out.println("**************CONFIGURACION**************");
 		System.out.println("Elige cantidad de preguntas a generar");
@@ -46,13 +46,24 @@ public class Main {
 				repetir = false;
 			}
 		}		
-//		System.out.println("Hay " + numItemSets + " item sets de tamaño " + tamItemSets);
+
 		Pregunta p = new Pregunta(numItemSets, tamItemSets);
 		
 		System.out.println("Especifica la ruta donde van a ser creados los archivos:");
 		ruta = leer.next();
-
-//		System.out.println("Se dispone de los siguientes " + tamItemSets + "-item sets:");
+		System.out.println("Especifica el nombre del fichero");
+		nombreFichero = leer.next();
+		ruta = ruta + "\\" + nombreFichero + ".xml";
+		
+		File file = new File(ruta);
+        if (!file.exists()) {
+            try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
 
 		while(!tieneSolucion || contador<numPreguntas) {
 			p.generarTotalConjuntos();
@@ -62,38 +73,24 @@ public class Main {
 			s.generarSoluciones();
 			tieneSolucion = s.tieneSolucion(numRespuestasVerdaderas);
 			if(tieneSolucion) {
-//		        p.getTotalConjuntos().stream().forEach(System.out::println);
-//				for (int i=0; i<p.getTotalConjuntos().size(); i++) {
-//					System.out.print(p.getTotalConjuntos().get(i));
-//				}
-//				System.out.println("\nCuales de las siguientes opciones son correctas?");
-//				s.imprimirOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
 				s.generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
 				
-				nombreFichero = ruta + "\\PosiblesItemSets_" + indice + ".xml";
-				
-				File file = new File(nombreFichero);
-	            if (!file.exists()) {
-	                try {
-						file.createNewFile();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	            }
-				indice++;
-			
-				Traductor t = new Traductor();
-				try {
-					t.exportarXML(s, nombreFichero);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				contador++;
-				nombreFichero = null;
+				totalProblemas.add(s);
 			}
 		}
+		
+		Traductor t = new Traductor();
+		t.generarPlantillas(totalProblemas);
+
+		try {
+			t.exportarXML(ruta);
+				
+		} catch (IOException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		}
 		System.out.println("Finalizado");
 		
 		

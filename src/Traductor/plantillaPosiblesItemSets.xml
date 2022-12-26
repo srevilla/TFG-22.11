@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<quiz>
+
 <!-- question: {numero}  -->
   <question type="multichoice">
     <name>
@@ -55,5 +54,3 @@
       </feedback>
     </answer>
   </question>
-
-</quiz>
