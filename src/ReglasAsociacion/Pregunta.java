@@ -13,51 +13,79 @@ import weka.core.Instances;
 //import weka.core.converters.ArffSaver;
 
 public class Pregunta {
-
-  public static void main(String[] args) throws IOException {
-    // Crea la lista de atributos del conjunto de datos
-	ArrayList<Attribute> atributos = new ArrayList<>();
-	Scanner sc = new Scanner(System.in);
 	
-    System.out.print("Ingrese el número de atributos: ");
-    int numAtributos = sc.nextInt();
-    
-    System.out.print("Ingrese el número de instancias aleatorias: ");
-    int numInstancias = sc.nextInt();
-    
-    for (int i = 0; i < numAtributos; i++) {
-//        System.out.print("Ingrese el nombre del atributo " + (i + 1) + ": ");
-        String nombreAtributo = Character.toString((char) ('A' + i));
-        // El atributo es booleano
-        List<String> etiquetas = new ArrayList<>();
-        etiquetas.add("T");
-        etiquetas.add("F");
-        atributos.add(new Attribute(nombreAtributo, etiquetas));
-      }
+	private ArrayList<Attribute> atributos;
+	private List<String> etiquetas;
+	private Instances datos;
+	private String nombreAtributo;
+	
+	public Pregunta() {
+		
+	}
+	
+	private void crearAtributos(int numAtributos) {
+		atributos = new ArrayList<>();
+		for (int i = 0; i < numAtributos; i++) {
+			
+	        nombreAtributo = Character.toString((char) ('A' + i));
+	
+	        etiquetas = new ArrayList<>();
+	        etiquetas.add("T");
+	        etiquetas.add("F");
+	        atributos.add(new Attribute(nombreAtributo, etiquetas));
+	      }
+	}
+	
+	public void crearConjuntoDatos(int numInstancias, int numAtributos) {
+		crearAtributos(numAtributos);
+	    datos = new Instances("datos", atributos, 0);
 
-    Instances datos = new Instances("datos", atributos, 0);
+	    Random rand = new Random();
 
-    Random rand = new Random();
+	    for (int i = 0; i < numInstancias; i++) {
 
-    for (int i = 0; i < numInstancias; i++) {
+	      Instance instancia = new DenseInstance(numAtributos);
+	      instancia.setDataset(datos); 
+	      
+	      for (int j = 0; j < numAtributos; j++) {
+	    	  instancia.setValue(j, (rand.nextInt(2) == 0) ? "T" : "F");
+	      }
+	      // Añade la instancia al conjunto de datos
+	      datos.add(instancia);
+	    }
+	}
 
-      Instance instancia = new DenseInstance(numAtributos);
-      instancia.setDataset(datos); 
-      
-      for (int j = 0; j < numAtributos; j++) {
-    	  instancia.setValue(j, (rand.nextInt(2) == 0) ? "T" : "F");
-      }
-      // Añade la instancia al conjunto de datos
-      datos.add(instancia);
-    }
-    System.out.println("Fin");
+	public ArrayList<Attribute> getAtributos() {
+		return atributos;
+	}
 
-    // Guarda el conjunto de datos en un archivo ARFF
-//    ArffSaver saver = new ArffSaver();
-//    saver.setInstances(data);
-//    saver.setFile(new File("datos.arff"));
-//    saver.writeBatch();
-  }
+	public void setAtributos(ArrayList<Attribute> atributos) {
+		this.atributos = atributos;
+	}
+
+	public List<String> getEtiquetas() {
+		return etiquetas;
+	}
+
+	public void setEtiquetas(List<String> etiquetas) {
+		this.etiquetas = etiquetas;
+	}
+
+	public Instances getDatos() {
+		return datos;
+	}
+
+	public void setDatos(Instances datos) {
+		this.datos = datos;
+	}
+
+	public String getNombreAtributo() {
+		return nombreAtributo;
+	}
+
+	public void setNombreAtributo(String nombreAtributo) {
+		this.nombreAtributo = nombreAtributo;
+	}
 }
  
 
