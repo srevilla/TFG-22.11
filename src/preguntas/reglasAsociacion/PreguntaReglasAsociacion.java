@@ -1,25 +1,22 @@
-package ReglasAsociacion;
+package preguntas.reglasAsociacion;
 //import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
-
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 //import weka.core.converters.ArffSaver;
 
-public class Pregunta {
+public class PreguntaReglasAsociacion {
 	
 	private ArrayList<Attribute> atributos;
 	private List<String> etiquetas;
 	private Instances datos;
 	private String nombreAtributo;
 	
-	public Pregunta() {
+	public PreguntaReglasAsociacion() {
 		
 	}
 	
@@ -50,7 +47,6 @@ public class Pregunta {
 	      for (int j = 0; j < numAtributos; j++) {
 	    	  instancia.setValue(j, (rand.nextInt(2) == 0) ? "T" : "F");
 	      }
-	      // Añade la instancia al conjunto de datos
 	      datos.add(instancia);
 	    }
 	}

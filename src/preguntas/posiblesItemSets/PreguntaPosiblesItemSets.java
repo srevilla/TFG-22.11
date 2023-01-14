@@ -1,18 +1,17 @@
-package PosiblesItemSets;
+package preguntas.posiblesItemSets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class Pregunta {
+public class PreguntaPosiblesItemSets {
 
 	private int numItemSets;
 	private int tamItemSets;
 	private List<Character> conjunto;
 	private List<List<Character>> totalConjuntos;
 
-	public Pregunta(int numItemSets, int tamItemSets) {
+	public PreguntaPosiblesItemSets(int numItemSets, int tamItemSets) {
 		this.numItemSets = numItemSets;
 		this.tamItemSets = tamItemSets;
 	}

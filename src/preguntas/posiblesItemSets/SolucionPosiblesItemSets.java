@@ -1,12 +1,10 @@
-package PosiblesItemSets;
+package preguntas.posiblesItemSets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Solucion {
+public class SolucionPosiblesItemSets {
 	
 	private List<List<Character>> totalConjuntos;
 	private List<List<Character>> posiblesSoluciones;
@@ -16,7 +14,7 @@ public class Solucion {
 	private int numOpcionesVerdaderas;
 	private int numOpcionesFalsas;
 
-	public Solucion(List<List<Character>> totalConjuntos) {
+	public SolucionPosiblesItemSets(List<List<Character>> totalConjuntos) {
 		this.totalConjuntos = totalConjuntos;
 	}
 	
@@ -139,25 +137,6 @@ public class Solucion {
 			}
 		}
 	}
-//	public void imprimirOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
-//		generarOpciones(numRespuestasFalsas, numRespuestasVerdaderas);
-//		for (int i=0; i<4; i++) {
-//			switch(i) {
-//			case 0: 
-//				System.out.println("a) " + getOpciones().remove(generarIndex(4-i)));
-//				break;
-//			case 1: 
-//				System.out.println("b) " + getOpciones().remove(generarIndex(4-i)));
-//				break;
-//			case 2: 
-//				System.out.println("c) " + getOpciones().remove(generarIndex(4-i)));
-//				break;
-//			case 3: 
-//				System.out.println("d) " + getOpciones().remove(generarIndex(4-i)));
-//				break;
-//			}
-//		}
-//	}
 	
 	public boolean tieneSolucion(int numRespuestasVerdaderas) {
 		if (getSolucionesVerdaderas().size()>=numRespuestasVerdaderas) {
