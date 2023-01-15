@@ -44,24 +44,25 @@ public class SolucionPosiblesItemSets {
 		}
 }
 
-	private <E> List<List<E>> generarPermutaciones(List<E> original) {
-		  if (original.isEmpty()) {
-		    List<List<E>> result = new ArrayList<>();
+	private List<List<Character>> generarPermutaciones(List<Character> itemActual) {
+		  if (itemActual.isEmpty()) {
+		    List<List<Character>> result = new ArrayList<>();
 		    result.add(new ArrayList<>());
 		    return result;
 		  }
-		  E firstElement = original.remove(0);
-		  List<List<E>> returnValue = new ArrayList<>();
-		  List<List<E>> permutations = generarPermutaciones(original);
-		  for (List<E> smallerPermutated : permutations) {
-		    for (int index = 0; index <= smallerPermutated.size(); index++) {
-		      List<E> temp = new ArrayList<>(smallerPermutated);
-		      temp.add(index, firstElement);
-		      returnValue.add(temp);
+		  
+		  Character primerElemento = itemActual.remove(0);
+		  List<List<Character>> resultado = new ArrayList<>();
+		  List<List<Character>> permutaciones = generarPermutaciones(itemActual);
+		  for (List<Character> per : permutaciones) {
+		    for (int index = 0; index <= per.size(); index++) {
+		      List<Character> temp = new ArrayList<>(per);
+		      temp.add(index, primerElemento);
+		      resultado.add(temp);
 		    }
 		  }
-		  return returnValue;
-		}
+		  return resultado;
+	}
 	
 	private List<List<Character>> simplificarPermutaciones (List<List<Character>> itemActualPermutaciones) {
 		int cont = 1;

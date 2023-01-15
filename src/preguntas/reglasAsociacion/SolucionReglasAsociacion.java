@@ -13,6 +13,7 @@ import weka.core.Instances;
 public class SolucionReglasAsociacion {
 
 	private Instances datos;
+	private Instances datosUso;
 	private Apriori apriori;
 	private List<AssociationRule> reglas;
 	private List<AssociationRule> reglasVerdaderas = new ArrayList<AssociationRule>();
@@ -23,9 +24,10 @@ public class SolucionReglasAsociacion {
 	private double soporte;
 	private double confianza;
 
-	public SolucionReglasAsociacion (Instances datos) {
+	public SolucionReglasAsociacion (Instances datos, Instances datosDiscretizacion) {
 		apriori = new Apriori();
 		setDatos(datos);
+		setDatosDiscretizacion(datosDiscretizacion);
 	}
 	
 	public void setSoporteMinimo(double n) {
@@ -42,7 +44,7 @@ public class SolucionReglasAsociacion {
 	
 	public void ejecutaAlgoritmo() {
 		try {
-			apriori.buildAssociations(datos);
+			apriori.buildAssociations(datosUso);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +68,7 @@ public class SolucionReglasAsociacion {
 			double confianzaRegla = rule.getPrimaryMetricValue();	
 			BigDecimal bd = new BigDecimal(confianzaRegla).setScale(2, RoundingMode.HALF_UP);
 			double confianzaRedondeada = bd.doubleValue();
-			double soporteRegla = (double)rule.getTotalSupport()/datos.size();
+			double soporteRegla = (double)rule.getTotalSupport()/datosUso.size();
 			
             if (confianzaRedondeada >= confianza && 
                 soporteRegla >= soporte) {
@@ -90,7 +92,7 @@ public class SolucionReglasAsociacion {
 		for (int i=0; i<numRespuestasVerdaderas; i++) {
 			String regla = getReglasVerdaderas().get(generarIndex(getReglasVerdaderas().size())).toString();
 			String solucionAñadir = regla.substring(0, regla.indexOf("<"));
-			solucionAñadir = solucionAñadir.replaceAll("[0-9]", "").replaceAll(":", "");
+			solucionAñadir = solucionAñadir.replaceAll(":\\s*\\d+(\\.\\d+)?", ": ").replaceAll(":", ""); //En esta expresion regular, :\\s* busca el patrón ": " y \\d+(\\.\\d+)? busca cualquier número entero o decimal después del espacio en blanco. El paréntesis alrededor de este último patrón hace que sea capturado y reemplazado en conjunto con el patrón anterior.
 			
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
@@ -102,7 +104,7 @@ public class SolucionReglasAsociacion {
 		for (int i=0; i<numRespuestasFalsas; i++) {
 			String regla = getReglasFalsas().get(generarIndex(getReglasFalsas().size())).toString();
 			String solucionAñadir = regla.substring(0, regla.indexOf("<"));
-			solucionAñadir = solucionAñadir.replaceAll("[0-9]", "").replaceAll(":", "");
+			solucionAñadir = solucionAñadir.replaceAll(":\\s*\\d+(\\.\\d+)?", ": ").replaceAll(":", "");
 			
 			if (!opciones.contains(solucionAñadir)) {
 				opciones.add(solucionAñadir);
@@ -126,9 +128,14 @@ public class SolucionReglasAsociacion {
 	    
 	    for (int i = 0; i < datos.numInstances(); i++) {
 	        Instance inst=datos.instance(i);
-	        for(int j=0;j<inst.numAttributes();j++) {
-	            sb.append(inst.stringValue(j));
-	            sb.append(" ");
+	        for(int j=0; j<inst.numAttributes(); j++) {
+	        	if(!inst.attribute(j).isNominal()) {
+	        		sb.append(String.valueOf(inst.value(j)));
+		            sb.append(" ");
+	        	} else {
+	        		sb.append(inst.stringValue(j));
+		            sb.append(" ");
+	        	}	            
 	        }
 		    sb.append("<br>");
 	    }
@@ -165,6 +172,18 @@ public class SolucionReglasAsociacion {
 
 	public void setDatos(Instances datos) {
 		this.datos = datos;
+	}
+	
+	public Instances getDatosUso() {
+		return datosUso;
+	}
+
+	public void setDatosDiscretizacion(Instances datosUso) {
+		if(datosUso.isEmpty()) {
+			this.datosUso = datos;
+		} else {
+			this.datosUso = datosUso;
+		}
 	}
 
 	public Apriori getApriori() {

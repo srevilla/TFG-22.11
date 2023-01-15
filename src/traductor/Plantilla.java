@@ -16,7 +16,7 @@ public class Plantilla {
 			inputStream.read(b);
 			contenido = new String(b);
 		} catch (IOException e) {
-			
+			e.printStackTrace();
 		}
 		plantilla = contenido;
 	}

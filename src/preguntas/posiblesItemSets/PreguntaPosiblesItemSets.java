@@ -17,48 +17,63 @@ public class PreguntaPosiblesItemSets {
 	}
 	
 	public char letraAleatoria() {
-		Random random = new Random();
-        char letraAleatoria = (char) (random.nextInt(7) + 'A');
-        return letraAleatoria;
+		try {
+			Random random = new Random();
+	        char letraAleatoria = (char) (random.nextInt(7) + 'A');
+	        return letraAleatoria;
+		} catch (Exception e) {
+			System.out.println("Error al generar letra aleatoria: " + e.getMessage());
+			return ' ';
+		}	
 	}
 	
 	public void generarItemSets() {
-		conjunto = new ArrayList<Character>();
-		char letraNueva;
-		while(conjunto.size() < getTamItemSets()) {
-			letraNueva = letraAleatoria();
-			if(!conjunto.contains(letraNueva)) {
-				conjunto.add(letraNueva);
+		try {
+			conjunto = new ArrayList<Character>();
+			char letraNueva;
+			while(conjunto.size() < getTamItemSets()) {
+				letraNueva = letraAleatoria();
+				if(!conjunto.contains(letraNueva)) {
+					conjunto.add(letraNueva);
+				}
 			}
+			Collections.sort(conjunto);
+		} catch (Exception e) {
+			System.out.println("Error al generar conjunto de items: " + e.getMessage());
 		}
-
-		Collections.sort(conjunto);
 	}
 	
 	public void generarTotalConjuntos() {
-		
-		totalConjuntos = new ArrayList<List<Character>>();
-		List<Character> conjuntoNuevo = new ArrayList<Character>();
-		
-		while(totalConjuntos.size() < getNumItemSets()) {
-			generarItemSets();
-			conjuntoNuevo = getConjunto();
-			if(!totalConjuntos.contains(conjuntoNuevo)) {
-				totalConjuntos.add(conjuntoNuevo);
-			}
-		}		
-		ordenarTotalConjuntos();
+		try {
+			totalConjuntos = new ArrayList<List<Character>>();
+			List<Character> conjuntoNuevo = new ArrayList<Character>();
+			
+			while(totalConjuntos.size() < getNumItemSets()) {
+				generarItemSets();
+				conjuntoNuevo = getConjunto();
+				if(!totalConjuntos.contains(conjuntoNuevo)) {
+					totalConjuntos.add(conjuntoNuevo);
+				}
+			}		
+			ordenarTotalConjuntos();
+		} catch (Exception e) {
+			System.out.println("Error al generar conjunto total: " + e.getMessage());
+		}
 	}
 	
 	public void ordenarTotalConjuntos() {
-        totalConjuntos.sort((x, y) -> {
-            for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
-                if (x.get(i) != y.get(i)) {
-                    return x.get(i) - y.get(i);
-                }
-            }
-            return x.size() - y.size();
-        });
+		try {
+			totalConjuntos.sort((x, y) -> {
+	            for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
+	                if (x.get(i) != y.get(i)) {
+	                    return x.get(i) - y.get(i);
+	                }
+	            }
+	            return x.size() - y.size();
+	        });
+		} catch (Exception e) {
+			System.out.println("Error al ordenar conjunto total: " + e.getMessage());
+		}
 	}
 
 	public int getNumItemSets() {

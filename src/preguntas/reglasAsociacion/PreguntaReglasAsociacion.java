@@ -7,13 +7,15 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-//import weka.core.converters.ArffSaver;
+import weka.filters.unsupervised.attribute.Discretize;
+import weka.filters.Filter;
 
 public class PreguntaReglasAsociacion {
 	
 	private ArrayList<Attribute> atributos;
 	private List<String> etiquetas;
 	private Instances datos;
+	private Instances datosUso;
 	private String nombreAtributo;
 	
 	public PreguntaReglasAsociacion() {
@@ -50,6 +52,32 @@ public class PreguntaReglasAsociacion {
 	      datos.add(instancia);
 	    }
 	}
+	
+	public void añadirDiscretizacion(int numIntervalos) {
+		Attribute nuevoAtr = new Attribute("X");
+		datos.insertAttributeAt(nuevoAtr, datos.numAttributes());
+		
+		Random random = new Random();
+		int atrIndex = datos.attribute("X").index();
+
+		for (int i = 0; i < datos.numInstances(); i++) {
+			double randomValue = Math.round((0 + (100 - 0) * random.nextDouble())*10)/10.0;
+		    datos.instance(i).setValue(atrIndex, randomValue);
+		}
+		
+		Discretize discretizar = new Discretize();
+
+		discretizar.setAttributeIndices("last");
+		discretizar.setBins(numIntervalos);
+		discretizar.setUseEqualFrequency(true);
+		try {
+			discretizar.setInputFormat(datos);
+			datosUso = Filter.useFilter(datos, discretizar);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<Attribute> getAtributos() {
 		return atributos;
@@ -75,6 +103,14 @@ public class PreguntaReglasAsociacion {
 		this.datos = datos;
 	}
 
+	public Instances getDatosUso() {
+		return datosUso;
+	}
+
+	public void setDatosDiscretizacion(Instances datosUso) {
+		this.datosUso = datosUso;
+	}
+	
 	public String getNombreAtributo() {
 		return nombreAtributo;
 	}
