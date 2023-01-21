@@ -1,21 +1,95 @@
-package preguntas.posiblesItemSets;
+package es.ubu.inf.tfg.generador.posiblesitemsets;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
-public class SolucionPosiblesItemSets {
+public class GeneradorPreguntaPosiblesItemSets {
 	
+	private int numItemSets;
+	private int tamItemSets;
+	private List<Character> conjunto;
 	private List<List<Character>> totalConjuntos;
 	private List<List<Character>> posiblesSoluciones;
 	private List<List<Character>> solucionesVerdaderas;
 	private List<List<Character>> solucionesFalsas;
-	private List<List<Character>> opciones;
-	private int numOpcionesVerdaderas;
-	private int numOpcionesFalsas;
+	private List<List<Character>> opcionesVerdaderas;
+	private List<List<Character>> opcionesFalsas;
 
-	public SolucionPosiblesItemSets(List<List<Character>> totalConjuntos) {
-		this.totalConjuntos = totalConjuntos;
+	public GeneradorPreguntaPosiblesItemSets(int numItemSets, int tamItemSets) {
+		this.numItemSets = numItemSets;
+		this.tamItemSets = tamItemSets;
+	}
+	
+	public String obtenerEnunciado() {
+		return "Se dispone de los siguientes " + tamItemSets + "-item sets: " + totalConjuntos.toString() + "\r\n" 
+				+ "¿Cuales son los posibles " + (tamItemSets+1) + "-item sets?";
+	}
+	
+	public String obtenerTitulo() {
+		return "Posibles Item Sets";
+	}
+	
+	private char letraAleatoria() {
+		try {
+			Random random = new Random();
+	        char letraAleatoria = (char) (random.nextInt(7) + 'A');
+	        return letraAleatoria;
+		} catch (Exception e) {
+			System.out.println("Error al generar letra aleatoria: " + e.getMessage());
+			return ' ';
+		}	
+	}
+	
+	private void generarItemSets() {
+		try {
+			conjunto = new ArrayList<Character>();
+			char letraNueva;
+			while(conjunto.size() < getTamItemSets()) {
+				letraNueva = letraAleatoria();
+				if(!conjunto.contains(letraNueva)) {
+					conjunto.add(letraNueva);
+				}
+			}
+			Collections.sort(conjunto);
+		} catch (Exception e) {
+			System.out.println("Error al generar conjunto de items: " + e.getMessage());
+		}
+	}
+	
+	public void generarTotalConjuntos() {
+		try {
+			totalConjuntos = new ArrayList<List<Character>>();
+			List<Character> conjuntoNuevo = new ArrayList<Character>();
+			
+			while(totalConjuntos.size() < getNumItemSets()) {
+				generarItemSets();
+				conjuntoNuevo = getConjunto();
+				if(!totalConjuntos.contains(conjuntoNuevo)) {
+					totalConjuntos.add(conjuntoNuevo);
+				}
+			}		
+			ordenarTotalConjuntos();
+		} catch (Exception e) {
+			System.out.println("Error al generar conjunto total: " + e.getMessage());
+		}
+	}
+	
+	private void ordenarTotalConjuntos() {
+		try {
+			totalConjuntos.sort((x, y) -> {
+	            for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
+	                if (x.get(i) != y.get(i)) {
+	                    return x.get(i) - y.get(i);
+	                }
+	            }
+	            return x.size() - y.size();
+	        });
+		} catch (Exception e) {
+			System.out.println("Error al ordenar conjunto total: " + e.getMessage());
+		}
 	}
 	
 	private void generarPosiblesSoluciones() {
@@ -116,14 +190,13 @@ public class SolucionPosiblesItemSets {
 	}
 	
 	public void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
-		opciones = new ArrayList<List<Character>>();
-		numOpcionesVerdaderas = numRespuestasVerdaderas;
-		numOpcionesFalsas = numRespuestasFalsas;
+		opcionesVerdaderas = new ArrayList<List<Character>>();
+		opcionesFalsas = new ArrayList<List<Character>>();
 		
 		for (int i=0; i<numRespuestasVerdaderas; i++) {
 			List<Character> solucionAñadir = getSolucionesVerdaderas().get(generarIndex(getSolucionesVerdaderas().size()));
-			if (!opciones.contains(solucionAñadir)) {
-				opciones.add(solucionAñadir);
+			if (!opcionesVerdaderas.contains(solucionAñadir)) {
+				opcionesVerdaderas.add(solucionAñadir);
 			} else {
 				i--;
 			}
@@ -131,8 +204,8 @@ public class SolucionPosiblesItemSets {
 		
 		for (int i=0; i<numRespuestasFalsas; i++) {
 			List<Character> solucionAñadir = getSolucionesFalsas().get(generarIndex(getSolucionesFalsas().size()));
-			if (!opciones.contains(solucionAñadir)) {
-				opciones.add(solucionAñadir);
+			if (!opcionesFalsas.contains(solucionAñadir)) {
+				opcionesFalsas.add(solucionAñadir);
 			} else {
 				i--;
 			}
@@ -145,14 +218,6 @@ public class SolucionPosiblesItemSets {
 		} else {
 			return false;
 		}
-	}
-
-	public List<List<Character>> getTotalConjuntos() {
-		return totalConjuntos;
-	}
-
-	public void setTotalConjuntos(List<List<Character>> totalConjuntos) {
-		this.totalConjuntos = totalConjuntos;
 	}
 
 	public List<List<Character>> getPosiblesSoluciones() {
@@ -179,28 +244,49 @@ public class SolucionPosiblesItemSets {
 		this.solucionesFalsas = solucionesFalsas;
 	}
 	
-	public List<List<Character>> getOpciones() {
-		return opciones;
+	public List<List<Character>> getOpcionesVerdaderas() {
+		return opcionesVerdaderas;
 	}
 
-	public void setOpciones(List<List<Character>> opciones) {
-		this.opciones = opciones;
-	}
-
-	public int getNumOpcionesVerdaderas() {
-		return numOpcionesVerdaderas;
-	}
-
-	public void setNumOpcionesVerdaderas(int numOpcionesVerdaderas) {
-		this.numOpcionesVerdaderas = numOpcionesVerdaderas;
-	}
-
-	public int getNumOpcionesFalsas() {
-		return numOpcionesFalsas;
-	}
-
-	public void setNumOpcionesFalsas(int numOpcionesFalsas) {
-		this.numOpcionesFalsas = numOpcionesFalsas;
+	public void setOpcionesVerdaderas(List<List<Character>> opcionesVerdaderas) {
+		this.opcionesVerdaderas = opcionesVerdaderas;
 	}
 	
+	public List<List<Character>> getOpcionesFalsas() {
+		return opcionesFalsas;
+	}
+
+	public void setOpcionesFalsas(List<List<Character>> opcionesFalsas) {
+		this.opcionesFalsas = opcionesFalsas;
+	}
+
+	public int getNumItemSets() {
+		return numItemSets;
+	}
+
+	public void setNumItemSets(int numItemSets) {
+		this.numItemSets = numItemSets;
+	}
+
+	public int getTamItemSets() {
+		return tamItemSets;
+	}
+
+	public void setTamItemSets(int tamItemSets) {
+		this.tamItemSets = tamItemSets;
+	}
+	
+	public List<Character> getConjunto(){
+		return conjunto;
+	}
+	
+	public List<List<Character>> getTotalConjuntos() {
+		return totalConjuntos;
+	}
+
+	public void setTotalConjuntos(List<List<Character>> totalConjuntos) {
+		this.totalConjuntos = totalConjuntos;
+	}
 }
+
+

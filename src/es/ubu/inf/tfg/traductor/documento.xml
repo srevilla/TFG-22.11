@@ -2,11 +2,10 @@
 <!-- question: {numero}  -->
   <question type="multichoice">
     <name>
-      <text>Reglas Asociacion</text>
+      <text>{titulo}</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<p dir="ltr" style="text-align: left;"> Sea el siguiente conjunto de datos: {conjunto}
-Obtenga aquellas reglas de asociacion con soporte y confianza mayores o iguales que, respectivamente, {soporte} y {confianza}%.<br></p>]]></text>
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">{enunciado}<br></p>]]></text>
     </questiontext>
     <generalfeedback format="html">
       <text></text>
@@ -29,25 +28,25 @@ Obtenga aquellas reglas de asociacion con soporte y confianza mayores o iguales 
       <text>Respuesta incorrecta.</text>
     </incorrectfeedback>
     <shownumcorrect/>
-    <answer fraction="{puntuacionA}" format="html">
+    <answer fraction="{pesoA}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionA}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="{puntuacionB}" format="html">
+    <answer fraction="{pesoB}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionB}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="{puntuacionC}" format="html">
+    <answer fraction="{pesoC}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionC}<br></p>]]></text>
       <feedback format="html">
         <text></text>
       </feedback>
     </answer>
-    <answer fraction="{puntuacionD}" format="html">
+    <answer fraction="{pesoD}" format="html">
       <text><![CDATA[<p dir="ltr" style="text-align: left;">{opcionD}<br></p>]]></text>
       <feedback format="html">
         <text></text>

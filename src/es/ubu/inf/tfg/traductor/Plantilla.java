@@ -1,4 +1,4 @@
-package traductor;
+package es.ubu.inf.tfg.traductor;
 
 import java.io.IOException;
 import java.io.InputStream;
