@@ -2,8 +2,8 @@ package es.ubu.inf.tfg.generador;
 
 import es.ubu.inf.tfg.dominio.BancoPreguntas;
 
-public interface GeneradorBancoPreguntas {
+public interface GeneradorBancoPreguntas <T> {
 	
-    BancoPreguntas generarBancoPreguntas(int numPreguntas);
+    BancoPreguntas generarBancoPreguntas(T config);
 
 }

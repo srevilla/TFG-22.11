@@ -19,7 +19,7 @@ public class TraductorXML implements Traductor {
 	}
 	
 	@Override
-	public void traducir(BancoPreguntas bancoPreguntas) {
+	public void traducir(BancoPreguntas bancoPreguntas) throws IOException {
 		Plantilla plantilla = new Plantilla("plantilla.xml");
 		generarPlantillas(bancoPreguntas, plantilla);
 		try {

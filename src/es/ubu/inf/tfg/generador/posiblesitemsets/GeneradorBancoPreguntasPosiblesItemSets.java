@@ -9,17 +9,16 @@ import es.ubu.inf.tfg.dominio.Opcion;
 import es.ubu.inf.tfg.dominio.Pregunta;
 import es.ubu.inf.tfg.generador.GeneradorBancoPreguntas;
 
-public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPreguntas {
+public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPreguntas <ConfigPosiblesItemSets> {
 	
-	private LectorPosiblesItemSets lector;
 	private static final int numOpciones = 4;
 	private static final int maxPuntuacion = 100;
 
 	@Override
-	public BancoPreguntas generarBancoPreguntas(int numPreguntas) {
+	public BancoPreguntas generarBancoPreguntas(ConfigPosiblesItemSets config) {
+		
 		BancoPreguntas bancoPreguntas;
-		lector = new LectorPosiblesItemSets();
-		ConfigPosiblesItemSets config = lector.leerConfig();
+
 		boolean tieneSolucion = false;
 		int contador = 0;
 		List<Pregunta> listaPreguntas = new ArrayList<>();
@@ -30,7 +29,7 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 		
 		GeneradorPreguntaPosiblesItemSets generadorPregunta = new GeneradorPreguntaPosiblesItemSets(config.getNumItemSets(), config.getTamItemSets());
 		
-		while(!tieneSolucion || contador<numPreguntas) {
+		while(!tieneSolucion || contador<config.getNumPreguntas()) {
 			opciones = new ArrayList<>();
 			generadorPregunta.generarTotalConjuntos();
 			numRespuestasVerdaderas = random.nextInt(numOpciones)+1;

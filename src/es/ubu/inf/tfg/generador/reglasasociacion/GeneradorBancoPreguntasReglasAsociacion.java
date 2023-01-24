@@ -9,17 +9,15 @@ import es.ubu.inf.tfg.dominio.Opcion;
 import es.ubu.inf.tfg.dominio.Pregunta;
 import es.ubu.inf.tfg.generador.GeneradorBancoPreguntas;
 
-public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPreguntas {
+public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPreguntas <ConfigReglasAsociacion> {
 
-	private LectorReglasAsociacion lector;
 	private static final int numOpciones = 4;
 	private static final int maxPuntuacion = 100;
 
 	@Override
-	public BancoPreguntas generarBancoPreguntas(int numPreguntas) {
+	public BancoPreguntas generarBancoPreguntas(ConfigReglasAsociacion config) {
 		BancoPreguntas bancoPreguntas;
-		lector = new LectorReglasAsociacion();
-//		ConfigReglasAsociacion config = lector.leerConfig();
+		
 		boolean tieneSolucion = false;
 		int contador = 0;
 		List<Pregunta> listaPreguntas = new ArrayList<>();
@@ -30,16 +28,15 @@ public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPr
 		
 //		GeneradorPreguntaReglasAsociacion generadorPregunta = new GeneradorPreguntaReglasAsociacion(config.getSoporte(), config.getConfianza(), config.getNumIntervalos(), config.getNumAtributos(), config.getNumInstancias(), config.getAtrDiscretos());
 		
-		while(!tieneSolucion || contador<numPreguntas) {
-			ConfigReglasAsociacion config = lector.leerConfig();
-			GeneradorPreguntaReglasAsociacion generadorPregunta = new GeneradorPreguntaReglasAsociacion(config.getSoporte(), config.getConfianza(), config.getNumIntervalos(), config.getNumAtributos(), config.getNumInstancias(), config.getAtrDiscretos());
+		while(!tieneSolucion || contador<config.getNumPreguntas()) {
+			GeneradorPreguntaReglasAsociacion generadorPregunta = new GeneradorPreguntaReglasAsociacion(config.getSoporte(), config.getConfianza(), config.getNumIntervalos(), config.getNumAtributos(), config.getNumInstancias(), config.isAtrDiscretos());
 
 			opciones = new ArrayList<>();
 	    	generadorPregunta.crearConjuntoDatos();
 			numRespuestasVerdaderas = random.nextInt(numOpciones)+1;
 		    numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
 		    
-		    if (config.getAtrDiscretos()) {
+		    if (config.isAtrDiscretos()) {
 	    		generadorPregunta.añadirDiscretizacion();
 	    	}
 		    
