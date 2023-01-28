@@ -13,6 +13,16 @@ public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPr
 
 	private static final int numOpciones = 4;
 	private static final int maxPuntuacion = 100;
+    private static final int minNumAtr = 4;
+    private static final int maxNumAtr = 10;
+    private static final int minNumInstancias = 10;
+    private static final int maxNumInstancias = 20;
+    private static final double minSoporte = 0.3;
+    private static final double maxSoporte = 0.6;
+    private static final double minConfianza = 0.6;
+    private static final double maxConfianza = 1.0;
+    private static final int minNumIntervalos = 2;
+    private static final int maxNumIntervalos = 4;
 
 	@Override
 	public BancoPreguntas generarBancoPreguntas(ConfigReglasAsociacion config) {
@@ -25,18 +35,16 @@ public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPr
         int numRespuestasVerdaderas;
         int numRespuestasFalsas;
         Random random = new Random();
-		
-//		GeneradorPreguntaReglasAsociacion generadorPregunta = new GeneradorPreguntaReglasAsociacion(config.getSoporte(), config.getConfianza(), config.getNumIntervalos(), config.getNumAtributos(), config.getNumInstancias(), config.getAtrDiscretos());
-		
+				
 		while(!tieneSolucion || contador<config.getNumPreguntas()) {
-			GeneradorPreguntaReglasAsociacion generadorPregunta = new GeneradorPreguntaReglasAsociacion(config.getSoporte(), config.getConfianza(), config.getNumIntervalos(), config.getNumAtributos(), config.getNumInstancias(), config.isAtrDiscretos());
+			GeneradorPreguntaReglasAsociacion generadorPregunta = establecerConfiguracion(config);
 
 			opciones = new ArrayList<>();
 	    	generadorPregunta.crearConjuntoDatos();
 			numRespuestasVerdaderas = random.nextInt(numOpciones)+1;
 		    numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
 		    
-		    if (config.isAtrDiscretos()) {
+		    if (generadorPregunta.getAtrDiscretos()) {
 	    		generadorPregunta.añadirDiscretizacion();
 	    	}
 		    
@@ -73,6 +81,57 @@ public class GeneradorBancoPreguntasReglasAsociacion implements GeneradorBancoPr
 		bancoPreguntas = new BancoPreguntas(listaPreguntas);
 		
 		return bancoPreguntas;
+	}
+	
+	private GeneradorPreguntaReglasAsociacion establecerConfiguracion(ConfigReglasAsociacion config) {
+		Random r = new Random();
+		int numAtributos;
+		int numInstancias;
+		double soporte;
+		double confianza;
+		boolean atrDiscretos;
+		int numIntervalos;
+		
+		if (config.getNumAtributos() == 0) {
+			numAtributos = r.nextInt((maxNumAtr - minNumAtr) + 1) + minNumAtr;
+		} else {
+			numAtributos = config.getNumAtributos();
+		}
+		
+		if (config.getNumInstancias() == 0) {
+			numInstancias = r.nextInt((maxNumInstancias - minNumInstancias) + 1) + minNumInstancias;
+		}
+		else {
+			numInstancias = config.getNumInstancias();
+		}
+		
+		if (config.getSoporte() == 0) {
+			soporte = r.nextDouble((maxSoporte - minSoporte) + 1) + minSoporte;
+		} else {
+			soporte = config.getSoporte();
+		}
+		
+		if (config.getConfianza() == 0) {
+			confianza = r.nextDouble((maxConfianza - minConfianza) + 1) + minConfianza;
+		} else {
+			confianza = config.getConfianza();
+		}
+		
+		if (config.isAtrDiscretos() == ' ') {
+			atrDiscretos = r.nextBoolean();
+		} else if (config.isAtrDiscretos() == 's') {
+			atrDiscretos = true;
+		} else {
+			atrDiscretos = false;
+		}
+		
+		if (config.getNumIntervalos() == 0) {
+			numIntervalos = r.nextInt((maxNumIntervalos - minNumIntervalos) + 1) + minNumIntervalos;
+		} else {
+			numIntervalos = config.getNumIntervalos();
+		}
+		
+		return new GeneradorPreguntaReglasAsociacion(numAtributos, numInstancias, soporte, confianza, atrDiscretos, numIntervalos);
 	}
 	
 	private double establecerPuntuacion(int numRespuestas) {

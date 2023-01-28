@@ -1,8 +1,5 @@
 package es.ubu.inf.tfg.generador.reglasasociacion;
 
-import java.text.DecimalFormat;
-import java.util.Random;
-
 public class ConfigReglasAsociacion {
 
 	private int numPreguntas;
@@ -10,10 +7,10 @@ public class ConfigReglasAsociacion {
 	private int numInstancias;
 	private double soporte;
 	private double confianza;
-	private boolean atrDiscretos;
+	private char atrDiscretos;
 	private int numIntervalos;
 	
-	public ConfigReglasAsociacion(int numPreguntas, int numAtributos, int numInstancias, double soporte, double confianza, boolean atrDiscretos, int numIntervalos) {
+	public ConfigReglasAsociacion(int numPreguntas, int numAtributos, int numInstancias, double soporte, double confianza, char atrDiscretos, int numIntervalos) {
 		this.numPreguntas = numPreguntas;
 		this.numAtributos = numAtributos;
 		this.numInstancias = numInstancias;
@@ -63,11 +60,11 @@ public class ConfigReglasAsociacion {
 		this.numInstancias = numInstancias;
 	}
 
-	public boolean isAtrDiscretos() {
+	public char isAtrDiscretos() {
 		return atrDiscretos;
 	}
 
-	public void setAtrDiscretos(boolean atrDiscretos) {
+	public void setAtrDiscretos(char atrDiscretos) {
 		this.atrDiscretos = atrDiscretos;
 	}
 
@@ -78,24 +75,5 @@ public class ConfigReglasAsociacion {
 	public void setNumIntervalos(int numIntervalos) {
 		this.numIntervalos = numIntervalos;
 	}
-	
-//	public ConfigReglasAsociacion(int numAtributos, int numInstancias) {
-//		Random rand = new Random();
-//		this.numAtributos = numAtributos;
-//		this.numInstancias = numInstancias;
-////		setSoporte(rand.nextDouble() * 0.7 + 0.3);
-//		
-////		setSoporte(Math.round((rand.nextDouble() * 0.7 + 0.3) * 10.0) / 10.0);
-//		setSoporte(Math.round((Math.random() * (0.6 - 0.3) + 0.3) * 10.0) / 10.0);
-//		
-////		setConfianza(rand.nextDouble() * 0.8 + 0.2);
-////		setConfianza(Math.round((rand.nextDouble() * 0.8 + 0.2) * 100.0) / 100.0);
-//		setConfianza(Math.round((Math.random() * (1 - 0.65) + 0.65) * 100.0) / 100.0);
-//
-//		setAtrDiscretos(rand.nextBoolean());
-//		setNumIntervalos(rand.nextInt(3) + 2);
-//	}
-	
-	
-	
+		
 }

@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import weka.associations.Apriori;
 import weka.associations.AssociationRule;
@@ -34,13 +36,13 @@ public class GeneradorPreguntaReglasAsociacion {
 	private List<String> opcionesFalsas;
 
 	
-	public GeneradorPreguntaReglasAsociacion(double soporte, double confianza, int numIntervalos, int numAtributos, int numInstancias, boolean atrDiscretos) {
-		this.soporte = soporte;
-		this.confianza = confianza;
-		this.numIntervalos = numIntervalos;
+	public GeneradorPreguntaReglasAsociacion(int numAtributos, int numInstancias, double soporte, double confianza, boolean atrDiscretos, int numIntervalos) {
 		this.numAtributos = numAtributos;
 		this.numInstancias = numInstancias;
+		this.soporte = soporte;
+		this.confianza = confianza;
 		this.atrDiscretos = atrDiscretos;
+		this.numIntervalos = numIntervalos;
 	}
 	
 	public String obtenerEnunciado() {
@@ -110,9 +112,6 @@ public class GeneradorPreguntaReglasAsociacion {
 		discretizar.setAttributeIndices("last");
 		discretizar.setBins(numIntervalos);
 		discretizar.setUseEqualFrequency(false);
-
-//		discretizar.setMakeBinary(false);
-//		discretizar.setUseKononenko(true);
 		
 		try {
 			discretizar.setInputFormat(datos);
@@ -187,28 +186,43 @@ public class GeneradorPreguntaReglasAsociacion {
 		opcionesFalsas = new ArrayList<String>();
 		
 		for (int i=0; i<numRespuestasVerdaderas; i++) {
-			String regla = reglasVerdaderas.get(generarIndex(reglasVerdaderas.size())).toString();
-			String solucionAñadir = regla.substring(0, regla.indexOf("<"));
-			solucionAñadir = solucionAñadir.replaceAll(":\\s*\\d+(\\.\\d+)?", ": ").replaceAll(":", ""); //En esta expresion regular, :\\s* busca el patrón ": " y \\d+(\\.\\d+)? busca cualquier número entero o decimal después del espacio en blanco. El paréntesis alrededor de este último patrón hace que sea capturado y reemplazado en conjunto con el patrón anterior.
-			
-			if (!opcionesVerdaderas.contains(solucionAñadir)) {
-				opcionesVerdaderas.add(solucionAñadir);
+			String regla = reglasVerdaderas.get(generarIndex(reglasVerdaderas.size())).toString();			
+			String solucionFinal = modificarString(regla);
+
+			if (!opcionesVerdaderas.contains(solucionFinal)) {
+				opcionesVerdaderas.add(solucionFinal);
 			} else {
 				i--;
 			}
 		}
 		
 		for (int i=0; i<numRespuestasFalsas; i++) {
-			String regla = reglasFalsas.get(generarIndex(reglasFalsas.size())).toString();
-			String solucionAñadir = regla.substring(0, regla.indexOf("<"));
-			solucionAñadir = solucionAñadir.replaceAll(":\\s*\\d+(\\.\\d+)?", ": ").replaceAll(":", "");
+			String regla = reglasFalsas.get(generarIndex(reglasFalsas.size())).toString();		
+			String solucionFinal = modificarString(regla);
 			
-			if (!opcionesFalsas.contains(solucionAñadir)) {
-				opcionesFalsas.add(solucionAñadir);
+			if (!opcionesFalsas.contains(solucionFinal)) {
+				opcionesFalsas.add(solucionFinal);
 			} else {
 				i--;
 			}
 		}
+	}
+	
+	private String modificarString(String regla) {
+		String solucionAñadir = regla.substring(0, regla.indexOf("<"));
+		solucionAñadir = solucionAñadir.replaceAll(":\\s*\\d+(\\.\\d+)?", ": ").replaceAll(":", "");
+
+		Pattern patron = Pattern.compile("-?\\d+(\\.\\d+)?");
+		Matcher matcher = patron.matcher(solucionAñadir);
+
+		while (matcher.find()) {
+		    String numero = matcher.group();
+		    double num = Double.parseDouble(numero);
+		    double rounded = Math.round(num * 10.0) / 10.0;
+		    solucionAñadir = solucionAñadir.replace(numero, String.valueOf(rounded));
+		}
+		
+		return solucionAñadir;
 	}
 	
 	public String getContenidoData() {

@@ -65,18 +65,18 @@ public abstract class Ventana <T> extends JFrame {
 						JOptionPane.showMessageDialog(Ventana.this, "Error al crear el archivo: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
-					JDialog dialog = new JDialog(Ventana.this, "Generando preguntas", Dialog.ModalityType.APPLICATION_MODAL);
-					JLabel label = new JLabel("Generando preguntas");
-					JProgressBar progressBar = new JProgressBar();
-					progressBar.setIndeterminate(true);
-					dialog.add(label, BorderLayout.NORTH);
-					dialog.add(progressBar, BorderLayout.CENTER);
-					dialog.pack();
-					dialog.setLocationRelativeTo(Ventana.this);
-					dialog.setVisible(true);
-
-					Thread t = new Thread(new Runnable() {
-						public void run() {
+//					JDialog dialog = new JDialog(Ventana.this, "Generando preguntas", Dialog.ModalityType.APPLICATION_MODAL);
+//					JLabel label = new JLabel("Generando preguntas");
+//					JProgressBar progressBar = new JProgressBar();
+//					progressBar.setIndeterminate(true);
+//					dialog.add(label, BorderLayout.NORTH);
+//					dialog.add(progressBar, BorderLayout.CENTER);
+//					dialog.pack();
+//					dialog.setLocationRelativeTo(Ventana.this);
+//					dialog.setVisible(true);
+//
+//					Thread t = new Thread(new Runnable() {
+//						public void run() {
 							BancoPreguntas bancoPreguntas = gbp.generarBancoPreguntas(obtenerConfiguracion());
 							try {
 								Traductor traductor = new TraductorXML(ruta);
@@ -84,14 +84,14 @@ public abstract class Ventana <T> extends JFrame {
 							} catch (IOException e2) {
 								JOptionPane.showMessageDialog(Ventana.this, "Error al exportar el archivo: " + e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 							}
-							dialog.setVisible(false);
+//							dialog.setVisible(false);
 						}
-					});
-					t.start();
+//					});
+//					t.start();
 
 					JOptionPane.showMessageDialog(Ventana.this, "Exportación finalizada");
 				}            
-			}
+			
 		});
 	}
 }

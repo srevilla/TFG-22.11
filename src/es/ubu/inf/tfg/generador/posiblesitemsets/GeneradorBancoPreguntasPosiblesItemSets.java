@@ -13,6 +13,10 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 	
 	private static final int numOpciones = 4;
 	private static final int maxPuntuacion = 100;
+	private static final int minNumItemSets = 10;
+	private static final int maxNumItemSets = 16;
+	private static final int minTamItemSets = 3;
+	private static final int maxTamItemSets = 4;
 
 	@Override
 	public BancoPreguntas generarBancoPreguntas(ConfigPosiblesItemSets config) {
@@ -26,10 +30,9 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
         int numRespuestasVerdaderas;
         int numRespuestasFalsas;
         Random random = new Random();
-		
-		GeneradorPreguntaPosiblesItemSets generadorPregunta = new GeneradorPreguntaPosiblesItemSets(config.getNumItemSets(), config.getTamItemSets());
-		
+				
 		while(!tieneSolucion || contador<config.getNumPreguntas()) {
+			GeneradorPreguntaPosiblesItemSets generadorPregunta = establecerConfiguracion(config);
 			opciones = new ArrayList<>();
 			generadorPregunta.generarTotalConjuntos();
 			numRespuestasVerdaderas = random.nextInt(numOpciones)+1;
@@ -68,6 +71,26 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 		bancoPreguntas = new BancoPreguntas(listaPreguntas);
 		
 		return bancoPreguntas;
+	}
+	
+	private GeneradorPreguntaPosiblesItemSets establecerConfiguracion(ConfigPosiblesItemSets config) {
+		Random r = new Random();
+		int numItemSets;
+		int tamItemSets;
+		
+		if (config.getNumItemSets() == 0) {
+			numItemSets = r.nextInt((maxNumItemSets - minNumItemSets) + 1) + minNumItemSets;
+		} else {
+			numItemSets = config.getNumItemSets();
+		}
+		
+		if (config.getTamItemSets() == 0) {
+			tamItemSets = r.nextInt((maxTamItemSets - minTamItemSets) + 1) + minTamItemSets;
+		} else {
+			tamItemSets = config.getTamItemSets();
+		}
+		
+		return new GeneradorPreguntaPosiblesItemSets(numItemSets, tamItemSets);
 	}
 	
 	private double establecerPuntuacion(int numRespuestas) {
