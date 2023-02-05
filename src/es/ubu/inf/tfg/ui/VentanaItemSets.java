@@ -10,7 +10,7 @@ import es.ubu.inf.tfg.generador.reglasasociacion.ConfigReglasAsociacion;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class VentanaReglasItemSets extends Ventana <ConfigReglasAsociacion> {
+public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
 
     /**
 	 * 
@@ -46,7 +46,7 @@ public class VentanaReglasItemSets extends Ventana <ConfigReglasAsociacion> {
     private static final int maxNumIntervalos = 4;
     
 
-    public VentanaReglasItemSets() {
+    public VentanaItemSets() {
         super(new JButton("Exportar XML"), new GeneradorBancoPreguntasItemSets());
         
         setLayout(new GridLayout(9, 2, 10, 10));

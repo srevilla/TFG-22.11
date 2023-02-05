@@ -8,7 +8,7 @@ import es.ubu.inf.tfg.generador.ampliacionitemsets.GeneradorBancoPreguntasAmplia
 import java.awt.*;
 import java.util.*;
 
-public class VentanaPosiblesItemSets extends Ventana <ConfigAmpliacionItemSets> {
+public class VentanaAmpliacionItemSets extends Ventana <ConfigAmpliacionItemSets> {
 
     /**
 	 * 
@@ -28,7 +28,7 @@ public class VentanaPosiblesItemSets extends Ventana <ConfigAmpliacionItemSets> 
 	private static final int minTamItemSets = 3;
 	private static final int maxTamItemSets = 4;
 
-    public VentanaPosiblesItemSets() {
+    public VentanaAmpliacionItemSets() {
         super(new JButton("Exportar XML"), new GeneradorBancoPreguntasAmpliacionItemSets());
         
         setLayout(new GridLayout(6, 2, 10, 10));

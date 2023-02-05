@@ -27,7 +27,7 @@ public class Main extends JFrame {
         boton1 = new JButton("Ampliación Item Sets");
         boton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaPosiblesItemSets v1 = new VentanaPosiblesItemSets();
+                VentanaAmpliacionItemSets v1 = new VentanaAmpliacionItemSets();
                 v1.setVisible(true);
                 v1.setSize(500, 300);
             }
@@ -45,7 +45,7 @@ public class Main extends JFrame {
         boton3 = new JButton("Generación Item Sets");
         boton3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaReglasItemSets v3 = new VentanaReglasItemSets();
+                VentanaItemSets v3 = new VentanaItemSets();
                 v3.setVisible(true);
                 v3.setSize(500, 300);
             }
