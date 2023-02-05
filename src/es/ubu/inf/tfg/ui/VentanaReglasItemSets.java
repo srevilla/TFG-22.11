@@ -4,13 +4,13 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import es.ubu.inf.tfg.generador.itemsets.GeneradorBancoPreguntasItemSets;
 import es.ubu.inf.tfg.generador.reglasasociacion.ConfigReglasAsociacion;
-import es.ubu.inf.tfg.generador.reglasasociacion.GeneradorBancoPreguntasReglasAsociacion;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class VentanaReglasAsociacion extends Ventana <ConfigReglasAsociacion> {
+public class VentanaReglasItemSets extends Ventana <ConfigReglasAsociacion> {
 
     /**
 	 * 
@@ -46,8 +46,8 @@ public class VentanaReglasAsociacion extends Ventana <ConfigReglasAsociacion> {
     private static final int maxNumIntervalos = 4;
     
 
-    public VentanaReglasAsociacion() {
-        super(new JButton("Exportar XML"), new GeneradorBancoPreguntasReglasAsociacion());
+    public VentanaReglasItemSets() {
+        super(new JButton("Exportar XML"), new GeneradorBancoPreguntasItemSets());
         
         setLayout(new GridLayout(9, 2, 10, 10));
         numPreguntasEtiqueta = new JLabel("Numero de preguntas:");
@@ -174,9 +174,5 @@ public class VentanaReglasAsociacion extends Ventana <ConfigReglasAsociacion> {
 		return new ConfigReglasAsociacion(numPreguntas, numAtributos, numInstancias, soporte, confianza, tieneDiscretos, numIntervalos);
 	}	
 }
-
-
-
-
 
 

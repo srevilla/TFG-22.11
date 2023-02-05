@@ -1,4 +1,4 @@
-package es.ubu.inf.tfg.generador.posiblesitemsets;
+package es.ubu.inf.tfg.generador.ampliacionitemsets;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class GeneradorPreguntaPosiblesItemSets {
+public class GeneradorPreguntaAmpliacionItemSets {
 	
 	private int numItemSets;
 	private int tamItemSets;
@@ -18,7 +18,7 @@ public class GeneradorPreguntaPosiblesItemSets {
 	private List<List<Character>> opcionesVerdaderas;
 	private List<List<Character>> opcionesFalsas;
 
-	public GeneradorPreguntaPosiblesItemSets(int numItemSets, int tamItemSets) {
+	public GeneradorPreguntaAmpliacionItemSets(int numItemSets, int tamItemSets) {
 		this.numItemSets = numItemSets;
 		this.tamItemSets = tamItemSets;
 	}

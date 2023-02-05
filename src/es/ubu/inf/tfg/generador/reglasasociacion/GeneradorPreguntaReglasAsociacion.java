@@ -7,183 +7,159 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import es.ubu.inf.tfg.dominio.Opcion;
+import es.ubu.inf.tfg.dominio.Pregunta;
+import es.ubu.inf.tfg.dominio.UnexpectedException;
+import es.ubu.inf.tfg.generador.conjuntodatos.ConjuntoDatos;
+import es.ubu.inf.tfg.generador.conjuntodatos.GeneradorConjuntoDatos;
 import weka.associations.Apriori;
 import weka.associations.AssociationRule;
-import weka.core.Attribute;
-import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Discretize;
 
 public class GeneradorPreguntaReglasAsociacion {
 		
 	double soporte;
 	double confianza;
-	int numIntervalos;
-	int numAtributos;
-	int numInstancias;
 	private boolean atrDiscretos;
-	private Instances datos;
-	private Instances datosUso;
-	private String intervalos;
-	private Apriori apriori;
-	private List<AssociationRule> reglas;
-	private List<AssociationRule> reglasVerdaderas;
-	private List<AssociationRule> reglasFalsas;
-	private List<String> opcionesVerdaderas;
-	private List<String> opcionesFalsas;
-
+	private GeneradorConjuntoDatos gcd;
 	
-	public GeneradorPreguntaReglasAsociacion(int numAtributos, int numInstancias, double soporte, double confianza, boolean atrDiscretos, int numIntervalos) {
-		this.numAtributos = numAtributos;
-		this.numInstancias = numInstancias;
-		this.soporte = soporte;
-		this.confianza = confianza;
-		this.atrDiscretos = atrDiscretos;
-		this.numIntervalos = numIntervalos;
+    private static final double minSoporte = 0.3;
+    private static final double maxSoporte = 0.6;
+    private static final double minConfianza = 0.6;
+    private static final double maxConfianza = 1.0;
+	private static final int numOpciones = 4;
+	private static final int maxPuntuacion = 100;
+		
+	public GeneradorPreguntaReglasAsociacion(ConfigReglasAsociacion config) {
+		Random r = new Random();
+		gcd = new GeneradorConjuntoDatos(config);
+		
+		if (config.getSoporte() == 0) {
+			soporte = minSoporte + (maxSoporte - minSoporte) * Math.round(r.nextDouble() * 10.0) / 10.0;
+		} else {
+			soporte = config.getSoporte();
+		}
+		
+		if (config.getConfianza() == 0) {
+			confianza = minConfianza + (maxConfianza - minConfianza) * Math.round(r.nextDouble() * 10.0) / 10.0;;
+		} else {
+			confianza = config.getConfianza();
+		}
+		
+		if (config.isAtrDiscretos() == ' ') {
+			atrDiscretos = r.nextBoolean();
+		} else if (config.isAtrDiscretos() == 's') {
+			atrDiscretos = true;
+		} else {
+			atrDiscretos = false;
+		}
+		
 	}
 	
-	public String obtenerEnunciado() {
-		String enunciado  = "Sea el siguiente conjunto de datos: " + getContenidoData() + "\r\n"
+	private String obtenerEnunciado(ConjuntoDatos conjuntoDatos) {
+		String enunciado  = "Sea el siguiente conjunto de datos: " + getContenidoData(conjuntoDatos.getDatosEnunciado()) + "\r\n"
 				+ "Obtenga aquellas reglas de asociacion con soporte y confianza mayores o iguales que, respectivamente, "+ (int)(soporte*10) + " y " + (int)(confianza*100) + "%.\r\n";
 		if (atrDiscretos) {
-			return enunciado + "El atributo X debe discretizarse entre los siguientes intervalos: " + intervalos;
+			return enunciado + "El atributo X debe discretizarse entre los siguientes intervalos: " + conjuntoDatos.getIntervalos();
 		} else {
 			return enunciado;
 		}
 		
 	}
 	
-	public String obtenerTitulo() {
+	private String obtenerTitulo() {
 		return "Reglas Asociacion";
 	}
 	
-	private ArrayList<Attribute> crearAtributos(int numAtributos) {
-		ArrayList<Attribute> atributos = new ArrayList<>();
-		String nombreAtributo;
-		List<String> etiquetas;
+	public Pregunta generarPregunta() {
 		
-		for (int i = 0; i < numAtributos; i++) {			
-	        nombreAtributo = Character.toString((char) ('A' + i));
-	        etiquetas = new ArrayList<>();
-	        etiquetas.add("T");
-	        etiquetas.add("F");
-	        atributos.add(new Attribute(nombreAtributo, etiquetas));
-	    }
-		return atributos;
-	}
-	
-	public void crearConjuntoDatos() {
-		Random rand;
-		
-		crearAtributos(numAtributos);
-	    datos = new Instances("datos", crearAtributos(numAtributos), 0);
-
-	    rand = new Random();
-
-	    for (int i = 0; i < numInstancias; i++) {
-
-	      Instance instancia = new DenseInstance(numAtributos);
-	      instancia.setDataset(datos); 
-	      
-	      for (int j = 0; j < numAtributos; j++) {
-	    	  instancia.setValue(j, (rand.nextInt(2) == 0) ? "T" : "F");
-	      }
-	      datos.add(instancia);
-	    }
-	}
-	
-	public void añadirDiscretizacion() {
-		Attribute nuevoAtr = new Attribute("X");
-		datos.insertAttributeAt(nuevoAtr, datos.numAttributes());
-		
-		Random random = new Random();
-		int atrIndex = datos.attribute("X").index();
-
-		for (int i = 0; i < datos.numInstances(); i++) {
-			double randomValue = Math.round((0 + (100 - 0) * random.nextDouble())*10)/10.0;
-		    datos.instance(i).setValue(atrIndex, randomValue);
-		}
-		
-		Discretize discretizar = new Discretize();
-
-		discretizar.setAttributeIndices("last");
-		discretizar.setBins(numIntervalos);
-		discretizar.setUseEqualFrequency(false);
-		
-		try {
-			discretizar.setInputFormat(datos);
-			datosUso = Filter.useFilter(datos, discretizar);
-			double[] puntosCorte = discretizar.getCutPoints(datosUso.numAttributes()-1);
-			establecerIntervalos(puntosCorte);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void setSoporteMinimo(double n) {
-		apriori.setMinMetric(0.3); 
-	}
-	
-	public void setConfianzaMinima(double n) {
-		apriori.setLowerBoundMinSupport(0.2);
-	}
-	
-	public void setNumReglas() {
-		apriori.setNumRules(20);
-	}
-	
-	public void ejecutaAlgoritmo() {
-		try {
-			apriori.buildAssociations(datosUso);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void obtenerReglas() {
-		reglas = apriori.getAssociationRules().getRules();
-	}
-	
-	public void generarSoluciones() {
-		apriori = new Apriori();
-		reglasVerdaderas = new ArrayList<AssociationRule>();
-		reglasFalsas = new ArrayList<AssociationRule>();
-		
-		setDatosUso(datosUso);
-		setSoporteMinimo(soporte);
-		setConfianzaMinima(confianza);
-		setNumReglas();
-		ejecutaAlgoritmo();
-		obtenerReglas();
-		
-		for (AssociationRule rule : reglas) {
-			double confianzaRegla = rule.getPrimaryMetricValue();	
-			BigDecimal bd = new BigDecimal(confianzaRegla).setScale(2, RoundingMode.HALF_UP);
-			double confianzaRedondeada = bd.doubleValue();
-			double soporteRegla = (double)rule.getTotalSupport()/datosUso.size();
+        Random random = new Random();
+		int numRespuestasVerdaderas = random.nextInt(numOpciones-1)+1;
+	    int numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
+	    boolean tieneSolucion = false;
+	    Pregunta pregunta = null;
+	    
+		while(!tieneSolucion) {
+			Apriori apriori = new Apriori();
+			List<AssociationRule> reglasVerdaderas = new ArrayList<AssociationRule>();
+			List<AssociationRule> reglasFalsas = new ArrayList<AssociationRule>();
+	        		
+			apriori.setMinMetric(0.3); 
+			apriori.setLowerBoundMinSupport(0.2);
+			apriori.setNumRules(20);
 			
-            if (confianzaRedondeada >= confianza && 
-                soporteRegla >= soporte) {
-                reglasVerdaderas.add(rule);
-            } else {
-                reglasFalsas.add(rule);
-            }
-        }
+			ConjuntoDatos conjuntoDatos = gcd.crearConjuntoDatos();
+			Instances datosCalculos = conjuntoDatos.getDatosCalculos();
+			
+			try {
+				apriori.buildAssociations(datosCalculos);
+			} catch (Exception e) {
+				throw new UnexpectedException(e);
+			}	
+			
+			List<AssociationRule> reglas = apriori.getAssociationRules().getRules();
+			
+			for (AssociationRule rule : reglas) {
+				double confianzaRegla = rule.getPrimaryMetricValue();	
+				BigDecimal bd = new BigDecimal(confianzaRegla).setScale(2, RoundingMode.HALF_UP);
+				double confianzaRedondeada = bd.doubleValue();
+				double soporteRegla = (double)rule.getTotalSupport()/datosCalculos.size();
+				
+	            if (confianzaRedondeada >= confianza && 
+	                soporteRegla >= soporte) {
+	                reglasVerdaderas.add(rule);
+	            } else {
+	                reglasFalsas.add(rule);
+	            }
+	        }
+			
+	        tieneSolucion = tieneSolucion(numRespuestasVerdaderas, numRespuestasFalsas, reglasVerdaderas, reglasFalsas);
+
+	        if(tieneSolucion) {
+	            List<Opcion> opciones = new ArrayList<>();
+	            List<List<String>> opcionesGeneradas = generarOpciones(numRespuestasVerdaderas, numRespuestasFalsas, reglasVerdaderas, reglasFalsas);
+	           	List<String> opcionesVerdaderas = opcionesGeneradas.get(0);
+	           	List<String> opcionesFalsas = opcionesGeneradas.get(1);
+	           	
+            	double pesoVerdaderas = (double) establecerPuntuacion(numRespuestasVerdaderas);
+            	double pesoFalsas = -establecerPuntuacion(numRespuestasFalsas);
+            	
+            	for (int i=0; i<numRespuestasVerdaderas; i++) {
+            		String texto = opcionesVerdaderas.get(i).toString();
+	            	Opcion opcion = new Opcion(pesoVerdaderas, texto);
+	            	opciones.add(opcion);
+	            }
+            	
+            	for (int i=0; i<numRespuestasFalsas; i++) {
+            		String texto = opcionesFalsas.get(i).toString();
+	            	Opcion opcion = new Opcion(pesoFalsas, texto);
+	            	opciones.add(opcion);
+	            }
+            	
+            	pregunta = new Pregunta(opciones, obtenerEnunciado(conjuntoDatos), obtenerTitulo());
+	        }
+		}
+		
+		return pregunta;
+		
 	}
+		
+	
 	
 	private int generarIndex(int maxIndex) {
         int index = (int)(Math.random() * maxIndex);
         return index;
 	}
 	
-	public void generarOpciones(int numRespuestasFalsas, int numRespuestasVerdaderas) {
-		opcionesVerdaderas = new ArrayList<String>();
-		opcionesFalsas = new ArrayList<String>();
+	private double establecerPuntuacion(int numRespuestas) {
+		return (double)maxPuntuacion/numRespuestas;
+	}
+	
+	private List<List<String>> generarOpciones(int numRespuestasVerdaderas, int numRespuestasFalsas, List<AssociationRule> reglasVerdaderas, List<AssociationRule> reglasFalsas) {
+		List<List<String>> resultado = new ArrayList<>();
+		List<String> opcionesVerdaderas = new ArrayList<String>();
+		List<String> opcionesFalsas = new ArrayList<String>();
 		
 		for (int i=0; i<numRespuestasVerdaderas; i++) {
 			String regla = reglasVerdaderas.get(generarIndex(reglasVerdaderas.size())).toString();			
@@ -206,6 +182,11 @@ public class GeneradorPreguntaReglasAsociacion {
 				i--;
 			}
 		}
+		
+		resultado.add(opcionesVerdaderas);
+		resultado.add(opcionesFalsas);
+		
+		return resultado;
 	}
 	
 	private String modificarString(String regla) {
@@ -225,59 +206,40 @@ public class GeneradorPreguntaReglasAsociacion {
 		return solucionAñadir;
 	}
 	
-	public String getContenidoData() {
+	private String getContenidoData(Instances datos) {
 		StringBuilder sb = new StringBuilder();
-	    sb.append("<br>");
-	    // Agrega los nombres de los atributos en la primera fila
-	    for (int i = 0; i < datos.numAttributes(); i++) {
-	        sb.append(datos.attribute(i).name());
-	        sb.append(" ");
-	    }
-	    
-	    sb.append("<br>");
-	    sb.append(" ");
-	    
-	    for (int i = 0; i < datos.numInstances(); i++) {
-	        Instance inst=datos.instance(i);
-	        for(int j=0; j<inst.numAttributes(); j++) {
-	        	if(!inst.attribute(j).isNominal()) {
-	        		sb.append(String.valueOf(inst.value(j)));
-		            sb.append(" ");
-	        	} else {
-	        		sb.append(inst.stringValue(j));
-		            sb.append(" ");
-	        	}	            
-	        }
-		    sb.append("<br>");
-	    }
-	    return sb.toString();
-//		TableFormatter formatter = new TableFormatter();
-//	    // Agrega los nombres de los atributos en la primera fila
-//	    for (int i = 0; i < datos.numAttributes(); i++) {
-//	        formatter.addRow(datos.attribute(i).name());
-//	    }
-//
-//	    for (int i = 0; i < datos.numInstances(); i++) {
-//	        Instance inst=datos.instance(i);
-//	        String[] row = new String[inst.numAttributes()];
-//	        for(int j=0;j<inst.numAttributes();j++) {
-//	            row[j] = inst.stringValue(j);
-//	        }
-//	        formatter.addRow(row);
-//	    }
-//	    return formatter.format();
+		  sb.append("<table>");
+
+		  // Agrega los nombres de los atributos en la primera fila
+		  sb.append("<tr>");
+		  for (int i = 0; i < datos.numAttributes(); i++) {
+		    sb.append("<th>");
+		    sb.append(datos.attribute(i).name());
+		    sb.append("</th>");
+		  }
+		  sb.append("</tr>");
+
+		  // Agrega los valores de las instancias
+		  for (int i = 0; i < datos.numInstances(); i++) {
+		    Instance inst = datos.instance(i);
+		    sb.append("<tr>");
+		    for (int j = 0; j < inst.numAttributes(); j++) {
+		      sb.append("<td>");
+		      if (!inst.attribute(j).isNominal()) {
+		        sb.append(String.valueOf(inst.value(j)));
+		      } else {
+		        sb.append(inst.stringValue(j));
+		      }
+		      sb.append("</td>");
+		    }
+		    sb.append("</tr>");
+		  }
+
+		  sb.append("</table>");
+		  return sb.toString();
 	}
 	
-	private void establecerIntervalos(double[] puntosCorte) {
-	    intervalos = "[";
-	    intervalos += "- ; " + Math.round(puntosCorte[0] * 10.0) / 10.0;
-	    for (int i = 0; i < puntosCorte.length - 1; i++) {
-	        intervalos += "], [" + Math.round((puntosCorte[i] + 0.1) * 10.0) / 10.0 + " ; " + Math.round((puntosCorte[i + 1]) * 10.0) / 10.0;
-	    }
-	    intervalos += "], [" + Math.round((puntosCorte[puntosCorte.length - 1] + 0.1) * 10.0) / 10.0 + " ; -]";
-	}
-	
-	public boolean tieneSolucion(int numRespuestasVerdaderas, int numRespuestasFalsas) {
+	private boolean tieneSolucion(int numRespuestasVerdaderas, int numRespuestasFalsas, List<AssociationRule> reglasVerdaderas, List<AssociationRule> reglasFalsas) {
 		if (reglasVerdaderas.size() >= numRespuestasVerdaderas
 				&& reglasFalsas.size() >= numRespuestasFalsas) {
 			return true;
@@ -302,30 +264,6 @@ public class GeneradorPreguntaReglasAsociacion {
 		this.confianza = confianza;
 	}
 
-	public int getNumIntervalos() {
-		return numIntervalos;
-	}
-
-	public void setNumIntervalos(int numIntervalos) {
-		this.numIntervalos = numIntervalos;
-	}
-
-	public int getNumAtributos() {
-		return numAtributos;
-	}
-
-	public void setNumAtributos(int numAtributos) {
-		this.numAtributos = numAtributos;
-	}
-
-	public int getNumInstancias() {
-		return numInstancias;
-	}
-
-	public void setNumInstancias(int numInstancias) {
-		this.numInstancias = numInstancias;
-	}
-
 	public boolean getAtrDiscretos() {
 		return atrDiscretos;
 	}
@@ -333,83 +271,5 @@ public class GeneradorPreguntaReglasAsociacion {
 	public void setAtrDiscretos(boolean atrDiscretos) {
 		this.atrDiscretos = atrDiscretos;
 	}
-
-	public Instances getDatos() {
-		return datos;
-	}
-
-	public void setDatos(Instances datos) {
-		this.datos = datos;
-	}
-
-	public Instances getDatosUso() {
-		return datosUso;
-	}
-
-	public void setDatosUso(Instances datosUso) {
-		if(datosUso == null) {
-			this.datosUso = datos;
-		} else {
-			this.datosUso = datosUso;
-		}
-	}
-
-	public String getIntervalos() {
-		return intervalos;
-	}
-
-	public void setIntervalos(String intervalos) {
-		this.intervalos = intervalos;
-	}
-
-	public Apriori getApriori() {
-		return apriori;
-	}
-
-	public void setApriori(Apriori apriori) {
-		this.apriori = apriori;
-	}
-
-	public List<AssociationRule> getReglas() {
-		return reglas;
-	}
-
-	public void setReglas(List<AssociationRule> reglas) {
-		this.reglas = reglas;
-	}
-
-	public List<AssociationRule> getReglasVerdaderas() {
-		return reglasVerdaderas;
-	}
-
-	public void setReglasVerdaderas(List<AssociationRule> reglasVerdaderas) {
-		this.reglasVerdaderas = reglasVerdaderas;
-	}
-
-	public List<AssociationRule> getReglasFalsas() {
-		return reglasFalsas;
-	}
-
-	public void setReglasFalsas(List<AssociationRule> reglasFalsas) {
-		this.reglasFalsas = reglasFalsas;
-	}
-
-	public List<String> getOpcionesVerdaderas() {
-		return opcionesVerdaderas;
-	}
-
-	public void setOpcionesVerdaderas(List<String> opcionesVerdaderas) {
-		this.opcionesVerdaderas = opcionesVerdaderas;
-	}
-
-	public List<String> getOpcionesFalsas() {
-		return opcionesFalsas;
-	}
-
-	public void setOpcionesFalsas(List<String> opcionesFalsas) {
-		this.opcionesFalsas = opcionesFalsas;
-	}
 	
-	
-
 }

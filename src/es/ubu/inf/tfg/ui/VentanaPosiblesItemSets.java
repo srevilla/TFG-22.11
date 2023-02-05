@@ -2,13 +2,13 @@ package es.ubu.inf.tfg.ui;
 
 import javax.swing.*;
 
-import es.ubu.inf.tfg.generador.posiblesitemsets.ConfigPosiblesItemSets;
-import es.ubu.inf.tfg.generador.posiblesitemsets.GeneradorBancoPreguntasPosiblesItemSets;
+import es.ubu.inf.tfg.generador.ampliacionitemsets.ConfigAmpliacionItemSets;
+import es.ubu.inf.tfg.generador.ampliacionitemsets.GeneradorBancoPreguntasAmpliacionItemSets;
 
 import java.awt.*;
 import java.util.*;
 
-public class VentanaPosiblesItemSets extends Ventana <ConfigPosiblesItemSets> {
+public class VentanaPosiblesItemSets extends Ventana <ConfigAmpliacionItemSets> {
 
     /**
 	 * 
@@ -29,7 +29,7 @@ public class VentanaPosiblesItemSets extends Ventana <ConfigPosiblesItemSets> {
 	private static final int maxTamItemSets = 4;
 
     public VentanaPosiblesItemSets() {
-        super(new JButton("Exportar XML"), new GeneradorBancoPreguntasPosiblesItemSets());
+        super(new JButton("Exportar XML"), new GeneradorBancoPreguntasAmpliacionItemSets());
         
         setLayout(new GridLayout(6, 2, 10, 10));
         numPreguntasLabel = new JLabel("Numero de preguntas:");
@@ -60,7 +60,7 @@ public class VentanaPosiblesItemSets extends Ventana <ConfigPosiblesItemSets> {
     }
     
 	@Override
-	public ConfigPosiblesItemSets obtenerConfiguracion() {
+	public ConfigAmpliacionItemSets obtenerConfiguracion() {
  	    int numPreguntas = (Integer) numPreguntasSpinner.getValue();
  	    
  	    int numItemSets;
@@ -77,7 +77,7 @@ public class VentanaPosiblesItemSets extends Ventana <ConfigPosiblesItemSets> {
             tamItemSets = (Integer) tamItemSetsSpinner.getValue();
         }
 
-		return new ConfigPosiblesItemSets(numPreguntas, numItemSets, tamItemSets);
+		return new ConfigAmpliacionItemSets(numPreguntas, numItemSets, tamItemSets);
 	}	
 }
 

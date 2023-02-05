@@ -1,12 +1,12 @@
-package es.ubu.inf.tfg.generador.posiblesitemsets;
+package es.ubu.inf.tfg.generador.ampliacionitemsets;
 
-public class ConfigPosiblesItemSets {
+public class ConfigAmpliacionItemSets {
 
 	private int numPreguntas;
 	private int numItemSets;
 	private int tamItemSets;
 	
-	public ConfigPosiblesItemSets(int numPreguntas, int numItemSets, int tamItemSets) {
+	public ConfigAmpliacionItemSets(int numPreguntas, int numItemSets, int tamItemSets) {
 		this.numPreguntas = numPreguntas;
 		this.numItemSets = numItemSets;
 		this.tamItemSets = tamItemSets;

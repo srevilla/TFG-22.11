@@ -48,7 +48,8 @@ public abstract class Ventana <T> extends JFrame {
 					JOptionPane.showMessageDialog(Ventana.this, "Ingrese un nombre para el fichero", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-
+				
+				boolean exportacionExitosa = false;
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				int returnVal = fileChooser.showOpenDialog(Ventana.this);
@@ -81,6 +82,7 @@ public abstract class Ventana <T> extends JFrame {
 							try {
 								Traductor traductor = new TraductorXML(ruta);
 								traductor.traducir(bancoPreguntas);
+								exportacionExitosa = true;
 							} catch (IOException e2) {
 								JOptionPane.showMessageDialog(Ventana.this, "Error al exportar el archivo: " + e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 							}
@@ -89,8 +91,10 @@ public abstract class Ventana <T> extends JFrame {
 //					});
 //					t.start();
 
+				if (exportacionExitosa) {
 					JOptionPane.showMessageDialog(Ventana.this, "Exportación finalizada");
-				}            
+				}				
+			}            
 			
 		});
 	}

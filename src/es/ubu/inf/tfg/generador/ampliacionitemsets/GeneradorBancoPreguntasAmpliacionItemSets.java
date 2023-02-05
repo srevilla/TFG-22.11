@@ -1,4 +1,4 @@
-package es.ubu.inf.tfg.generador.posiblesitemsets;
+package es.ubu.inf.tfg.generador.ampliacionitemsets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import es.ubu.inf.tfg.dominio.Opcion;
 import es.ubu.inf.tfg.dominio.Pregunta;
 import es.ubu.inf.tfg.generador.GeneradorBancoPreguntas;
 
-public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPreguntas <ConfigPosiblesItemSets> {
+public class GeneradorBancoPreguntasAmpliacionItemSets implements GeneradorBancoPreguntas <ConfigAmpliacionItemSets> {
 	
 	private static final int numOpciones = 4;
 	private static final int maxPuntuacion = 100;
@@ -19,7 +19,7 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 	private static final int maxTamItemSets = 4;
 
 	@Override
-	public BancoPreguntas generarBancoPreguntas(ConfigPosiblesItemSets config) {
+	public BancoPreguntas generarBancoPreguntas(ConfigAmpliacionItemSets config) {
 		
 		BancoPreguntas bancoPreguntas;
 
@@ -32,10 +32,10 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
         Random random = new Random();
 				
 		while(!tieneSolucion || contador<config.getNumPreguntas()) {
-			GeneradorPreguntaPosiblesItemSets generadorPregunta = establecerConfiguracion(config);
+			GeneradorPreguntaAmpliacionItemSets generadorPregunta = establecerConfiguracion(config);
 			opciones = new ArrayList<>();
 			generadorPregunta.generarTotalConjuntos();
-			numRespuestasVerdaderas = random.nextInt(numOpciones)+1;
+			numRespuestasVerdaderas = random.nextInt(numOpciones-1)+1;
 		    numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
 		    
 		    try {
@@ -73,7 +73,7 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 		return bancoPreguntas;
 	}
 	
-	private GeneradorPreguntaPosiblesItemSets establecerConfiguracion(ConfigPosiblesItemSets config) {
+	private GeneradorPreguntaAmpliacionItemSets establecerConfiguracion(ConfigAmpliacionItemSets config) {
 		Random r = new Random();
 		int numItemSets;
 		int tamItemSets;
@@ -90,7 +90,7 @@ public class GeneradorBancoPreguntasPosiblesItemSets implements GeneradorBancoPr
 			tamItemSets = config.getTamItemSets();
 		}
 		
-		return new GeneradorPreguntaPosiblesItemSets(numItemSets, tamItemSets);
+		return new GeneradorPreguntaAmpliacionItemSets(numItemSets, tamItemSets);
 	}
 	
 	private double establecerPuntuacion(int numRespuestas) {
