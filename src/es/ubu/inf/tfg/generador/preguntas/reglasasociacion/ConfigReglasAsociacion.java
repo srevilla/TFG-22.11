@@ -1,4 +1,4 @@
-package es.ubu.inf.tfg.generador.reglasasociacion;
+package es.ubu.inf.tfg.generador.preguntas.reglasasociacion;
 
 public class ConfigReglasAsociacion {
 

@@ -1,6 +1,7 @@
 package es.ubu.inf.tfg.dominio;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Pregunta {
 	
@@ -12,6 +13,24 @@ public class Pregunta {
 		this.opciones = opciones;
 		this.enunciado = enunciado;
 		this.titulo = titulo;
+	}	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(enunciado, opciones, titulo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pregunta other = (Pregunta) obj;
+		return Objects.equals(enunciado, other.enunciado) && Objects.equals(opciones, other.opciones)
+				&& Objects.equals(titulo, other.titulo);
 	}
 
 	public List<Opcion> getOpciones() {

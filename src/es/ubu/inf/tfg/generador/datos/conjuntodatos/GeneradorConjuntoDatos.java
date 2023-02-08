@@ -1,11 +1,11 @@
-package es.ubu.inf.tfg.generador.conjuntodatos;
+package es.ubu.inf.tfg.generador.datos.conjuntodatos;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import es.ubu.inf.tfg.dominio.UnexpectedException;
-import es.ubu.inf.tfg.generador.reglasasociacion.ConfigReglasAsociacion;
+import es.ubu.inf.tfg.generador.preguntas.reglasasociacion.ConfigReglasAsociacion;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
@@ -15,10 +15,10 @@ import weka.filters.unsupervised.attribute.Discretize;
 
 public class GeneradorConjuntoDatos {
 
-	private int numIntervalos;
-	private int numAtributos;
-	private int numInstancias;
-	private boolean atrDiscretos;
+	private final int numIntervalos;
+	private final int numAtributos;
+	private final int numInstancias;
+	private final boolean atrDiscretos;
 	
     private static final int minNumAtr = 4;
     private static final int maxNumAtr = 8;

@@ -2,8 +2,8 @@ package es.ubu.inf.tfg.ui;
 
 import javax.swing.*;
 
-import es.ubu.inf.tfg.generador.ampliacionitemsets.ConfigAmpliacionItemSets;
-import es.ubu.inf.tfg.generador.ampliacionitemsets.GeneradorBancoPreguntasAmpliacionItemSets;
+import es.ubu.inf.tfg.generador.preguntas.ampliacionitemsets.ConfigAmpliacionItemSets;
+import es.ubu.inf.tfg.generador.preguntas.ampliacionitemsets.GeneradorBancoPreguntasAmpliacionItemSets;
 
 import java.awt.*;
 import java.util.*;

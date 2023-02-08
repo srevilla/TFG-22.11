@@ -1,16 +1,18 @@
-package es.ubu.inf.tfg.generador.itemsets;
+package es.ubu.inf.tfg.generador.preguntas.itemsets;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import es.ubu.inf.tfg.dominio.Opcion;
 import es.ubu.inf.tfg.dominio.Pregunta;
 import es.ubu.inf.tfg.dominio.UnexpectedException;
-import es.ubu.inf.tfg.generador.conjuntodatos.ConjuntoDatos;
-import es.ubu.inf.tfg.generador.conjuntodatos.GeneradorConjuntoDatos;
-import es.ubu.inf.tfg.generador.reglasasociacion.ConfigReglasAsociacion;
+import es.ubu.inf.tfg.generador.datos.conjuntodatos.ConjuntoDatos;
+import es.ubu.inf.tfg.generador.datos.conjuntodatos.GeneradorConjuntoDatos;
+import es.ubu.inf.tfg.generador.preguntas.reglasasociacion.ConfigReglasAsociacion;
 import weka.associations.Apriori;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -63,23 +65,23 @@ public class GeneradorPreguntaItemSets {
 	
 	public Pregunta generarPregunta() {
         Random random = new Random();
-//		int numRespuestasVerdaderas = random.nextInt(numOpciones-1)+1;
-//	    int numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
+		int numRespuestasVerdaderas = random.nextInt(numOpciones-1)+1;
+	    int numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
 	    boolean tieneSolucion = false;
 	    Pregunta pregunta = null;
 	    
 	    while(!tieneSolucion) {
-	    	Random r = new Random();
-			int numRespuestasVerdaderas = r.nextInt(numOpciones-1)+1;
-		    int numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
-			soporte = minSoporte + (maxSoporte - minSoporte) * r.nextDouble();
-			soporte = Math.round(soporte * 10.0) / 10.0;
+//	    	Random r = new Random();
+//			int numRespuestasVerdaderas = r.nextInt(numOpciones-1)+1;
+//		    int numRespuestasFalsas = numOpciones - numRespuestasVerdaderas;
+//			soporte = minSoporte + (maxSoporte - minSoporte) * r.nextDouble();
+//			soporte = Math.round(soporte * 10.0) / 10.0;
 			Apriori apriori = new Apriori();
 
-			apriori.setLowerBoundMinSupport(soporte-0.3);
+//			apriori.setLowerBoundMinSupport(soporte-0.3);
 //			apriori.setUpperBoundMinSupport(soporte+0.3);
-			apriori.setMinMetric(0.8); 
-			apriori.setNumRules(200);
+//			apriori.setMinMetric(0.8); 
+			apriori.setNumRules(100);
 			
 			ConjuntoDatos conjuntoDatos = gcd.crearConjuntoDatos();
 			Instances datosCalculos = conjuntoDatos.getDatosCalculos();
@@ -103,12 +105,12 @@ public class GeneradorPreguntaItemSets {
 		      Collection<Item> premiseItems = rule.getPremise();
 		      Collection<Item> consequenceItems = rule.getConsequence();
 		      
-		      if(premiseItems.size()>=1) {
+		      if(premiseItems.size()>=2) {
 			      premiseItemsList.add(premiseItems);
 			      soportesItemsSetsPremisa.add(rule.getPremiseSupport());
 		      }
 		      
-		      if(consequenceItems.size()>=1) {
+		      if(consequenceItems.size()>=2) {
 			      consequenceItemsList.add(consequenceItems);
 			      soportesItemsSetsConseq.add(rule.getConsequenceSupport());
 		      }
@@ -133,7 +135,7 @@ public class GeneradorPreguntaItemSets {
 		    	}
 		    }
 		    
-	        tieneSolucion = tieneSolucion(numRespuestasVerdaderas, numRespuestasFalsas, itemSetsVerdaderos.size(), itemSetsFalsos.size());
+	        tieneSolucion = tieneSolucion(numRespuestasVerdaderas, numRespuestasFalsas, itemSetsVerdaderos, itemSetsFalsos);
 	        if(tieneSolucion) {
 	            List<Opcion> opciones = new ArrayList<>();
 	            List<List<String>> opcionesGeneradas = generarOpciones(numRespuestasVerdaderas, numRespuestasFalsas, itemSetsVerdaderos, itemSetsFalsos);
@@ -202,9 +204,21 @@ public class GeneradorPreguntaItemSets {
 		return resultado;
 	}
 	
-	private boolean tieneSolucion(int numRespuestasVerdaderas, int numRespuestasFalsas, int itemSetsVerdaderos, int itemSetsFalsos) {
-		if (itemSetsVerdaderos >= numRespuestasVerdaderas
-				&& itemSetsFalsos >= numRespuestasFalsas) {
+	private boolean tieneSolucion(int numRespuestasVerdaderas, int numRespuestasFalsas, List<Collection<Item>> itemSetsVerdaderos, List<Collection<Item>> itemSetsFalsos) {
+		
+		Set<String> itemSetsVerdaderosSet = new HashSet<>();
+		Set<String> itemSetsFalsosSet = new HashSet<>();
+
+		for(Collection<Item> itemSet : itemSetsVerdaderos) {
+			itemSetsVerdaderosSet.add(itemSet.toString());
+		}
+		
+		for(Collection<Item> itemSet : itemSetsFalsos) {
+			itemSetsFalsosSet.add(itemSet.toString());
+		}
+		
+		if (itemSetsVerdaderosSet.size() >= numRespuestasVerdaderas
+				&& itemSetsFalsosSet.size() >= numRespuestasFalsas) {
 			return true;
 		} else {
 			return false;

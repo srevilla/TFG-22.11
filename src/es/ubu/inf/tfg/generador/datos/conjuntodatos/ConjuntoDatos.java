@@ -1,4 +1,4 @@
-package es.ubu.inf.tfg.generador.conjuntodatos;
+package es.ubu.inf.tfg.generador.datos.conjuntodatos;
 
 import weka.core.Instances;
 

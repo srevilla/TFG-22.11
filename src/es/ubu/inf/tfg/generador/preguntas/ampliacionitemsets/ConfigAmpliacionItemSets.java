@@ -1,4 +1,4 @@
-package es.ubu.inf.tfg.generador.ampliacionitemsets;
+package es.ubu.inf.tfg.generador.preguntas.ampliacionitemsets;
 
 public class ConfigAmpliacionItemSets {
 

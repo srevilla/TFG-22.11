@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import es.ubu.inf.tfg.generador.itemsets.GeneradorBancoPreguntasItemSets;
-import es.ubu.inf.tfg.generador.reglasasociacion.ConfigReglasAsociacion;
+import es.ubu.inf.tfg.generador.preguntas.itemsets.GeneradorBancoPreguntasItemSets;
+import es.ubu.inf.tfg.generador.preguntas.reglasasociacion.ConfigReglasAsociacion;
 
 import java.awt.*;
 import java.util.ArrayList;

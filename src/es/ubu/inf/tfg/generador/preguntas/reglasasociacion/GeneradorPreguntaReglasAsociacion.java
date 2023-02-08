@@ -1,17 +1,19 @@
-package es.ubu.inf.tfg.generador.reglasasociacion;
+package es.ubu.inf.tfg.generador.preguntas.reglasasociacion;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import es.ubu.inf.tfg.dominio.Opcion;
 import es.ubu.inf.tfg.dominio.Pregunta;
 import es.ubu.inf.tfg.dominio.UnexpectedException;
-import es.ubu.inf.tfg.generador.conjuntodatos.ConjuntoDatos;
-import es.ubu.inf.tfg.generador.conjuntodatos.GeneradorConjuntoDatos;
+import es.ubu.inf.tfg.generador.datos.conjuntodatos.ConjuntoDatos;
+import es.ubu.inf.tfg.generador.datos.conjuntodatos.GeneradorConjuntoDatos;
 import weka.associations.Apriori;
 import weka.associations.AssociationRule;
 import weka.core.Instance;
@@ -19,8 +21,8 @@ import weka.core.Instances;
 
 public class GeneradorPreguntaReglasAsociacion {
 		
-	double soporte;
-	double confianza;
+	private double soporte;
+	private double confianza;
 	private boolean atrDiscretos;
 	private GeneradorConjuntoDatos gcd;
 	
@@ -240,8 +242,19 @@ public class GeneradorPreguntaReglasAsociacion {
 	}
 	
 	private boolean tieneSolucion(int numRespuestasVerdaderas, int numRespuestasFalsas, List<AssociationRule> reglasVerdaderas, List<AssociationRule> reglasFalsas) {
-		if (reglasVerdaderas.size() >= numRespuestasVerdaderas
-				&& reglasFalsas.size() >= numRespuestasFalsas) {
+		
+		Set<String> reglasVerdaderasSet = new HashSet<>();
+		Set<String> reglasFalsasSet = new HashSet<>();
+
+		for(AssociationRule regla : reglasVerdaderas) {
+			reglasVerdaderasSet.add(regla.toString());
+		}
+		
+		for(AssociationRule regla : reglasFalsas) {
+			reglasFalsasSet.add(regla.toString());
+		}
+		if (reglasVerdaderasSet.size() >= numRespuestasVerdaderas
+				&& reglasFalsasSet.size() >= numRespuestasFalsas) {
 			return true;
 		} else {
 			return false;
