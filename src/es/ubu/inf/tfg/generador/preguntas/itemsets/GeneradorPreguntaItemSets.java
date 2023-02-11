@@ -56,7 +56,7 @@ public class GeneradorPreguntaItemSets {
 	
 	private String obtenerEnunciado(ConjuntoDatos conjuntoDatos) {
 		return "Sea el siguiente conjunto de datos: " + getContenidoData(conjuntoDatos.getDatosEnunciado()) + "\r\n"
-				+ "Genere los item sets con soporte mayor o igual que "+ (int)(soporte*10) + ".\r\n";	
+				+ "Seleccione los item sets con soporte mayor o igual que "+ (int)(soporte*10) + ".\r\n";	
 	}
 	
 	private String obtenerTitulo() {

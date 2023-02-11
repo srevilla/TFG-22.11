@@ -22,7 +22,6 @@ public class GeneradorBancoPreguntasItemSets implements GeneradorBancoPreguntas 
 			if(!listaPreguntas.contains(nuevaPregunta)) {
 				listaPreguntas.add(nuevaPregunta);
 	        	contador++;
-				System.out.println("ok-"+contador);
 			}
 		}
 		

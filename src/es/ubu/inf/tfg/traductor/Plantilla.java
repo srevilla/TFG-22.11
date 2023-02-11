@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 public class Plantilla {
 
-	String plantilla;
+	private String plantilla;
 
 	public Plantilla(String fichero) {
 		

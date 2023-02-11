@@ -23,7 +23,7 @@ public class GeneradorPreguntaReglasAsociacion {
 		
 	private double soporte;
 	private double confianza;
-	private boolean atrDiscretos;
+	private boolean atrNumericos;
 	private GeneradorConjuntoDatos gcd;
 	
     private static final double minSoporte = 0.3;
@@ -49,20 +49,20 @@ public class GeneradorPreguntaReglasAsociacion {
 			confianza = config.getConfianza();
 		}
 		
-		if (config.isAtrDiscretos() == ' ') {
-			atrDiscretos = r.nextBoolean();
-		} else if (config.isAtrDiscretos() == 's') {
-			atrDiscretos = true;
+		if (config.isAtrNumericos() == ' ') {
+			atrNumericos = r.nextBoolean();
+		} else if (config.isAtrNumericos() == 's') {
+			atrNumericos = true;
 		} else {
-			atrDiscretos = false;
+			atrNumericos = false;
 		}
 		
 	}
 	
 	private String obtenerEnunciado(ConjuntoDatos conjuntoDatos) {
 		String enunciado  = "Sea el siguiente conjunto de datos: " + getContenidoData(conjuntoDatos.getDatosEnunciado()) + "\r\n"
-				+ "Obtenga aquellas reglas de asociacion con soporte y confianza mayores o iguales que, respectivamente, "+ (int)(soporte*10) + " y " + (int)(confianza*100) + "%.\r\n";
-		if (atrDiscretos) {
+				+ "Seleccione las reglas de asociacion con soporte y confianza mayores o iguales que, respectivamente, "+ (int)(soporte*10) + " y " + (int)(confianza*100) + "%.\r\n";
+		if (atrNumericos) {
 			return enunciado + "El atributo X debe discretizarse entre los siguientes intervalos: " + conjuntoDatos.getIntervalos();
 		} else {
 			return enunciado;
@@ -277,12 +277,12 @@ public class GeneradorPreguntaReglasAsociacion {
 		this.confianza = confianza;
 	}
 
-	public boolean getAtrDiscretos() {
-		return atrDiscretos;
+	public boolean getAtrNumericos() {
+		return atrNumericos;
 	}
 
-	public void setAtrDiscretos(boolean atrDiscretos) {
-		this.atrDiscretos = atrDiscretos;
+	public void setAtrNumericos(boolean atrDiscretos) {
+		this.atrNumericos = atrDiscretos;
 	}
 	
 }

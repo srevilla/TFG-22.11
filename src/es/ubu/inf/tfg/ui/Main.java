@@ -24,12 +24,12 @@ public class Main extends JFrame {
     public Main() {
         super("Menu principal");
         setLayout(new FlowLayout());
-        boton1 = new JButton("Ampliación Item Sets");
-        boton1.addActionListener(new ActionListener() {
+        boton3 = new JButton("Ampliación Item Sets");
+        boton3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaAmpliacionItemSets v1 = new VentanaAmpliacionItemSets();
-                v1.setVisible(true);
-                v1.setSize(500, 300);
+                VentanaAmpliacionItemSets v3 = new VentanaAmpliacionItemSets();
+                v3.setVisible(true);
+                v3.setSize(500, 300);
             }
         });
 
@@ -42,12 +42,12 @@ public class Main extends JFrame {
             }
         });
         
-        boton3 = new JButton("Generación Item Sets");
-        boton3.addActionListener(new ActionListener() {
+        boton1 = new JButton("Generación Item Sets");
+        boton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VentanaItemSets v3 = new VentanaItemSets();
-                v3.setVisible(true);
-                v3.setSize(500, 300);
+                VentanaItemSets v1 = new VentanaItemSets();
+                v1.setVisible(true);
+                v1.setSize(500, 300);
             }
         });
     }
@@ -57,27 +57,18 @@ public class Main extends JFrame {
         JButton acercaDeBoton = new JButton("Acerca de");
         acercaDeBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(Main.this, "MIT License\r\n"
+                JOptionPane.showMessageDialog(Main.this, "AssoQuiz-Generator\r\n"
                 		+ "\r\n"
+                		+ "MIT License\r\n"
                 		+ "Copyright (c) 2023 Sergio Revilla\r\n"
                 		+ "\r\n"
-                		+ "Permission is hereby granted, free of charge, to any person obtaining a copy\r\n"
-                		+ "of this software and associated documentation files (the \"Software\"), to deal\r\n"
-                		+ "in the Software without restriction, including without limitation the rights\r\n"
-                		+ "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\r\n"
-                		+ "copies of the Software, and to permit persons to whom the Software is\r\n"
-                		+ "furnished to do so, subject to the following conditions:\r\n"
-                		+ "\r\n"
-                		+ "The above copyright notice and this permission notice shall be included in all\r\n"
-                		+ "copies or substantial portions of the Software.\r\n"
-                		+ "\r\n"
-                		+ "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\r\n"
-                		+ "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\r\n"
-                		+ "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\r\n"
-                		+ "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\r\n"
-                		+ "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\r\n"
-                		+ "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\r\n"
-                		+ "SOFTWARE.");
+                		+ "Desarrollo de una aplicación para la Universidad de Burgos que\r\n"
+                		+ "consta de una interfaz gráfica en la que el usuario debe de seleccionar\r\n"
+                		+ "entre unos tipos de preguntas a generar, configurando unos parámetros\r\n"
+                		+ "diferentes en cada una. La aplicación genera un archivo en formato\r\n"
+                		+ ".XML para ser importado en la plataforma Moodle con la finalidad de\r\n"
+                		+ "generar de forma automática cuestionarios sobre el tema de reglas de asociación\r\n"
+                		+ "para la asignatura de minería de datos.");
             }
         });
         toolBar.add(acercaDeBoton);

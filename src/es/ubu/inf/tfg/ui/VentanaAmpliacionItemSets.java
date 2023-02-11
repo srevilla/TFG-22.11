@@ -31,7 +31,7 @@ public class VentanaAmpliacionItemSets extends Ventana <ConfigAmpliacionItemSets
     public VentanaAmpliacionItemSets() {
         super(new JButton("Exportar XML"), new GeneradorBancoPreguntasAmpliacionItemSets());
         
-        setLayout(new GridLayout(6, 2, 10, 10));
+        setLayout(new GridLayout(4, 2, 10, 10));
         numPreguntasLabel = new JLabel("Numero de preguntas:");
         add(numPreguntasLabel);
         numPreguntasSpinner = new JSpinner(new SpinnerNumberModel(1, 1, maxNumPreguntas, 1));
@@ -40,7 +40,7 @@ public class VentanaAmpliacionItemSets extends Ventana <ConfigAmpliacionItemSets
         numItemSetsLabel = new JLabel("Numero de ItemSets:");
         add(numItemSetsLabel);
         ArrayList<Object> opcionesNum = new ArrayList<>();
-        opcionesNum.add(" ");
+        opcionesNum.add("Aleatorio");
         for (int i = minNumItemSets; i <= maxNumItemSets; i++) {
         	opcionesNum.add(i);
         }
@@ -50,7 +50,7 @@ public class VentanaAmpliacionItemSets extends Ventana <ConfigAmpliacionItemSets
         tamItemSetsLabel = new JLabel("Tamaño de ItemSets:");
         add(tamItemSetsLabel);
         ArrayList<Object> opcionesTam = new ArrayList<>();
-        opcionesTam.add(" ");
+        opcionesTam.add("Aleatorio");
         for (int i = minTamItemSets; i <= maxTamItemSets; i++) {
         	opcionesTam.add(i);
         }
@@ -64,14 +64,14 @@ public class VentanaAmpliacionItemSets extends Ventana <ConfigAmpliacionItemSets
  	    int numPreguntas = (Integer) numPreguntasSpinner.getValue();
  	    
  	    int numItemSets;
-        if (numItemSetsSpinner.getValue().equals(" ")) {
+        if (numItemSetsSpinner.getValue().equals("Aleatorio")) {
         	numItemSets = 0;
         } else {
             numItemSets = (Integer) numItemSetsSpinner.getValue();
         }
 
         int tamItemSets;
-        if (tamItemSetsSpinner.getValue().equals(" ")) {
+        if (tamItemSetsSpinner.getValue().equals("Aleatorio")) {
         	tamItemSets = 0;
         } else {
             tamItemSets = (Integer) tamItemSetsSpinner.getValue();

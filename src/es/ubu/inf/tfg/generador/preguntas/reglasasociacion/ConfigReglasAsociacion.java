@@ -7,16 +7,16 @@ public class ConfigReglasAsociacion {
 	private int numInstancias;
 	private double soporte;
 	private double confianza;
-	private char atrDiscretos;
+	private char atrNumericos;
 	private int numIntervalos;
 	
-	public ConfigReglasAsociacion(int numPreguntas, int numAtributos, int numInstancias, double soporte, double confianza, char atrDiscretos, int numIntervalos) {
+	public ConfigReglasAsociacion(int numPreguntas, int numAtributos, int numInstancias, double soporte, double confianza, char atrNumericos, int numIntervalos) {
 		this.numPreguntas = numPreguntas;
 		this.numAtributos = numAtributos;
 		this.numInstancias = numInstancias;
 		this.soporte = soporte;
 		this.confianza = confianza;
-		this.atrDiscretos = atrDiscretos;
+		this.atrNumericos = atrNumericos;
 		this.numIntervalos = numIntervalos;
 	}
 
@@ -60,12 +60,12 @@ public class ConfigReglasAsociacion {
 		this.numInstancias = numInstancias;
 	}
 
-	public char isAtrDiscretos() {
-		return atrDiscretos;
+	public char isAtrNumericos() {
+		return atrNumericos;
 	}
 
-	public void setAtrDiscretos(char atrDiscretos) {
-		this.atrDiscretos = atrDiscretos;
+	public void setAtrNumericos(char atrDiscretos) {
+		this.atrNumericos = atrDiscretos;
 	}
 
 	public int getNumIntervalos() {

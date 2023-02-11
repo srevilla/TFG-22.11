@@ -49,7 +49,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
     public VentanaItemSets() {
         super(new JButton("Exportar XML"), new GeneradorBancoPreguntasItemSets());
         
-        setLayout(new GridLayout(9, 2, 10, 10));
+        setLayout(new GridLayout(8, 2, 10, 10));
         numPreguntasEtiqueta = new JLabel("Numero de preguntas:");
         add(numPreguntasEtiqueta);
         numPreguntasSpinner = new JSpinner(new SpinnerNumberModel(1, 1, maxNumPreguntas, 1));
@@ -58,7 +58,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         numAtributosEtiqueta = new JLabel("Numero de atributos:");
         add(numAtributosEtiqueta);
         ArrayList<Object> opcionesNumAtr = new ArrayList<>();
-        opcionesNumAtr.add(" ");
+        opcionesNumAtr.add("Aleatorio");
         for (int i = minNumAtr; i <= maxNumAtr; i++) {
         	opcionesNumAtr.add(i);
         }
@@ -68,7 +68,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         numInstanciasEtiqueta = new JLabel("Numero de instancias:");
         add(numInstanciasEtiqueta);
         ArrayList<Object> opcionesNumIns = new ArrayList<>();
-        opcionesNumIns.add(" ");
+        opcionesNumIns.add("Aleatorio");
         for (int i = minNumInstancias; i <= maxNumInstancias; i++) {
         	opcionesNumIns.add(i);
         }
@@ -78,7 +78,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         soporteEtiqueta = new JLabel("Soporte:");
         add(soporteEtiqueta);
         ArrayList<Object> opcionesNumSop = new ArrayList<>();
-        opcionesNumSop.add(" ");
+        opcionesNumSop.add("Aleatorio");
         for (double i = minSoporte; i <= maxSoporte; i += 0.1) {
         	opcionesNumSop.add(i);
         }
@@ -88,10 +88,8 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         confianzaEtiqueta = new JLabel("Confianza:");
         add(confianzaEtiqueta);
         ArrayList<Object> opcionesNumCon = new ArrayList<>();
-        opcionesNumCon.add(" ");
-//        for (double i = minConfianza; i <= maxConfianza; i += 0.1) {
-//        	opcionesNumCon.add(i);
-//        }
+        opcionesNumCon.add("Aleatorio");
+
         opcionesNumCon.add(0.6);
         opcionesNumCon.add(0.7);
         opcionesNumCon.add(0.8);
@@ -104,7 +102,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         atrDiscretosEtiqueta = new JLabel("¿Quieres que haya atributos numéricos?");
         add(atrDiscretosEtiqueta);
         ArrayList<String> opcionesAtributos = new ArrayList<>();
-        opcionesAtributos.add(" ");
+        opcionesAtributos.add("Aleatorio");
         opcionesAtributos.add("Sí");
         opcionesAtributos.add("No");
         atrDiscretosSpinner = new JSpinner(new SpinnerListModel(opcionesAtributos));
@@ -115,7 +113,7 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
                     numIntervalosEtiqueta = new JLabel("Numero de intervalos:");
                     add(numIntervalosEtiqueta);
                     ArrayList<Object> opcionesNumInt = new ArrayList<>();
-                    opcionesNumInt.add(" ");
+                    opcionesNumInt.add("Aleatorio");
                     for (int i = minNumIntervalos; i <= maxNumIntervalos; i++) {
                     	opcionesNumInt.add(i);
                     }
@@ -138,22 +136,22 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
  	    int numPreguntas = (Integer) numPreguntasSpinner.getValue();
  	    
  	    int numAtributos = 0;
- 	    if (!numAtributosSpinner.getValue().equals(" ")) {
+ 	    if (!numAtributosSpinner.getValue().equals("Aleatorio")) {
  	    	numAtributos = (Integer) numAtributosSpinner.getValue();
  	    } 
  	    
  	    int numInstancias = 0;
- 	    if (!numInstanciasSpinner.getValue().equals(" ")) {
+ 	    if (!numInstanciasSpinner.getValue().equals("Aleatorio")) {
  	    	numInstancias = (Integer) numInstanciasSpinner.getValue();
  	    }
  	    
  	    Double soporte = (double) 0;
- 	    if (!soporteSpinner.getValue().equals(" ")) {
+ 	    if (!soporteSpinner.getValue().equals("Aleatorio")) {
  	    	soporte = (Double) soporteSpinner.getValue();
  	    }
  	    
  	    Double confianza = (double) 0;
- 	    if (!confianzaSpinner.getValue().equals(" ")) {
+ 	    if (!confianzaSpinner.getValue().equals("Aleatorio")) {
  	    	confianza = (Double) confianzaSpinner.getValue();
  	    }
  	    
@@ -162,12 +160,12 @@ public class VentanaItemSets extends Ventana <ConfigReglasAsociacion> {
         
         if(atrDiscretosSpinner.getValue().equals("Sí")) {
         	tieneDiscretos = 's';
-     	    if (!numIntervalosSpinner.getValue().equals(" ")) {
+     	    if (!numIntervalosSpinner.getValue().equals("Aleatorio")) {
      	    	numIntervalos = (Integer) numIntervalosSpinner.getValue();
      	    }
         }
         
-        if (atrDiscretosSpinner.getValue().equals(" ")) {
+        if (atrDiscretosSpinner.getValue().equals("Aleatorio")) {
         	tieneDiscretos = ' ';
         }
 

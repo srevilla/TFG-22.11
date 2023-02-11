@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BancoPreguntas {
 
-	List<Pregunta> preguntas = new ArrayList<>();
+	private List<Pregunta> preguntas = new ArrayList<>();
 	
 	public BancoPreguntas(List<Pregunta> preguntas) {
 		this.preguntas = preguntas;

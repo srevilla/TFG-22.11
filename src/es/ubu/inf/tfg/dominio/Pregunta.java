@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Pregunta {
 	
-	List<Opcion> opciones;
-	String enunciado;
-	String titulo;
+	private List<Opcion> opciones;
+	private String enunciado;
+	private String titulo;
 	
 	public Pregunta (List<Opcion> opciones, String enunciado, String titulo) {
 		this.opciones = opciones;

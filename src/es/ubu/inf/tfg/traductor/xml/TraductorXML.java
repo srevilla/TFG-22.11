@@ -12,7 +12,7 @@ import es.ubu.inf.tfg.traductor.Plantilla;
 
 public class TraductorXML implements Traductor {
 	
-	String ruta;
+	private String ruta;
 		
 	public TraductorXML(String ruta) {
 		this.ruta = ruta;
@@ -78,7 +78,7 @@ public class TraductorXML implements Traductor {
 		plantilla.reemplazar("documento", documento.toString());
 	}
 	
-	public void exportarXML(String ruta, Plantilla plantilla) throws IOException {
+	private void exportarXML(String ruta, Plantilla plantilla) throws IOException {
 		guardar(ruta, plantilla);
 	}
 	

@@ -15,10 +15,10 @@ import weka.filters.unsupervised.attribute.Discretize;
 
 public class GeneradorConjuntoDatos {
 
-	private final int numIntervalos;
 	private final int numAtributos;
 	private final int numInstancias;
-	private final boolean atrDiscretos;
+	private final boolean atrNumericos;
+	private final int numIntervalos;
 	
     private static final int minNumAtr = 4;
     private static final int maxNumAtr = 8;
@@ -43,12 +43,12 @@ public class GeneradorConjuntoDatos {
 			numInstancias = config.getNumInstancias();
 		}
 		
-		if (config.isAtrDiscretos() == ' ') {
-			atrDiscretos = r.nextBoolean();
-		} else if (config.isAtrDiscretos() == 's') {
-			atrDiscretos = true;
+		if (config.isAtrNumericos() == ' ') {
+			atrNumericos = r.nextBoolean();
+		} else if (config.isAtrNumericos() == 's') {
+			atrNumericos = true;
 		} else {
-			atrDiscretos = false;
+			atrNumericos = false;
 		}
 		
 		if (config.getNumIntervalos() == 0) {
@@ -92,15 +92,15 @@ public class GeneradorConjuntoDatos {
 	      datosEnunciado.add(instancia);
 	    }
 	    
-	    if(atrDiscretos) {
-	    	return añadirDiscretizacion(datosEnunciado);
+	    if(atrNumericos) {
+	    	return añadirAtributosNumericos(datosEnunciado);
 	    }
 	    
 	    return new ConjuntoDatos(datosEnunciado, datosEnunciado, null);
 	    	       
 	}
 	
-	private ConjuntoDatos añadirDiscretizacion(Instances datos) {
+	private ConjuntoDatos añadirAtributosNumericos(Instances datos) {
 		Attribute nuevoAtr = new Attribute("X");
 		datos.insertAttributeAt(nuevoAtr, datos.numAttributes());
 		
@@ -131,7 +131,7 @@ public class GeneradorConjuntoDatos {
 			
 	}
 	
-	public String establecerIntervalos(double[] puntosCorte) {
+	private String establecerIntervalos(double[] puntosCorte) {
 		String intervalos = "(";
 		
 	    intervalos += "- ; " + Math.round(puntosCorte[0] * 10.0) / 10.0;
