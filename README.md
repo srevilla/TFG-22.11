@@ -1,4 +1,4 @@
-#AssoQuiz-Generator
+# AssoQuiz-Generator
 
 AssoQuiz-Generator es una aplicación de escritorio desarrollada como Trabajo de Fin de Grado de Ingeniería Informática para la Universidad de Burgos.
 
