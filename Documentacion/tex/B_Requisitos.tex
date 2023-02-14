@@ -1,0 +1,333 @@
+\apendice{Especificación de Requisitos}
+
+\section{Introducción}
+
+Este apéndice es una sección fundamental para el éxito de cualquier proyecto de software. En este apartado se describen los objetivos generales y se hace un catálogo exhaustivo de los requisitos necesarios para lograr esos objetivos. La especificación de requisitos es el proceso de identificar y documentar los requisitos de software que deben ser satisfechos para garantizar que el proyecto cumpla con las expectativas deseadas.
+
+La importancia de esta sección radica en que es la base para el diseño, desarrollo, y pruebas del software. Si los requisitos no están claramente definidos, es probable que el proyecto se desvíe de su objetivo original y que los resultados finales no sean satisfactorios. Por lo tanto, la especificación de requisitos es un paso crítico en el desarrollo de software de alta calidad y es esencial para garantizar el éxito del proyecto. \cite{wiki:requisitos}
+
+\section{Objetivos generales}
+
+Los objetivos generales del proyecto son los siguientes:
+
+\begin{enumerate}
+\item Generación de bancos de preguntas que contengan preguntas generadas de los siguientes tipos: \textit{Generación Item Sets}, \textit{Generación Reglas de Asociación} y \textit{Ampliación Item Sets}.
+\item Configuración de diferentes parámetros para la generación de los bancos de preguntas, como el número de preguntas, el número de item sets o atributos, y otros, por el usuario.
+\item Capacidad de establecer valores de forma aleatoria si el usuario no define algún parámetro en la configuración.
+\item Obtención de un archivo .XML compatible con la plataforma \textit{Moodle} de forma que contenga todas las preguntas generadas de un mismo tipo.
+\end{enumerate}
+
+\section{Catálogo de requisitos}\label{catalogo-de-requisitos}
+
+A continuación, se enumeran los requisitos específicos derivados de los objetivos generales del proyecto.
+
+\subsection{Requisitos funcionales}\label{requisitos-funcionales}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RF-1 Generación de banco de preguntas:} la aplicación tiene que ser capaz de generar bancos de preguntas sobre reglas de asociación para la asignatura de minería de datos. Un banco de preguntas contiene preguntas que a su vez, tienen titulo, enunciado y opciones.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-1.1 Generar banco de preguntas \textit{Ampliación Item Sets}:} La aplicación debe ser capaz de generar un banco de preguntas que contenga todas las preguntas generadas de este tipo.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.1.1: Definir el número de preguntas a generar:} el usuario tiene que ser capaz de configurar el número de preguntas de este tipo que quiere generar.
+    \item
+      \textbf{RF-1.1.2: Definir el número de item sets:} el usuario tiene que poder definir el número de item sets que formarán parte del conjunto de n-item sets que va a ser generado.
+    \item 
+      \textbf{RF-1.1.3: Definir el tamaño de los item sets:} el usuario tiene que poder definir el tamaño de los item sets que formarán parte del conjunto de n-item sets que va a ser generado.
+    \item
+      \textbf{RF-1.1.4: Establecer la configuración de forma aleatoria:} el usuario no tiene que estar obligado a definir la configuración de todos los parámetros anteriores, de forma que si no establece un valor determinado para un parámetro, este valor se generará de forma aleatoria.
+    \end{itemize}
+  \item
+    \textbf{RF-1.2 Generar banco de preguntas \textit{Generación Reglas de Asociación}:} La aplicación debe ser capaz de generar un banco de preguntas que contenga todas las preguntas generadas de este tipo.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.2.1: Definir el número de preguntas a generar:} el usuario tiene que ser capaz de configurar el número de preguntas de este tipo que quiere generar.
+    \item
+      \textbf{RF-1.2.2: Definir el número de atributos:} el usuario tiene que poder definir el número de atributos que formarán parte del conjunto de datos que va a ser generado.
+    \item
+      \textbf{RF-1.2.3: Definir el número de instancias:} el usuario tiene que poder definir el número de instancias que formarán parte del conjunto de datos que va a ser generado.
+    \item
+      \textbf{RF-1.2.4: Definir el soporte mínimo:} el usuario tiene que poder definir el valor del soporte mínimo del problema.
+    \item
+      \textbf{RF-1.2.5: Definir la confianza mínima:} el usuario tiene que poder definir el valor de la confianza mínima del problema.
+    \item
+      \textbf{RF-1.2.6: Especificar si quiere atributos numéricos para ser discretizados:} el usuario tiene que poder establecer si quiere atributos numéricos para que sean discretizados.
+    \item
+      \textbf{RF-1.2.7: Definir el número de intervalos a discretizar:} el usuario tiene que poder definir el número de intervalos en los que se va a discretizar el atributo numérico.
+    \item
+      \textbf{RF-1.2.8: Establecer la configuración de forma aleatoria:} el usuario no tiene que estar obligado a definir la configuración de todos los parámetros anteriores, de forma que si no establece un valor determinado para un parámetro, este valor se generará de forma aleatoria.
+    \end{itemize}
+\item
+    \textbf{RF-1.3 Generar banco de preguntas \textit{Generación Item Sets}:} La aplicación debe ser capaz de generar un banco de preguntas que contenga todas las preguntas generadas de este tipo.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{RF-1.3.1: Definir el número de preguntas a generar:} el usuario tiene que ser capaz de configurar el número de preguntas de este tipo que quiere generar.
+    \item
+      \textbf{RF-1.3.2: Definir el número de atributos:} el usuario tiene que poder definir el número de atributos que formarán parte del conjunto de datos que va a ser generado.
+    \item
+      \textbf{RF-1.3.3: Definir el número de instancias:} el usuario tiene que poder definir el número de instancias que formarán parte del conjunto de datos que va a ser generado.
+    \item
+      \textbf{RF-1.3.4: Definir el soporte mínimo:} el usuario tiene que poder definir el valor del soporte mínimo del problema.
+    \item
+      \textbf{RF-1.3.5: Definir la confianza mínima:} el usuario tiene que poder definir el valor de la confianza mínima del problema.
+    \item
+      \textbf{RF-1.3.6: Especificar si quiere atributos numéricos para ser discretizados:} el usuario tiene que poder establecer si quiere atributos numéricos para que sean discretizados.
+    \item
+      \textbf{RF-1.3.7: Definir el número de intervalos a discretizar:} el usuario tiene que poder definir el número de intervalos en los que se va a discretizar el atributo numérico.
+    \item
+      \textbf{RF-1.3.8: Establecer la configuración de forma aleatoria:} el usuario no tiene que estar obligado a definir la configuración de todos los parámetros anteriores, de forma que si no establece un valor determinado para un parámetro, este valor se generará de forma aleatoria.
+    \end{itemize}
+   \end{itemize}
+
+\iffalse
+\item
+  \textbf{RF-2 Resolución de problemas:} la aplicación tiene que ser capaz de resolver los problemas que ella misma ha generado.
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{RF-2.1 Resolución para el problema de calcular item sets:} la aplicación tiene que ser capaz de obtener todos los posibles n+1-item sets a partir de un conjunto de n-item sets y clasificarlos en válidos y no válidos.
+  \item
+    \textbf{RF-2.2 Resolución para el problema de obtener las reglas de asociación:} la aplicación tiene que ser capaz de obtener varias reglas de asociación a partir de un conjunto de datos y clasificarlas en válidas y no válidas.
+  \end{itemize}
+\fi 
+\item
+  \textbf{RF-2 Exportación de problemas:} la aplicación tiene que ser capaz de exportar todos los problemas que ha generado.
+
+  \begin{itemize}
+  \tightlist
+    \item
+    \textbf{RF-2.1 Introducir un nombre para el fichero:} el usuario tiene que poder introducir el nombre que desea dar a su fichero que va a generar.
+    \item 
+    \textbf{RF-2.2 Especificación de la ruta:} el usuario tiene que poder especificar la ruta en la que quiere que se guarde su fichero .XML generado.
+  \item
+    \textbf{RF-2.3 Exportación en formato Moodle XML:} la aplicación tiene que ser capaz de exportar todos los problemas generados en un fichero .XML importable en la plataforma Moodle.
+  \end{itemize}
+
+\item
+    \textbf{RF-3 Obtener información de la aplicación:} el usuario tiene que poder obtener información acerca de la aplicación.
+
+\end{itemize}
+
+\subsection{Requisitos no funcionales}\label{requisitos-no-funcionales}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RNF-1 Usabilidad:} la aplicación debe ser fácil de usar, con una interfaz gráfica sencilla de forma que no requiera aprendizaje.
+\item
+  \textbf{RNF-2 Rendimiento:} la aplicación tiene que ser capaz de hacer sus funciones de forma rápida y sin estancarse.
+\item
+  \textbf{RNF-3 Escalabilidad:} la aplicación tiene que
+  estar diseñada para añadir nuevas funcionalidades de forma sencilla.
+\item
+  \textbf{RNF-4 Disponibilidad:} la aplicación debe de estar disponible para su uso en todo momento, de forma que no dependa de una conexión a internet.
+\item
+  \textbf{RNF-5 Mantenibilidad}: la aplicación debe soportar cambios y mejoras sin que su funcionamiento general se vea afectado.
+\item
+  \textbf{RNF-6 Fiabilidad}: la aplicación debe de funcionar de manera confiable y tiene que ser capaz de recuperarse ante fallos no deseados.
+  
+\end{itemize}
+
+\section{Especificación de requisitos}
+En esta sección se muestra el diagrama de casos de uso resultante y se desarrollar cada uno de ellos.
+
+\begin{landscape}
+\imagenAncho{DiagramaCasosUso}{Diagrama de casos de uso}{1.5}
+\end{landscape}
+
+\subsection{Actores}
+Solo interactuará con el sistema un actor, que en este caso será un profesor.
+
+\subsection{Casos de uso}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-1}    & \textbf{Acerca de}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-3 \\
+		\textbf{Descripción}          & Permite al usuario obtener información de la aplicación. \\
+		\textbf{Precondición}         & Iniciar la aplicación. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Pulsar el botón de \textit{Acerca de}.
+		\end{enumerate} \\
+		\textbf{Postcondición}        & Se abre un panel con información de la aplicación. \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Media \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-1 Acerca de.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-2}    & \textbf{Ampliación Item Sets}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.1, RF-1.1.1, RF-1.1.2, RF-1.1.3, RF-1.1.4 \\
+		\textbf{Descripción}          & Permite al usuario acceder a una ventana de configuración de este tipo de pregunta. \\
+		\textbf{Precondición}         & Iniciar la aplicación. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+            \item Pulsar el botón
+		\end{enumerate} \\
+		\textbf{Postcondición}        & Se abre la ventana para configurar este tipo de pregunta. \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-2 Ampliación Item Sets.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-3}    & \textbf{Generación Reglas Asociación}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.2, RF-1.2.1, RF-1.2.2, RF-1.2.3, RF-1.2.4, RF-1.2.5, RF-1.2.6, RF-1.2.7, RF-1.2.8 \\
+		\textbf{Descripción}          & Permite al usuario acceder a una ventana de configuración de este tipo de pregunta.  \\
+		\textbf{Precondición}         & Iniciar la aplicación \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+            \item Pulsar el botón
+		\end{enumerate} \\
+		\textbf{Postcondición}        & Se abre la ventana para configurar este tipo de pregunta. \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-3 Generación Reglas Asociación.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-4}    & \textbf{Generación Item Sets}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.3, RF-1.3.1, RF-1.3.2, RF-1.3.3, RF-1.3.4, RF-1.3.5, RF-1.3.6, RF-1.3.7, RF-1.3.8 \\
+		\textbf{Descripción}          & Permite al usuario acceder a una ventana de configuración de este tipo de pregunta.  \\
+		\textbf{Precondición}         & Iniciar la aplicación. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+            \item Pulsar el botón
+		\end{enumerate} \\
+		\textbf{Postcondición}        & Se abre la ventana para configurar este tipo de pregunta. \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-4 Generación Item Sets.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-5}    & \textbf{Configuración de Ampliación Item Sets}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.1, RF-1.1.1, RF-1.1.2, RF-1.1.3, RF-1.1.4 \\
+		\textbf{Descripción}          & Permite al usuario configurar una pregunta de este tipo.  \\
+		\textbf{Precondición}         & Pulsar el botón de \textit{Ampliación Item Sets} \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Seleccionar un número de preguntas a generar.
+            \item Seleccionar o no el tamaño del conjunto de item sets y el tamaño de los item sets.
+		\end{enumerate} \\
+		\textbf{Postcondición}        & - \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-5 Configuración de Ampliación Item Sets.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-6}    & \textbf{Configuración del conjunto de datos}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-1, RF-1.2, RF-1.2.1, RF-1.2.2, RF-1.2.3, RF-1.2.4, RF-1.2.5, RF-1.2.6, RF-1.2.7, RF-1.2.8, RF-1.3, RF-1.3.1, RF-1.3.2, RF-1.3.3, RF-1.3.4, RF-1.3.5, RF-1.3.6, RF-1.3.7, RF-1.3.8 \\
+		\textbf{Descripción}          & Permite al usuario configurar las preguntas de \textit{Generación Reglas Asociación} y \textit{Generación Item Sets}.  \\
+		\textbf{Precondición}         & Pulsar el botón de \textit{Generación Reglas Asociación} o el de \textit{Generación Item Sets} \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Seleccionar un número de preguntas a generar.
+            \item Seleccionar o no el número de instancias a generar, el número de atributos del conjunto de datos, el valor del soporte mínimo, el valor de la confianza, si se quieren atributos numéricos y el número de intervalos.
+		\end{enumerate} \\
+		\textbf{Postcondición}        & - \\
+		\textbf{Excepciones}          & - \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-6 Configuración del conjunto de datos.}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-7}    & \textbf{Exportar XML}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Sergio Revilla Merino \\
+		\textbf{Requisitos asociados} & RF-2, RF-2.1, RF-2.2, RF-2.3 \\
+		\textbf{Descripción}          & Traduce y exporta el banco de preguntas en la ruta seleccionada.  \\
+		\textbf{Precondición}         & Se ha pulsado el botón de \textit{Exportar} \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+            \item Darle un nombre al fichero que se va a generar.
+            \item Seleccionar la ruta deseada.
+            \item Pulsar el botón \textit{Guardar}
+            \item Se genera el banco de preguntas en base a la configuración establecida.
+            \item Se traduce el banco de preguntas a formato XML.
+		\end{enumerate} \\
+		\textbf{Postcondición}        & Se genera un fichero .XML en la ubicación establecida y con el nombre establecido.\\
+		\textbf{Excepciones}          & No se ha introducido ningún nombre para el fichero (mensaje). \\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-7 Exportar XML.}
+\end{table}
+

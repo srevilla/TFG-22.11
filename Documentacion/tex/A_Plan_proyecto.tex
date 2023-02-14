@@ -1,0 +1,244 @@
+\apendice{Plan de Proyecto Software}
+
+\section{Introducción}
+
+El apartado se centra en el Plan de Proyecto de Software y su importancia para el desarrollo de software de alta calidad. Se analizan dos aspectos clave del plan de proyecto: la planificación temporal y la viabilidad económica y legal. La planificación temporal establece un cronograma para el desarrollo del software y permite seguir el progreso y prever posibles desafíos. La viabilidad económica y legal evalúa la viabilidad financiera y legal del proyecto y asegura su sostenibilidad a largo plazo. Con un plan de proyecto bien estructurado y detallado, se puede establecer un camino claro hacia el éxito del software y minimizar los riesgos y los problemas a lo largo del proceso de desarrollo. \cite{wiki:proyectosoftware}
+
+\section{Planificación temporal}
+
+La planificación temporal es esencial para establecer un cronograma realista y efectivo para el desarrollo del software. Este cronograma incluye fechas clave para hitos importantes y la asignación de tareas a los miembros del equipo. La planificación temporal permite un seguimiento riguroso del progreso y una identificación temprana de posibles desafíos o ajustes necesarios.
+
+Para este proyecto se decidió utilizar una metodología ágil como SCRUM. No obstante, no se ha seguido al 100\% esta metodología ya que el proyecto se ha hecho en solitario y es de carácter educativo. A continuación se especifican las tareas que se han ido desarrollando en cada \textit{sprint} del proyecto. En este proyecto se decidió que cada \textit{sprint} tendría una duración de dos semanas. Una vez finalizado el \textit{sprint}, se tenía una reunión con el tutor para revisar todo lo que se había hecho en ese periodo de tiempo. También se usaron gráficos \textit{burndown} para monitorizar el proceso y se usaron tableros canvas.
+
+La estimación de las tareas se realizó mediante story points. A continuación se muestra una tabla de equivalencia entre los \textit{story points} y la estimación temporal que se decidió otorgar a cada uno.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.5\columnwidth}}
+		\toprule
+		\textbf{\textit{Story points}} & \textbf{Estimación temporal} \\
+		\toprule
+		\textbf{1} & 15mins \\
+		\textbf{2} & 45mins \\
+		\textbf{3} & 2h \\
+		\textbf{5} & 5h \\
+		\textbf{8} & 12h \\
+		\textbf{13} & 24h \\
+		\textbf{21} & 2,5 días \\
+		\textbf{40} & 1 semana \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Equivalencia entre \textit{story points} y tiempo.}
+\end{table}
+
+
+\subsection{\textit{Sprint} 0: hasta el 15 de Diciembre}
+Esto no es un \textit{sprint} como tal sino que es un proceso de búsqueda de información y de reuniones con el tutor para planificar el proyecto y empezar a darle forma. 
+
+Durante esta fase se aprendió a realizar los ejercicios del tema de reglas de asociación de la asignatura de \textit{Minería de Datos} a mano, para lo cual, se tuvieron que leer los correspondientes apuntes de la asignatura y ver algún vídeo explicativo. 
+
+En esta fase se instalaron también las herramientas que se iban a utilizar y se creó el repositorio en GitHub.
+
+\subsection{\textit{Sprint} 1: 15 de Diciembre - 29 de Diciembre}
+Siguiendo los consejos que el tutor dio a través de reuniones por Teams, lo primero que se hizo fue crear una pregunta en \textit{Moodle} de tipo opción múltiple y exportarla a un formato .XML para tener una idea de cómo tienen que ser los ficheros que se van a generar. Esta pregunta exportada sirvió como plantilla orignal para el proyecto.
+
+Se creó la primera pregunta, que consistió en generar conjuntos de datos aleatorios de n-item sets y soluciones para los mismos, clasificándolas en válidas y no válidas. Una vez se tuvo la pregunta funcionando, se creó una clase para traducirla a un formato .XML que Moodle fuese capaz de entender, usando para ello la plantilla que se había creado anteriormente.
+
+Durante esta fase también se realizó una búsqueda de información para aprender a crear interfaces gráficas en Java.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.8\columnwidth}}
+		\toprule
+		\textbf{Índice} & \textbf{Descripción} \\
+		\toprule
+		\textbf{\#1} & Investigar como hacer una interfaz gráfica \\
+		\textbf{\#2} & Generar item sets aleatorios \\
+		\textbf{\#3} & Generar posibles soluciones \\
+		\textbf{\#4} & Generar respuestas correctas e incorrectas \\
+		\textbf{\#5} & Generar plantilla para la pregunta de tipo \textit{Ampliación Item Sets} \\
+		\textbf{\#6} & Crear traductor para las preguntas de tipo \textit{Ampliación Item Sets} \\
+		\bottomrule
+	\end{tabularx}
+	\caption{\textit{Issues} del \textit{sprint} 1}
+\end{table}
+
+
+\imagen{Sprint 1}{\textit{sprint} 1 - Burndown report}
+
+\subsection{\textit{Sprint} 2: 29 de Diciembre - 13 de Enero}
+En este \textit{sprint} se configuró el proyecto como un proyecto de \textit{Maven} para poder utilizar las dependencias externas de la libería de \textit{Weka}, por lo que previamente se investigó como hacerlo. 
+
+También se empezó a desarrollar la pregunta de tipo \textit{Generación Reglas Asociación}. Para ello se hicieron pruebas usando \textit{Weka} y posteriormente se desarrolló en el código la parte de crear el conjunto de datos aleatorios para reglas de asociación. Una vez hecho esto, se consiguió obtener soluciones y clasificarlas en válidas y no válidas.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.8\columnwidth}}
+		\toprule
+		\textbf{Índice} & \textbf{Descripción} \\
+		\toprule
+		\textbf{\#7} & Crear conjunto de datos para reglas de asociación \\
+		\textbf{\#8} & Crear soluciones para la pregunta de tipo \textit{Generación Reglas Asociación} \\
+		\textbf{\#9} & Utilizar \textit{Maven} para las dependencias externas \\
+		\bottomrule
+	\end{tabularx}
+	\caption{\textit{Issues} del \textit{sprint} 2}
+\end{table}
+
+\imagen{Sprint 2}{\textit{Sprint} 2 - Burndown report}
+
+\subsection{\textit{Sprint} 3: 13 de Enero - 27 de Enero}
+En esta fase del proyecto se solucionó un bug referente a la visualización de las reglas de asociación en \textit{Moodle}, que no se mostraban de forma correcta. También se reorganizó el código por pimera vez para tenerlo más ordenado y limpio.
+
+Además de estos arreglos, se implementaron funcionalidades nuevas como la de la opción de que el conjunto de datos contenga columnas numéricas de forma que se puedan discretizar entre unos intervalos determinados.
+
+Por último se realizó la interfaz gráfica. Para ello se reorganizó primero el código de nuevo. Después se empezaron a crear las ventanas correspondientes y una vez se hizo esto, se crearon botones para enlazar la interfaz gráfica con las funciones del código de forma que todo sea más visual y fácil de usar.
+
+En este \textit{sprint} no se cumplieron todas las tareas que se tenían previstas, de forma que las que faltaban por completar se dejaron para el siguiente.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.8\columnwidth}}
+		\toprule
+		\textbf{Índice} & \textbf{Descripción} \\
+		\toprule
+		\textbf{\#10} & Las opciones de la pregunta de tipo \textit{Generación Reglas Asociación} no se muestran correctamente en \textit{Moodle} \\
+		\textbf{\#13} & Reorganizar código \\
+		\textbf{\#14} & Añadir atributos numéricos en preguntas de tipo \textit{Generación Reglas Asociación} \\
+		\textbf{\#16} & Editar el enunciado de la plantilla para cuando haya atributos a discretizar \\
+		\textbf{\#17} & Interfaz gráfica \\
+		\bottomrule
+	\end{tabularx}
+	\caption{\textit{Issues} del \textit{sprint} 3}
+\end{table}
+
+\imagen{Sprint 3}{\textit{Sprint} 3 - Burndown report}
+
+\subsection{\textit{Sprint} 4: 28 de Enero - 11 de Febrero}
+
+En este \textit{sprint} se completaron las tareas que habían quedado pendientes de realizar en el anterior. 
+
+También se introdujo una nueva pregunta llamada \textit{Generación Item Sets} siguiendo las indicaciones del tutor.
+
+Se realizó el tratamiento de excepciones y se introdujo la posibilidad de establecer valores aleatorios en la configuración.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.8\columnwidth}}
+		\toprule
+		\textbf{Índice} & \textbf{Descripción} \\
+		\toprule
+		\textbf{\#11} & El conjunto de datos para la pregunta de tipo \textit{Generación Reglas Asociación} no se muestran correctamente en \textit{Moodle} \\
+		\textbf{\#15} & Tratamiento de excepciones \\
+		\textbf{\#18} & Introducir opción de aleatorio \\
+		\textbf{\#20} & El formato de los valores numericos en las opciones de reglas de asociacion aparece de forma incorrecta \\
+  	\textbf{\#21} & Introducir nueva pregunta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{\textit{Issues} del \textit{sprint} 4}
+\end{table}
+
+\imagen{Sprint 4}{\textit{Sprint} 4 - Burndown report}
+
+\section{Estudio de viabilidad}
+
+La viabilidad económica y legal es un aspecto fundamental del plan de proyecto de software que evalúa si el proyecto es viable desde un punto de vista financiero y legal. Este análisis incluye una revisión detallada de los costos y los ingresos proyectados, así como una revisión de las leyes y regulaciones relevantes. La viabilidad económica y legal ayuda a asegurar que el proyecto sea sostenible a largo plazo y no enfrente obstáculos legales durante su ejecución.
+
+En este caso, dado el contexto académico del proyecto, no se requiere un estudio de viabilidad exhaustivo. No obstante, en este apartado se realizará un estudio simple de viabilidad, tanto económica como legal.
+
+\subsection{Viabilidad económica}
+
+En este apartado se van a analizar de forma estimada los costes y beneficios que podría haber supuesto el proyecto en caso de que se hubiese realizado en una empresa real.
+
+\subsubsection{Costes}
+
+\begin{enumerate}
+
+\item Costes de personal
+
+Para el cálculo del coste de personal se debe tener en cuenta al desarrollador y a los dos tutores del proyecto que también deben recibir una retribución por el apoyo prestado.
+
+\begin{itemize}
+\item Desarrollador: Graduado en Ingeniería Informática que recibe un salario de 12€/h. Suponiendo que se han trabajado unas 6 horas al día, el desarrollador supone 504€/semana. La duración del proyecto ha sido de 12 semanas, por lo que el coste del desarrollador será de 6048€.
+\item Tutores: Titulados en Ingeniería Informática que suponemos que cobran20€/h. La implicación media del tutor es de 1h/semana, y teniendo en cuenta que el proyecto ha durado 12 semanas se obtiene lo siguiente:
+\begin{equation*}
+1 \text{ tutor} \times \frac{20\text{€}}{1\text{ hora}} \times \frac{1\text{ hora}}{1\text{ semana}} \times 12\text{ semanas} = 240\text{€}
+\end{equation*}
+
+\end{itemize}
+
+Si se suma el coste del desarrollador y del tutor, el resultado es el siguiente:
+\begin{equation*}
+    6048\text{€} + 240\text{€} = 6288\text{€}
+\end{equation*}
+
+A este salario bruto hay que sumarle el coste de la Seguridad Social, que es, aproximadamente de un 30\% sobre el salario bruto:
+\begin{equation*}
+6288\text{€} \times 0.3\text{€} = 1886.4\text{€}
+\end{equation*}
+
+Si sumamos el salario bruto más el coste de la Seguridad Social, obtenemos el resultado final del coste de personal:
+\begin{equation*}
+6288\text{€} + 1886.4\text{€} = 8174.4\text{€}
+\end{equation*}
+
+\item Coste de software
+
+El coste de software en este proyecto ha sido de 0€, ya que se ha trabajado con herramientas con licencia gratuita.
+
+\item Coste de Hardware
+
+El coste de hardware en este proyecto es equivalente al coste del ordenador portátil que se ha utilizado para el mismo. En este caso, se ha utilizado un portátil con 8GB de RAM con un precio de 300€.
+
+\item Coste de Impresión
+\begin{itemize}
+\item Impresión de la memoria : 25€
+\end{itemize}
+
+\item Costes totales
+
+Por lo tanto, si se suman todos los costes anteriores, se obtiene un coste total de 8499.4€.
+\end{enumerate}
+
+\subsubsection{Beneficios}
+La aplicación desarrollada no genera ningún beneficio económico puesto que es un proyecto de caracter educativo y se va a distribuir de forma gratuita. 
+
+\subsection{Viabilidad legal}
+
+En esta sección se va a tratar el tema de las licencias de los software que se han utilizado para la creación de este proyecto. 
+
+Se va a hacer un análisis de las licencias que tiene cada dependencia que se ha utilizado, y a partir de ahí, se va a establecer una licencia para este proyecto, según lo que más se ajuste
+\begin{table}[b]
+    \centering
+	\begin{tabularx}{\linewidth}{ p{0.18\columnwidth} p{0.49\columnwidth} p{0.11\columnwidth}}
+		\toprule
+		\textbf{Dependencia} & \textbf{Descripción} & \textbf{Licencia}\\
+		\toprule
+		\textbf{Java.Util} & Contiene clases y funciones útiles para realizar tareas comunes, como manejo de colecciones, formateo de fechas, generación de números aleatorios, etc. & GPL \\
+		\textbf{Java.Math} & Contiene clases para realizar operaciones matemáticas complejas. & OTN \\
+  	\textbf{Java.IO} & Proporciona clases para realizar operaciones de entrada/salida básicas, como leer y escribir archivos y streams de datos. & OTN \\
+   	\textbf{Java.Swing} & Biblioteca de componentes de interfaz gráfica de usuario. & OTN \\
+       \textbf{Java.Awt} & Biblioteca para crear aplicaciones gráficas de escritorio con interfaces de usuario y ventanas. & OTN \\
+       \textbf{Weka.Core} & Se usa para el procesamiento y análisis de datos en el marco de trabajo de aprendizaje automático de Weka. & GPL \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Licencias de las dependencias del proyecto.}
+\end{table}
+
+Dado que el programa usa dependencias con licencia GPL y OTN, se ha elegido una licencia compatible con ambas. Una de las licencias compatibles sería la GPL v3.0, ya que es compatible con la GPL v2.0 (que es la licencia de la mayoría de las aplicaciones basadas en GPL) y también permite la distribución de software combinado con código de terceros con licencias distintas a la GPL. \cite{wiki:licence}
+
+Las características generales de esta licencia son las siguientes:
+\begin{itemize}
+    \item \textbf{Copyleft}: La GPL impone un copyleft fuerte, lo que significa que todas las obras derivadas de un programa licenciado bajo la GPL deben ser licenciadas bajo la misma licencia.
+    \item \textbf{Fuente abierta}: La GPL requiere que el código fuente de un programa licenciado bajo ella sea disponible para cualquiera que lo desee.
+    \item \textbf{Distribución libre}: La GPL permite la distribución libre y sin restricciones del software, siempre y cuando se respeten las condiciones de la licencia.
+    \item \textbf{Modificaciones permitidas}: La GPL permite a los usuarios modificar y distribuir versiones modificadas del software licenciado bajo ella.
+    \item \textbf{No discriminación}: La GPL no discrimina a ningún grupo de usuarios, incluyendo a los desarrolladores comerciales.
+    \item \textbf{Aplicación a todas las partes}: La GPL se aplica a todas las partes del software, incluyendo cualquier componente o biblioteca que se incluya en el programa.
+    \item \textbf{No garantía}: La GPL no proporciona ninguna garantía o responsabilidad por el software licenciado bajo ella.
+\end{itemize}
+
+\cite{wiki:gpl}
+ 
+
+

@@ -1,0 +1,117 @@
+\capitulo{4}{Técnicas y herramientas}
+
+\section{Técnicas}
+
+\subsection{SCRUM}
+SCRUM es una metodología ágil de gestión de proyectos que se enfoca en la entrega continua de valor al cliente mediante un proceso iterativo e incremental. Se divide en ciclos cortos de trabajo, llamados sprints, en los cuales un equipo trabaja de forma colaborativa en tareas específicas para completar una parte del proyecto. El objetivo es entregar un producto o servicio funcional al final de cada sprint. \cite{wiki:scrum}
+
+En este proyecto se ha seguido este tipo de metodología al organizarse en sprints de una duración de dos semanas con diferentes tareas a completar en cada uno de ellos.
+
+\subsection{UML}
+UML (Unified Modeling Language) es un lenguaje de modelado de sistemas que permite representar de manera gráfica y estandarizada los distintos aspectos de un sistema, como su estructura, comportamiento, procesos y relaciones. UML se utiliza comúnmente en el diseño y planificación de proyectos de software, así como en la documentación y comunicación del mismo. \cite{wiki:uml}
+
+En este proyecto, se ha aplicado UML de la siguiente manera: 
+
+\begin{enumerate}
+    \item Se han identificado los requisitos del sistema y definido su alcance.
+    \item Se ha diseñado la arquitectura y estructura del sistema mediante diagramas de clases.
+    \item Se ha modelado el comportamiento del sistema mediante diagramas de estado y actividad.
+    \item Se ha utilizado el modelo como base para el desarrollo del sistema y como documentación para su mantenimiento y evolución.
+\end{enumerate}
+
+\section{Herramientas}
+
+\subsection{Java}
+Java es un lenguaje de programación de alto nivel, orientado a objetos y de propósito general. Fue desarrollado por Sun Microsystems (ahora propiedad de Oracle) a finales de los años 90. Se caracteriza por ser multiplataforma, lo que significa que los programas escritos en Java pueden ejecutarse en diferentes sistemas operativos sin necesidad de ser recompilados, y su arquitectura "write once, run anywhere" (escribir una vez, ejecutar en cualquier lugar).
+
+Java es un lenguaje orientado a objetos, lo que significa que utiliza el paradigma de programación orientada a objetos (POO) para construir programas. La POO se enfoca en la encapsulación, la herencia y el polimorfismo, tres conceptos fundamentales que permiten crear un código más organizado y reutilizable. \cite{wiki:java}
+
+Java cuenta con una gran cantidad de librerías y paquetes pre-construidos para facilitar el desarrollo de aplicaciones.
+
+Para la realización de este proyecto se ha utilizado Java JDK 19.
+
+Página web de la herramienta: \url{https://www.java.com/es/}
+
+\subsection{Eclipse}
+Eclipse es un entorno de desarrollo integrado (IDE) de código abierto ampliamente utilizado para la programación en varios lenguajes de programación, incluyendo Java, C++, y PHP. Ofrece características como depuración, control de versiones, y herramientas de construcción integradas. También tiene un sistema de plugins para extender las funcionalidades del IDE. Es muy popular entre los desarrolladores debido a su capacidad de adaptarse a diferentes necesidades de desarrollo y su gran comunidad de usuarios. \cite{wiki:eclipse}
+
+En este proyecto se ha utilizado Eclipse IDE 2022‑09.
+
+Página web de la herramienta: \url{https://eclipse.org/org/}
+
+\subsection{Maven}
+Maven es una herramienta software que se utiliza en la construcción y administración de proyectos Java.
+
+Esta herramienta utiliza un POM (Project Object Model) mediante la creación de un fichero en formato .XML en el que se describe el proyecto software a construir y se especifican las dependencias externas del proyecto, así como otras tareas.\cite{wiki:maven}
+
+En este proyecto se ha utilizado Apache Maven 3.8.7.
+
+Página web de la herramienta: \url{https://maven.apache.org/}
+
+\subsection{Weka}
+Weka es una herramienta de minería de datos open source que proporciona una amplia variedad de algoritmos de aprendizaje automático para la clasificación, regresión, agrupamiento y visualización de datos.\cite{wiki:weka}
+
+Weka proporciona varios algoritmos de aprendizaje automático para generar reglas de asociación a partir de datos de transacciones, entre ellos, el algoritmo \textit{Apriori}.
+
+En este proyecto se ha utilizado weka 3.8.6.
+
+Página web de la herramienta: \url{https://www.cs.waikato.ac.nz/ml/weka/}
+
+\subsection{Git}
+Git es un sistema de control de versiones de código. Es una herramienta que permite a los desarrolladores llevar un registro detallado de los cambios realizados en un proyecto de software a lo largo del tiempo. Con Git, se pueden almacenar y gestionar de forma eficiente las diferentes versiones de un proyecto, lo que facilita la colaboración y la resolución de conflictos entre los desarrolladores.
+
+\subsection{GitHub}
+GitHub es una plataforma en línea que proporciona almacenamiento y control de versiones para proyectos de software. Los desarrolladores pueden crear repositorios para su proyecto, trabajar en ellos y colaborar con otros desarrolladores. También proporciona herramientas para ayudar a los desarrolladores a colaborar y manejar sus proyectos de manera eficiente, como un sistema de seguimiento de errores, gestión de tareas, comentarios y discusiones. Es un lugar donde se almacena y se comparte el código fuente y se sigue las últimas tendencias en tecnología.\cite{wiki:github}
+
+Enlace al repositorio de este proyecto: \url{https://github.com/srevilla/TFG-22.11}
+
+\subsection{ZenHub}
+ZenHub es una herramienta de gestión de proyectos en línea que se integra con GitHub. Es una plataforma de colaboración que permite a los equipos de desarrollo de software planificar, organizar y seguir el progreso de sus proyectos de manera eficiente.\cite{zenhub}
+
+Con ZenHub, los equipos pueden crear tableros de proyectos personalizados, donde pueden asignar tareas a miembros del equipo, establecer prioridades y seguir el progreso en tiempo real.
+
+Página web de la herramienta: \url{https://www.zenhub.com/}
+
+\subsection{Moodle}
+ Moodle es un sistema de gestión del aprendizaje de código abierto que ayuda a los profesores a crear y administrar cursos en línea, proporciona herramientas de colaboración y una gran cantidad de características y plugins que pueden ser utilizadas para personalizar el funcionamiento y la apariencia de un curso.\cite{moodle}
+
+ En este proyecto se ha utilizado para importar los cuestionarios generados en formato .XML, ya que era el principal objetivo de la aplicación.
+
+ Página web de la herramienta: \url{https://docs.moodle.org/}
+
+ \subsection{XML}
+XML es un lenguaje de etiquetas utilizado para describir y transmitir información estructurada. Es un lenguaje de etiquetado similar al HTML, pero más flexible y menos estricto en su sintaxis.\cite{wiki:xml}
+
+ En este proyecto se ha utilizado XML para crear cuestionarios. Los cuestionarios se pueden escribir en un archivo XML y luego importar al sistema de Moodle. Al utilizar XML, los cuestionarios son fáciles de crear y editar, y también son fácilmente transferibles entre diferentes sistemas.
+
+ \subsection{\LaTeX}
+\textit{\LaTeX} es un sistema de composición de texto utilizado principalmente para la creación de documentos científicos y académicos, es especialmente útil en la creación de ecuaciones matemáticas, tablas, gráficos y figuras y proporciona herramientas para crear índices, bibliografías y tablas de contenido automáticamente.\cite{wiki:latex}
+
+\subsection{Overleaf}
+ Overleaf es una plataforma de colaboración de documentos basada en \textit{\LaTeX} en línea, que permite a los usuarios crear y editar documentos académicos y científicos de forma colaborativa y fácil de usar, con características de colaboración en tiempo real y compilación y visualización en línea.\cite{wiki:overleaf}
+ 
+Página web de la herramienta: \url{https://es.overleaf.com/}
+
+\subsection{Diagrams.net}
+Diagrams.net (anteriormente llamado Draw.io) es una herramienta en línea gratuita para la creación y edición de diagramas y gráficos. Se ha usado para crear los diagramas UML de los anexos, entre los que se incluyen diagramas de clases, diagramas de secuencia, etc... Es una opción popular para quienes buscan una herramienta fácil de usar para crear diagramas profesionales sin la necesidad de software de pago costoso. Además, permite la colaboración en tiempo real y la integración con diferentes servicios en línea, como Google Drive y Dropbox. \cite{wiki:diagrams}
+
+Página web de la herramienta: \url{https://app.diagrams.net/}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

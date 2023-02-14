@@ -1,0 +1,207 @@
+\apendice{Documentación técnica de programación}
+
+\section{Introducción}
+
+La documentación técnica de programación es un elemento esencial para el correcto desarrollo y mantenimiento de un proyecto software. En este apéndice, se describen los aspectos técnicos relacionados con el proyecto, incluyendo la estructura de directorios, el manual del programador, la compilación, la instalación y ejecución del proyecto y las pruebas del sistema. Esta documentación es fundamental para garantizar la consistencia y la eficacia del software y para facilitar la tarea de los programadores y usuarios que interactúan con él. La información contenida en este apéndice es crucial para el éxito y la escalabilidad del proyecto a largo plazo.
+
+\section{Estructura de directorios}
+
+El repositorio del proyecto se distribuye de la siguiente manera:
+\begin{itemize}
+\tightlist
+\item
+  \texttt{/}: contiene el fichero pom.xml de Maven, el fichero README, el .gitignore y la copia de la licencia.
+\item
+  \texttt{/src/}: es el módulo correspondiente a la aplicación.
+\item
+  \texttt{/src/es/ubu/inf/tfg}: contiene todas las carpetas principales del proyecto.
+\item
+  \texttt{/src/es/ubu/inf/tfg/ui/}: contiene todas las clases relacionadas con la interfaz de usuario, entre las que se encuentra el main del programa.
+\item
+  \texttt{/src/es/ubu/inf/tfg/dominio/}: contiene las clases que forman parte del dominio del proyecto.
+\item
+  \texttt{/src/es/ubu/inf/tfg/generador}: contiene una interfaz común para todas las preguntas y dos subpaquetes: uno para la generación de datos y otro para la generación de preguntas.
+\item
+  \texttt{/src/es/ubu/inf/tfg/generador/datos}: contiene un subpaquete por cada conjunto de datos que es necesario generar.
+\item 
+  \texttt{/src/es/ubu/inf/tfg/generador/datos/conjuntoitemsets}: contiene las clases necesarias para generar un conjunto de item sets.
+\item
+  \texttt{/src/es/ubu/inf/tfg/generador/datos/conjuntodatos}: contiene las clases necesarias para generar un conjunto de datos.
+\item
+  \texttt{/src/es/ubu/inf/tfg/generador/preguntas}: contiene un subpaquete por cada tipo de pregunta que se puede generar.
+\item
+\texttt{/src/es/ubu/inf/tfg/generador/preguntas/ampliacionitemsets}: contiene las clases necesarias para generar una pregunta de tipo "Ampliación Item Sets"
+\item \texttt{/src/es/ubu/inf/tfg/generador/preguntas/reglasasociaicon}: contiene las clases necesarias para generar una pregunta de tipo "Generación Reglas de Asociación"
+\item
+  \texttt{/src/es/ubu/inf/tfg/generador/preguntas/itemsets}: contiene las clases necesarias para generar una pregunta de tipo "Generación Item Sets"
+\item
+  \texttt{/src/es/ubu/inf/tfg/traductor}: contiene una interfaz para traducir las preguntas, una clase Plantilla y las plantillas en formato .XML necesarias para ejecutar el código desde Eclipse.
+\item
+  \texttt{/src/es/ubu/inf/tfg/traductor/xml}: contiene la clase necesaria para traducir un banco de preguntas a formato .xml.
+\item
+  \texttt{/resources/}: es el módulo correspondiente a las plantillas en formato .XML.
+\item
+  \texttt{/resources/es/ubu/inf/tfg/traductor}: contiene las plantillas en formato .XML necesarias para ejecutar el archivo .jar.
+\end{itemize}
+
+\imagenAncho{PaquetesGeneral}{Estructura de paquetes}{0.6}
+\imagenAncho{PaquetesDominio}{Estructura de paquetes del dominio}{0.6}
+\imagenAncho{PaquetesGenerador}{Estructura de paquetes del generador}{0.8}
+\imagenAncho{PaquetesTraductor}{Estructura de paquetes del traductor}{0.6}
+\imagenAncho{PaquetesUi}{Estructura de paquetes de la interfaz de usuario}{0.6}
+
+\section{Manual del programador}
+
+Este manual está diseñado para guiar a programadores futuros que trabajen en la aplicación. Se describen los pasos para obtener las herramientas necesarias, configurar el entorno de desarrollo y añadir nuevas características a la aplicación.
+
+\subsection{Entorno de desarrollo}
+Para trabajar en el proyecto se necesita tener instalado lo siguiente:
+
+\begin{itemize}
+\tightlist
+\item
+  Java JDK 19.
+\item
+  Eclipse.
+\item
+  Git.
+\end{itemize}
+
+A continuación, se indica como instalar y configurar correctamente cada uno de ellos.
+
+\subsubsection{Java JDK 19}
+Java es uno de los lenguajes de programación más utilizados. Se pudesde descargar la útlima versión desde \url{https://www.oracle.com/es/java/technologies/downloads/}. Es importante seleccionar adecuadamente el sistema operativo y la arquitectura del ordenador. \cite{wiki:jdk}
+
+En este caso se va a explicar el proceso de instalación en Windows, ya que es el sistem operativo que se ha utilizado para este proyecto:
+\begin{enumerate}
+    \item Ejecutar el archivo de instalación y seguir las instrucciones en pantalla para completar la instalación.
+    \item Verificar que la instalación de Java se haya realizado correctamente abriendo el símbolo del sistema y escribiendo \textit{java -version}.
+    \item Hacer clic en el botón \textit{Inicio} y escribir \textit{variables de entorno} en el cuadro de búsqueda.
+    \item Seleccionar \textit{Editar las variables de entorno del sistema} en los resultados de la búsqueda.
+    \item En la ventana \textit{Configuración avanzada del sistema}, hacer clic en el botón \textit{Variables de entorno}.
+    \item En la sección \textit{Variables del sistema}, buscar la variable PATH y hacer clic en \textit{Editar}.
+    \item Agregar la ruta de la carpeta \textit{lib} de Java a la variable PATH, asegurándose de separar las entradas con un punto y coma. Por ejemplo, si Java está instalado en \texttt{C:\textbackslash Program Files\textbackslash Java\textbackslash jdk-19}, agregar \texttt{;C:\textbackslash Program Files\textbackslash Java\textbackslash jdk-19\textbackslash lib} al final de la variable PATH.
+    \item Hacer clic en \textit{Aceptar} para guardar los cambios.
+
+\end{enumerate}
+
+\subsubsection{Eclipse}
+Para descargar Eclipse en Windows se han seguido los siguientes pasos:
+\begin{enumerate}
+    \item Descargar el archivo de instalación desde \url{https://www.eclipse.org/downloads/}.
+    \item Descomprimir el archivo de instalación en la carpeta deseada.
+    \item Hacer clic en el archivo \textit{eclipse.exe} para iniciarlo.
+    \item Seleccionar una carpeta de \textit{Workspace} qué es donde se guardarán los proyectos.
+\end{enumerate} 
+
+\subsubsection{Git}
+Pra descargar Git en Windows se han seguido los siguientes pasos:
+\begin{enumerate}
+    \item Descargar el archivo de instalación desde \url{https://git-scm.com/downloads}. 
+    \item Ejecutar el archivo de instalación y seguir las instrucciones indicadas.
+    \item Verificar la instalación abriendo el símbolo del sistema y escribiendo \textit{git --version}. Se tiene que obtener una respuesta que indique la versión de Git que se ha instalado.
+\end{enumerate}
+La instalación de Git también incluye una interfaz gráfica de usuario, como Git Bash o Git GUI, que permite interactuar con Git de manera más amigable.
+
+\subsection{Añadir nuevas características a la aplicación}
+
+Una vez se ha importado el proyecto en Eclipse, ya es posible añadir nuevas características.
+
+\subsubsection{Añadir nuevas preguntas}
+Para ello hay que seguir los siguientes pasos:
+\begin{enumerate}
+    \item Crear un nuevo paquete dentro de \texttt{/src/es/ubu/inf/tfg/generador/preguntas} que se llame como el nombre de la nueva pregunta.
+    \item Dentro de este paquete, crear, al menos, dos clases:
+    \begin{itemize}
+        \item Un generador de banco de preguntas: esta clase tiene que implementar la interfaz \textit{GeneradorBancoPreguntas} y tiene que sobreescribir su método \textit{generarBancoPreguntas(T config)} pasándole la configuración de la nueva pregunta.
+        \item Un generador de pregunta: esta clase tiene que tener un método \textit{generarPregunta()} que devuelva una pregunta nueva. Para ello se tendrán que crear, además, métodos que establezcan su enunciado, título y opciones. 
+        \item Una configuración de pregunta: esta clase es opcional, puesto que puede que una nueva pregunta utilice un conjunto de datos común para varias preguntas, por lo que no sería necesario crear una configuración nueva. Esta clase tiene que iniciar en el constructor los valores necesarios para generar el conjunto de datos que vaya a usar.
+    \end{itemize}
+    \item Crear una nueva clase dentro de \texttt{/src/es/ubu/inf/tfg/ui} que se corresponda con la ventana de la nueva pregunta en la interfaz gráfica. Además de eso, editar el \textit{Main} para añadir un nuevo botón que llame a la nueva clase. 
+\end{enumerate}
+
+\subsubsection{Añadir nuevo traductor}
+Estos son los pasos que hay que seguir en caso de que se quiera añadir un nuevo traductor para traducir el banco de preguntas a otro lenguaje:
+
+\begin{enumerate}
+    \item Crear un nuevo paquete dentro de \texttt{/src/es/ubu/inf/tfg/traductor} que se llame como el lenguaje al que se va a traducir.
+    \item Dentro de este paquete, crear una nueva clase que implemente la interfaz \textit{Traductor} y sobreescriba el método \textit{traducir(BancoPreguntas bancoPreguntas)}. Este método tiene que hacer lo necesario para traducir el banco de preguntas que recibe al lenguaje deseado.
+    \item Añadir dentro del paquete \texttt{/src/es/ubu/inf/tfg/traductor} las plantillas en el formato del lenguaje que se desea traducir. Estas plantillas tienen que ser utilizadas por la nueva clase para traducir las preguntas.
+\end{enumerate}
+
+Por último, es necesario subir las actualizaciones al repositorio de GitHub. Para ello, hay que hacer lo siguiente en la terminal:
+\begin{enumerate}
+    \item Situarse en el directorio del proyecto mediante el comando \textit{cd} seguido de la ruta del directorio.
+    \item Añadir al \textit{stage} los archivos modificados mediante \textit{git add .}
+    \item Hacer \textit{commit} mediante \textit{git commit -m "nombre que se quiera dar al commit"}.
+    \item Subir los cambios a la rama principal del repositorio mediante \textit{git push}.
+\end{enumerate}
+
+\subsubsection{Actualizar dependencias}
+
+Es importante que las dependencias utilizadas en el proyecto estén actualizadas para el correcto mantenimiento del mismo. 
+
+En este proyecto se utiliza Maven como herramienta para gestionar las dependencias externas. Las dependencias se definen dentro del fichero \textit{pom.xml}.
+
+\imagen{Pom}{Contenido del fichero \textit{pom.xml}}
+
+\section{Compilación, instalación y ejecución del proyecto}
+En esta sección se describen los pasos para obtener el código fuente del proyecto, compilarlo, ejecutarlo y exportarlo.
+
+\subsection{Obtención del código fuente}
+Para el desarrollo del proyecto se ha utilizado un repositorio Git alojado en GitHub. Para obtener una copia del repositorio hay que seguir los siguientes pasos:
+
+\begin{enumerate}
+\item Abrir la terminal de Git Bash.
+\item Colocarse en el directorio donde se desee copiar el repositorio (mediante el comando \texttt{cd}).
+\item Introducir el siguiente comando:\\\texttt{git\ clone\ https://github.com/srevilla/TFG-22.11.git}
+\item Cuando finalice la descarga ya estará disponible una copia completa del repositorio.
+\end{enumerate}
+
+\subsection{Importar proyecto en Eclipse}
+Para importar un proyecto en Eclipse, hay que seguir estos pasos:
+
+\begin{enumerate}
+    \item Abrir Eclipse y seleccionar \textit{File} -> \textit{Import}.
+    \item Seleccionar la opción \textit{Existing Projects into Workspace} y hacer clic en \textit{Next}.
+    \item Seleccionar la ubicación del proyecto que se desea importar.
+    \item Verificar que el proyecto aparece en la lista de proyectos seleccionados y hacer clic en \textit{Finish}.
+\end{enumerate}
+
+Una vez hecho esto, el proyecto estará disponible en el árbol de proyectos de Eclipse y puede ser abierto y modificado desde allí.
+
+\subsection{Compilación del código}
+Para compilar el proyecto en Eclipse, es necesario seguir estos pasos:
+
+\begin{enumerate}
+    \item Hacer clic en el botón \textit{Project} en la barra de herramientas y seleccionar \textit{Build Project} en el menú desplegable.
+    \item Alternativamente, se puede presionar \textit{Ctrl + B} en el teclado.
+\end{enumerate}
+
+De esta forma, Eclipse compila el código fuente y muestra cualquier error o advertencia en la pestaña \textit{Problems}. Si no hay errores, se crea automáticamente un archivo compilado o ejecutable en la carpeta \textit{bin} del proyecto.
+
+\subsection{Ejecución del proyecto}
+
+Para ejecutar el código en Eclipse, es necesario seguir estos pasos:
+
+\begin{enumerate}
+    \item Hacer clic derecho en el archivo principal del proyecto (en este caso, la clase \textit{Main.java} situada en \texttt{/src/es/ubu/inf/tfg/ui/}) y seleccionar \textit{Run As} en el menú desplegable.
+    \item Seleccionar \textit{Java Application} en el menú desplegable.
+\end{enumerate}
+
+De esta forma, Eclipse compila y ejecuta el código, y se abre una ventana con el menú principal de la aplicación.
+
+\imagen{Ejecucion}{Ejecución del proyecto en Eclipse}
+
+\subsection{Exportar aplicación}
+Para crear un archivo ejecutable del proyecto es necesario seguir estos pasos:
+\begin{enumerate}
+    \item Hacer clic derecho en el proyecto en el panel \textit{Project Explorer} y seleccionar \textit{Export} en el menú desplegable.
+    \item Seleccionar \textit{Java} en la categoría \textit{Export} y luego \textit{JAR file}.
+    \item Seguir las instrucciones en el asistente de exportación para especificar la ubicación y las opciones del archivo JAR.
+    \item Una vez que se ha creado el archivo JAR, ejecutarlo desde la línea de comandos utilizando el comando \textit{"java -jar nombre.jar"}.
+\end{enumerate}
+
+\section{Pruebas del sistema}
+
+Se ha comprobado manualmente el funcionamiento del programa. Se han utilizado diferentes casos de prueba para cada uno de los tipos de preguntas y se ha verificado que el programa proporciona resultados correctos y precisos. Aunque no se han implementado pruebas unitarias, se está seguro de que el programa cumple con los requisitos y estándares necesarios para ser utilizado eficientemente.

@@ -1,0 +1,114 @@
+\capitulo{3}{Conceptos teóricos}
+
+\section{Introducción}
+
+Las reglas de asociación en minería de datos son una técnica utilizada para encontrar patrones y relaciones ocultas en un conjunto de datos. Estas reglas se basan en el principio de que si dos o más elementos aparecen juntos con frecuencia en un conjunto de datos, es probable que estén relacionados de alguna manera. \cite{wiki:reglasasociacion}
+
+Para entender esto del todo hay que mencionar el concepto de item set. Un item set es simplemente un conjunto de elementos o ítems que aparecen juntos con frecuencia en un conjunto de datos. Por ejemplo, en un supermercado, un item set podría ser un conjunto de productos que un cliente compra juntos, como leche y pan. \cite{itemsets}
+
+Las reglas de asociación son conclusiones que se pueden sacar de los item sets. Por ejemplo, si se encuentra que muchos clientes compran leche y pan juntos, se puede crear una regla de asociación que indique que los clientes que compran leche también suelen comprar pan.
+
+Estas técnicas se utilizan en la vida real para tomar decisiones basadas en patrones y relaciones en grandes conjuntos de datos. Por ejemplo, en un supermercado, se pueden utilizar para decidir cómo colocar los productos en las estanterías o para personalizar las promociones y ofertas para los clientes. En la publicidad en línea, se pueden utilizar para personalizar los anuncios que se muestran a los usuarios basados en sus intereses y comportamientos.
+
+\section{Generación de item sets}
+
+Para generar un conjunto de n-item sets en minería de datos, se siguen los siguientes pasos: \cite{pdf_reglas}
+
+\begin{enumerate}
+    \item Seleccionar un conjunto de datos: El primer paso es seleccionar un conjunto de datos que contenga información sobre los elementos o ítems que se quieren analizar.
+    \item Identificar los elementos o ítems individuales: El siguiente paso es identificar los elementos o ítems individuales en el conjunto de datos. Por ejemplo, en un supermercado, los elementos individuales podrían ser productos específicos como leche, pan, huevos, etc.
+    \item Calcular la frecuencia de cada item set: A continuación, se cuenta la frecuencia con la que cada item set aparece en el conjunto de datos. Un item set es un conjunto de n elementos o ítems que aparecen juntos. Por ejemplo, en un supermercado, un item set de dos elementos sería leche y pan.
+    \item Filtrar los item sets con una frecuencia mínima: Una vez que se han calculado las frecuencias de cada item set, se puede filtrar los item sets que no cumplen con una frecuencia mínima establecida previamente. Esto se hace para evitar item sets que no sean significativos o que aparezcan con poca frecuencia.
+    \item Generar el conjunto de n-item sets: Finalmente, se pueden generar el conjunto de n-item sets a partir de los item sets que cumplen con la frecuencia mínima.
+\end{enumerate}
+
+Para obtener los n+1-item sets a partir de los n-item sets, se siguen los siguientes pasos:
+\begin{enumerate}
+    \item Tomar dos item sets de n elementos: El primer paso es tomar dos item sets de n elementos y compararlos para ver si tienen n-1 elementos en común.
+    \item Unir los item sets: Si los dos item sets tienen n-1 elementos en común, se pueden unir para formar un item set de n+1 elementos.
+    \item Calcular la frecuencia del item set unido: A continuación, se cuenta la frecuencia con la que aparece el item set unido en el conjunto de datos.
+    \item Filtrar los item sets unidos con una frecuencia mínima: Finalmente, se pueden filtrar los item sets unidos que no cumplen con una frecuencia mínima establecida previamente. 
+\end{enumerate}
+
+Este proceso se podría repetir para obtener item sets de n+2 elementos, n+3 elementos, etc. hasta que se alcance el número de elementos deseado.
+
+\section{Generación de reglas de asociación}
+Para obtener reglas de asociación de un conjunto de datos, se siguen los siguientes pasos: \cite{pdf_reglas}
+
+\begin{enumerate}
+    \item Discretizar atributos numéricos, si los hay: en caso de que haya atributos numéricos, es necesario discretizarlos. Esto significa convertirlo en un atributo categórico, es decir, dividir un rango continuo de valores en un conjunto finito de categorías o intervalos.
+    \item Generar el conjunto de item sets: El primer paso es generar el conjunto de item sets a partir del conjunto de datos, siguiendo los pasos que se describieron en la respuesta anterior.
+    \item Establecer el soporte mínimo: El siguiente paso es establecer un soporte mínimo, que es un porcentaje o un número que representa la frecuencia mínima con la que un item set debe aparecer en el conjunto de datos para ser considerado significativo. 
+    $$\text{soporte}(A \implies C) = \text{soporte}(A \cup C)$$
+ 
+    \item Generar las reglas de asociación: A continuación, se pueden generar las reglas de asociación a partir de los item sets que cumplen con el soporte mínimo. Una regla de asociación es una relación entre dos item sets que indica que si un item set aparece en el conjunto de datos, es probable que también aparezca el otro item set. Por ejemplo, una regla de asociación podría ser "si un cliente compra leche, es probable que también compre pan".
+    \item Establecer la confianza mínima: El siguiente paso es establecer una confianza mínima, que es un porcentaje que representa el grado de confianza en la regla de asociación. La confianza se puede calcular como la proporción de veces que aparece el item set de destino en el conjunto de datos, dada la presencia del item set de origen.
+    $$\text{confianza}(A \implies C) = \frac{\text{soporte}(A \cup C)}{\text{soporte}(A)}$$
+    
+    \item Filtrar las reglas de asociación con una confianza mínima: Finalmente, se pueden filtrar las reglas de asociación que no cumplen con la confianza mínima establecida previamente.
+\end{enumerate}
+
+\section{Algoritmo Apriori}
+
+Apriori es un algoritmo de minería de datos utilizado para generar reglas de asociación en un conjunto de datos. El algoritmo se basa en la idea de que si un item set es frecuente, entonces todos los subconjuntos de ese item set también deben ser frecuentes. \cite{wiki:apriori}
+
+El algoritmo se divide en dos fases similares a lo explicado anteriormente:
+
+\begin{enumerate}
+    \item Generación de item sets: En esta fase, se generan todos los item sets posibles del conjunto de datos, y se eliminan aquellos que no cumplen con el soporte mínimo establecido previamente.
+    \item Generación de reglas de asociación: En esta fase, se generan reglas de asociación a partir de los item sets frecuentes obtenidos en la primera fase. Se utiliza un proceso de \textit{candidate generation} para generar reglas de asociación, en el que se combinan item sets para generar nuevas reglas, y se eliminan aquellas que no cumplen con la confianza mínima establecida previamente.
+\end{enumerate}
+
+El algoritmo Apriori se caracteriza por su eficiencia en términos de tiempo de ejecución y memoria, ya que utiliza un proceso de eliminación de item sets infrecuentes para reducir el espacio de búsqueda. Sin embargo, también tiene algunas limitaciones, como la necesidad de establecer un soporte mínimo y una confianza mínima adecuados, y la incapacidad de manejar datos no estructurados.
+
+\imagen{Apriori}{Algoritmo Apriori}{.8}\cite{wiki:apriori}
+
+\section{Ejemplo práctico}
+
+Se va a hacer un ejemplo de cómo calcular las reglas de asociación que superan un soporte mínimo y una confianza mínima en el contexto de una tienda.
+
+Supongamos que tenemos el siguiente conjunto de datos de transacciones de compra en una tienda:
+
+\begin{itemize}
+    \item Transacción 1: pan, leche, huevos
+    \item Transacción 2: pan, leche
+    \item Transacción 3: leche, huevos
+    \item Transacción 4: pan, huevos
+    \item Transacción 5: pan, leche
+\end{itemize}
+
+Lo primero es calcular el soporte de cada item set en el conjunto de datos.
+
+Luego, supongamos que se establece un soporte mínimo de 6 y una confianza mínima del 70\%.:
+
+Para el item set $\{pan, leche\}$, el soporte es 3/5 = 0.6, que cumple con la condición de ser igual o mayor que el soporte mínimo de 6 (0.6), por lo que se puede generar una regla a partir de este item set.
+
+\begin{itemize}
+    \item Regla: "si un cliente compra pan, es muy probable que también compre leche" (soporte: 3/5, confianza: 3/4)
+\end{itemize}
+
+La confianza de la regla se puede calcular dividiendo el soporte del item set $\{pan, leche\}$ por el soporte del item set $\{pan\}$. En este caso, la confianza es 3/4 = 0.75.
+
+La confianza es mayor que la confianza mínima del 70\% (0.7), por lo que se puede considerar esta regla.
+
+De este modo, se puede afirmar que la regla "si un cliente compra pan, es muy probable que también compre leche" (soporte: 3/5, confianza: 3/4) supera tanto el soporte mínimo como la confianza mínima y, por lo tanto, es una regla de asociación válida.
+
+Este proceso se puede repetir para todos los item sets y sus respectivas reglas para encontrar todas las reglas de asociación que superan el soporte mínimo y la confianza mínima.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\linewidth}{X p{0.5\columnwidth}}
+		\toprule
+		\textbf{Item set} & \textbf{Soporte} \\
+		\toprule
+		$\{pan\}$ & 4/5 \\
+		$\{leche\}$ & 4/5 \\
+		$\{huevos\}$ & 2/5 \\
+		$\{pan, leche\}$ & 3/5 \\
+		$\{pan, huevos\}$ & 2/5 \\
+        $\{leche, huevos\}$ & 2/5 \\
+        $\{pan, leche, huevos\}$ & 1/5 \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Ejemplo práctico item sets}
+\end{table}

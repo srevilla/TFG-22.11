@@ -1,0 +1,70 @@
+\apendice{Especificación de diseño}
+
+\section{Introducción}
+
+En este apartado se describen los detalles técnicos y funcionales clave del proyecto desarrollado. Se enfocará en tres áreas esenciales: diseño de datos, diseño procedimental y diseño arquitectónico. En el diseño de datos, se definirá y estructurará la organización de los datos utilizados en el proyecto, con diagramas para visualizar las relaciones entre ellos y su relación con las diferentes entidades en el sistema. En el diseño procedimental, se describirán los procesos y tareas del proyecto, con un diagrama de secuencia que muestra la secuencia de interacciones entre los componentes del sistema. En el diseño arquitectónico, se describirá la estructura general del software, que utiliza una arquitectura hexagonal para permitir una mayor flexibilidad, escalabilidad y modularidad.
+
+\section{Diseño de datos}
+
+El diseño de datos es un componente clave a la hora de realizar un proyecto de software. En este apartado, se enfoca en la definición y estructuración de los datos que se utilizan en el proyecto. Para ilustrar y describir esta estructura, se incluyen diagramas que permiten visualizar la organización de los datos, las relaciones entre ellos y cómo se relacionan con las diferentes entidades en el sistema. El diseño de datos es una herramienta esencial para garantizar la eficiencia, la fiabilidad y la seguridad de los datos en el software. \cite{wiki:diseñodatos}
+
+La aplicación cuenta con las siguientes entidades:
+\begin{itemize}
+    \item \textbf{BancoPreguntas}: tiene una lista de preguntas. Almacena todas las preguntas que se han generado.
+    \item \textbf{Pregunta}: tiene un título, enunciado y una lista de opciones. Almacena los campos que forman una pregunta.
+    \item \textbf{Opcion} tiene un peso y un texto. El peso es la puntuación que esa opción tiene asignada, de forma que si es verdadera es positiva, y si es falsa, negativa. Su valor depende del número de opciones verdaderas y falsas.
+\end{itemize}
+
+\subsection{Diagrama E/R}
+
+Un diagrama E/R (Entidad-Relación) es una técnica gráfica que permite representar y modelar entidades y las relaciones entre ellas en un sistema o proyecto. Un diagrama E/R se compone de dos elementos principales: entidades y relaciones. Las entidades son objetos que se consideran relevantes para el sistema o proyecto que se está modelando. Las relaciones describen cómo las entidades están vinculadas entre sí. En un diagrama E/R, las entidades se representan como rectángulos y las relaciones como líneas conectadas entre ellos. Este tipo de diagrama es útil para representar y comprender la estructura de un sistema y para planificar su desarrollo.
+
+\imagenAncho{DiagramaER}{Diagrama Entidad/Relación}{1}
+
+\subsection{Estructura de la interfaz de usuario}
+
+Se va a explicar la estructura de la interfaz gráfica para la pregunta \textit{GeneradorReglasAsociacion}. Esta estructura es la misma para todos los tipos de preguntas que la aplicación puede implementar.
+
+La ventana principal es una clase abstracta, cuyo método es implementado por la clase \textit{VentanaReglasAsociacion}. Esta clase instancia un objeto de tipo \textit{BancoPreguntas}. Un banco de preguntas tiene una lista de \textit{Preguntas}. Cada objeto de esta lista, tiene a su vez una lista de \textit{Opciones}
+
+\imagen{DiagramaClases-Interfaz}{Diagrama de clases de la interfaz}
+
+\subsection{Estructura del generador}
+
+Se va a explicar la estructura del generador para la pregunta \textit{GeneradorReglasAsociacion}. Esta estructura es la misma para todos los tipos de preguntas que la aplicación puede implementar.
+
+El generador tiene una interfaz llamada \textit{GeneradorBancoPreguntas} que tiene un método que recibe un objeto genérico. Este método, es implementado por la clase \textit{GeneradorBancoPreguntasReglasAsociacion}. Esta clase, además, utiliza un objeto de tipo \textit{GeneradorConjuntoDatos} para obtener objetos de tipo \textit{ConjuntoDatos}. La clase \textit{ConfigReglasAsociacion} es usada por varias clases que acceden a los valores de un objeto de este tipo.
+
+\begin{landscape}
+    \imagenAncho{DiagramaClases-Generador}{Diagrama de clases del generador}{1.4}
+\end{landscape}
+
+\subsection{Estructura del traductor}
+
+Se va a explicar la estructura del traductor para la pregunta \textit{GeneradorReglasAsociacion}. Esta estructura es la misma para todos los tipos de banco de preguntas que la aplicación puede traducir. 
+
+El traductor tiene una interfaz \textit{Traductor} que tiene un método que traduce un banco de preguntas que recibe por parámetro. La clase \textit{TraductorXML} implementa este método para traducir el banco de preguntas a un formato .XML importable en \textit{Moodle}. Para ello, utiliza la clase \textit{Plantilla}.
+
+\imagen{DiagramaClases-Traductor}{Diagrama de clases del traductor}
+
+\section{Diseño procedimental}
+
+El diseño procedimental se centra en describir cómo se realizan las diferentes tareas y procesos en el proyecto. Para ilustrar estos procesos, se incluye un diagrama de secuencia, que muestra la secuencia de interacciones entre los objetos y componentes del sistema y cómo se realizan las tareas y procesos. Este diagrama de secuencia es una herramienta valiosa para entender cómo se realizarán las tareas en el software y cómo se relacionan entre ellas. Por lo tanto, es esencial para garantizar la eficiencia y la claridad en el diseño y la implementación del software. \cite{wiki:diseñoprocedimentall}
+
+\begin{landscape}
+\imagenAncho{DiagramaSecuencia}{Diagrama de secuencia}{1.5}
+\end{landscape}
+
+\section{Diseño arquitectónico}
+
+El diseño arquitectónico se centra en describir la estructura y organización general del software. En este caso, se ha elegido utilizar una arquitectura hexagonal.
+
+La arquitectura hexagonal es un enfoque para diseñar aplicaciones que se centra en la separación clara de los componentes de una aplicación en diferentes capas. La idea detrás de la arquitectura hexagonal es proporcionar una estructura clara y modular que permita separar los diferentes aspectos del sistema y mejorar la escalabilidad, la mantenibilidad y la testabilidad del código. Al hacerlo, se pueden realizar cambios en una parte del sistema sin afectar a otras partes, lo que facilita el desarrollo y la mejora continua del software. \cite{wiki:hexagonal}
+
+Para este proyecto se ha seguido esta arquitectura al separar la interfaz gráfica del usuario, el dominio y la lógica de negocio (generación de preguntas y creación de archivos .XML) en diferentes capas.
+
+La capa de interfaz gráfica se encarga de presentar la información al usuario y recibir sus selecciones y configuraciones. La capa de generación de preguntas se encarga de crear las preguntas basadas en las selecciones y configuraciones del usuario. Por último, la capa de creación de archivos .XML se encarga de convertir las preguntas en un formato compatible con la plataforma Moodle.
+
+\imagen{ArquitecturaHexagonal}{Arquitectura hexagonal}
+
+

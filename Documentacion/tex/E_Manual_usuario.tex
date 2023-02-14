@@ -1,0 +1,75 @@
+\apendice{Documentación de usuario}
+
+\section{Introducción}
+
+El manual de usuario es un componente fundamental de cualquier proyecto software, ya que proporciona la información necesaria para que los usuarios puedan utilizar el producto de manera efectiva. Este apéndice incluye tres secciones importantes: Requisitos de usuarios, Instalación y Manual del usuario.
+
+\section{Requisitos de usuarios}
+
+En esta sección se describen todos los requisitos técnicos y de hardware necesarios para utilizar el programa de manera óptima. Aquí se incluyen los requisitos mínimos y recomendados de hardware y software, así como cualquier otra información relevante para asegurarse de que el programa funcione correctamente en el sistema del usuario.
+
+Los requisitos mínimos son:
+\begin{itemize}
+    \item Sistema operativo: Se requiere un sistema operativo compatible con Java, como Windows, MacOS o Linux.
+    \item Java: Se requiere tener instalada la versión mínima de Java SE (Standard Edition) necesaria para ejecutar el programa. La versión recomendada es Java SE 19 ya que es la más reciente.
+    \item Espacio en disco: Se requiere una cantidad mínima de espacio en disco para almacenar el programa y cualquier otro archivo necesario para su ejecución.
+    \item Memoria RAM: Se requiere una cantidad mínima de memoria RAM para ejecutar el programa de manera óptima.
+\end{itemize}
+
+\section{Instalación}
+
+En esta sección se explica como instalar y configurar el programa en el sistema del usuario. 
+
+Para ejecutar \textit{AssoQuiz-Generator} se dispone de un fichero .jar ejecutable. El programa se iniciará al ejecutar este fichero.
+
+\imagenAncho{Icono}{Icono \textit{AssoQuiz-Generator}}{0.3}
+
+\section{Manual del usuario}
+
+En esta sección se proporciona una descripción detallada de cómo utilizar el programa, Aquí se incluyen capturas de pantalla y ejemplos prácticos para ilustrar cómo utilizar el programa de manera efectiva. 
+
+Al ejecutar \textit{AssoQuiz-Generator} aparece una ventana con los tipos de preguntas disponibles.
+
+\imagenAncho{VentanaPrincipal}{Ventana principal}{0.5}
+Si se pulsa en una opción, se abre una ventana en la que se da opción a configurar un banco de preguntas. Se pueden seleccionar la configuración de los parámetros entre unos intervalos establecidos previamente en el código. También da la opción de generar aleatoriamente estos parametros para cada pregunta generada.
+
+\imagenAncho{VentanaConfiguracion}{Ventana configuración \textit{Generación Reglas Asociación}}{0.7}
+
+En esta ventana hay un botón de exportar, que al pulsarlo se abre un explorador en el que se tiene que elegir una carpeta para guardar el archivo .XML que se va a generar. Es necesario introducir un nombre para el archivo, de lo contrario, el programa no deja guardarlo.
+
+\imagenAncho{VentanaExportar}{Ventana de guardado de un archivo}{0.7}
+
+Mientras se genera el banco de preguntas, sale un mensaje avisando de que se está generando. Cuando ya ha terminado, se avisa al usuario mediante esta ventana:
+
+\imagenAncho{VentanaFin}{Ventana finalizado}{0.7}
+
+Una vez hecho esto, el fichero está listo para ser importado en \textit{Moodle}. 
+
+Para ello es necesario poder acceder a la plataforma de aprendizaje de \textit{Moodle}. Los pasos que se deben seguir son:
+
+\begin{enumerate}
+    \item Ir a la página principal del curso.
+    \item Pulsar en \textit{Banco de preguntas} desde el bloque de Administración.
+    \item Pulsar en \textit{Importar archivos}.
+    \item Seleccionar la opción de \textit{formato XML Moodle}.
+    \item Desde la siguiente ventana pulsar en \textit{Examinar}.
+    \item Seleccionar el fichero .XML desde el ordenador.
+    \item Pulsar en \textit{Importar} este archivo.
+\end{enumerate}
+
+Los puntos 5 y 6 se pueden realizar arrastrando el archivo al recuadro que se muestra.
+
+    \imagenAncho{MoodleItemSets}{Vista de la pregunta \textit{Generación Item Sets} resuelta en \textit{Moodle}}{1}
+
+\begin{landscape}
+\imagenAncho{Moodle}{Vista de la pregunta \textit{Generación Reglas Asociación} resuelta en \textit{Moodle}}{1.6}
+\end{landscape}
+
+\begin{landscape}
+    \imagenAncho{MoodleAmpliacionItemSets}{Vista de la pregunta \textit{Ampliación Item Sets} resuelta en \textit{Moodle}}{1.6}
+\end{landscape}
+
+
+
+
+

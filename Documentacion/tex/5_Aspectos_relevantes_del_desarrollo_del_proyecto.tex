@@ -1,0 +1,114 @@
+\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+
+Este apartado recoge los aspectos más interesantes del desarrollo del proyecto. Se abordan los aspectos relacionados con la justificación de las herramientas y los caminos elegidos para desarrollar el software. Se explica la importancia de estas decisiones y cómo afectan a la eficacia, la eficiencia y la calidad del proyecto. También se describen las ventajas y desventajas de las herramientas y los procesos elegidos y cómo se hizo la elección final.
+
+En este apartado también se explica cómo se llevó a cabo el desarrollo del proyecto desde el principio hasta el final.
+
+\section{Inicio del proyecto}
+La idea del proyecto se tomó de la lista de TFGs ofertados por la UBU. Hacer una aplicación para la universidad de Burgos de forma que ayude a los profesores a generar cuestionarios, ya sea para exámenes online o para cuestionarios de autoevaluación se vio como una propuesta interesante, por lo que se contactó al tutor correspondiente a este proyecto. Una vez se contactó al tutor, se hizo una reunión para planificar el proyecto. En esta reunión se establecieron las herramientas a utilizar, las metodologías, los objetivos y los plazos del proyecto.
+
+Se decidió utilizar el lenguaje de programación Java para el desarrollo de esta apliación y el entorno de desarrollo Eclipse. El motivo de esto es porque tanto Eclipse como Java son herramientas que ya se habían utilizado en proyectos anteriores y se habían trabajado con ellas en la universidad, de modo que se conocían más a fondo que otro tipo de herramientas. Además de eso, Eclipse es una herramienta muy poderosa que facilita la programación, especialmente en la refactorización y depuración del código, que cuenta con muchos plugins disponibles, como el control de tareas, control de versiones, pruebas, etc.
+
+Para la gestión de dependencias externas se decidió utilizar Maven. El motivo de esto es que Maven es una herramienta de gestión de proyectos y dependencias en Java muy potente ya que permite automatizar la descarga e integración de bibliotecas externas en un proyecto, de forma que se simplifica y agiliza el proceso de desarrollo al resolverse dependencias de forma rápida y confiable. Además, Maven proporciona un formato estándar para la estructura del proyecto y una serie de reglas para la construcción y el despliegue de aplicaciones, lo que aumenta la consistencia y la calidad del código.
+
+Para la realización de este proyecto se decidió utilizar una metodología ágil. El motivo de esto es que ofrecen varias ventajas en comparación con las metodologías tradicionales no ágiles. La principal ventaja de las metodologías ágiles es su flexibilidad y capacidad de adaptación a los cambios. En lugar de seguir un plan rigido y establecido, las metodologías ágiles permiten un enfoque iterativo e incremental que permite una mejor gestión de los cambios.
+
+Se decidió utilizar SCRUM como metodología ágil a implementar en este proyecto. Las razones de esto fue que se trata de una de las metodologías ágiles más populares y utilizadas, que promueve la transparencia y la inspectabilidad en todas las fases del proyecto, lo que permite una mejor toma de decisiones y una mayor eficacia en la resolución de problemas. Además, SCRUM utiliza sprints regulares para mantener el enfoque en los objetivos y mejorar la productividad. También ofrece una estructura sólida para la gestión de tareas y el seguimiento de los progresos, lo que permite una mejor gestión del tiempo y una mejor gestión del riesgo.
+
+Al ser un proyecto educativo, no se ha seguido esta metodología al 100\% ya que no se ha trabajado en equipo si no que ha sido un proyecto individual, por lo tanto, no se han hecho reuniones diarias y otras tareas típicas de la metodología SCRUM. No obstante, se ha intentado adaptar esta metodología lo mejor posible a un proyecto educativo e individual de la siguiente forma:
+\begin{itemize}
+    \item Se planificaron \textit{sprints} como estrategia para completar una cantidad de trabajo establecida.
+    \item Se realizaron reuniones con el tuto al final de cada sprint, en las que se comentaban los objetivos que se habian conseguido, los que quedaban por hacer y se establecían los objetivos del próximo \textit{sprint}.
+    \item La duración de cada \textit{sprint} se estableció de dos semanas.
+    \item Se utilizaron \textit{story points} como medida para estimar el esfuerzo que se realizó en cada tarea.
+    \item Se utilizaron gráficos \textit{burndown} para monitorizar el progreso. 
+\end{itemize}
+
+En cuanto al sistema de cotrol de versiones a utilizar, se optó por \textit{Git} ya que permite gestionar proyectos de una forma eficiente y cuenta con muchas ventajas como la facilidad de resolución de conflictos, permite revertir cambios, ofrece una amplia documentación y soporte comunidad, y permite una fácil integración con otros servicios y herramientas.
+
+Para alojar el proyecto en la nube se acordó, siguiendo los consejos del tutor, usar \textit{GitHub} porque ofrece varias ventajas como su amplia comunidad de desarrolladores, herramientas de colaboración en tiempo real, integración con diferentes servicios y herramientas, control de versiones robusto y seguimiento de errores, así como una amplia documentación y soporte en línea. Además, ofrece opciones gratuitas y de pago para proyectos tanto personales como empresariales. Además de esto, se estaba familiarizado con esta herramienta ya que su uso había sido habitual en alguna asignatura impartida en la universidad de Burgos por lo que se vio como la opción más completa y viable.
+
+\subsection{Conocimientos necesarios}
+
+El proyecto requería recordar conocimientos sobre asignaturas ya cursadas en la carrera, entre las que se encuentran las siguientes:
+
+\begin{itemize}
+    \item \textbf{Metodología de la programación}: se han aplicado los conocimientos aprendidos en esta asignatura para desarrollar una aplicación en java orientada a objetos utilizando Eclipse. Para ello, se han utilizado habilidades como la abstracción, encapsulamiento, herencia o polimorfismo.
+    \item \textbf{Minería de datos} se ha repasado el tema de reglas de asociación correspondiente a esta asignatura para poder implementar el algoritmo. En este tema, caben destacar conceptos como el de item sets, reglas de asociación o el algoritmo apriori.
+    \item \textbf{Ingeniería del software}: los conocimientos aprendidos en esta asignatura se han utilizado para diseñar y desarrollar el proyecto asegurando su fiabilidad, seguridad y calidad, así como la capacidad para diseñar y evaluar interfaces persona computador que garanticen la accesibilidad y usabilidad a la aplicación.
+    \item \textbf{Gestión de proyectos}: esta asignatura ha contribuido a la organización, planificación y gestión del proyecto, utilizando técnicas como la estimación o planificación de tareas, así como a la utilización de la metodología \textit{SCRUM}.
+\end{itemize}
+
+Además de repasar estos conocimientos, se tuvieron que aprender algunos nuevos, siendo el más destacable el de cómo crear interfaces gráficas en Java. Para ello se buscó información en diferentes sitios web y se vieron algunos videos explicativos del proceso.
+
+\section{Desarrollo}
+
+\begin{enumerate}
+    \item Se comenzó escribiendo el código para la pregunta \textit{Ampliación Item Sets}. Para ello, se construyeron las clases y los métodos necesarios para desarrollar esta pregunta. Estas clases consistía en una versión \textit{primitiva} de lo que actualmente se tiene en los siguientes paquetes: 
+    \begin{itemize}
+        \item \texttt{/src/es/ubu/inf/tfg/generador/datos/conjuntoitemsets}
+        \item \texttt{/src/es/ubu/inf/tfg/generador/preguntas/ampliacionitemsets}
+        \item \texttt{/src/es/ubu/inf/tfg/traductor}
+    \end{itemize}
+    Es decir, se hizo el generador de conjuntos de n-item sets y se calcularon todos sus posibles n+1-item sets. Una vez hecho esto, se hizo un clasificador para que clasificara esas posibles soluciones en verdaderas y falsas, comprobando previamente que existían soluciones para ese conjunto de datos con los parámetros especificados. Posteriormente, se hizo un traductor simple para traducir esta pregunta a un formato .XML importable en \textit{Moodle}. Para ello se creó una plantilla que es utilizada por la clase Traductor para traducir la pregunta.
+    \item Para la pregunta \textit{Reglas Asociación} se siguió una lógica similar a la anterior. Es decir, se creó una clase en la que se generaba el conjunto de datos a utilizar y se clasificaban las reglas de asociación a partir de ese conjunto en verdaderas y falsas, en caso de que tuviese solución. La lógica del traductor era la misma, por lo que se empezaron a utilizar más conceptos de POO como la utilización de interfaces y clases abstractas, de forma que no era necesario crear otro traductor específico para esta pregunta sino que se podían utilizar estas técnicas para que el traductor funcionase independientemente del tipo de pregunta que sea. Para ello, se creó una interfaz común para todos los tipos de preguntas que se encarga de generar el banco de preguntas. Por lo tanto, se reorganizó el código en diferentes paquetes a como estaban originalmente, de forma que la estructura fuera algo así:
+    \begin{itemize}
+        \item Se tiene un paquete generador que contiene diferentes subpaquetes.
+        \item Cada subpaquete se corresponde con una pregunta. 
+        \item En cada subpaquete hay una clase para la configuración, otra clase para generar el banco de preguntas y otra gente para generar las preguntas necesarias para generar el banco de preguntas.
+    \end{itemize}
+    \item Hasta este punto, todo funcionaba por comandos introducidos desde consola. Para facilitar la utliziación de la aplicación se decidió crear una interfaz gráfica. Con la interfaz gráfica es posible decidir, en la configuración de cada pregunta, qué campos se quieren generar aleatoriamente y cuales no, introduciendo el valor a mano en estos últimos. Por lo tanto, se cambiaron las clases anteriores de forma que esto fuese posible, y además, se creó usando \textit{JFrame} las ventanas de la interfaz, siendo necesario crear un \textit{Main} desde cero totalmente nuevo.
+    \item En un principio, estas preguntas eran las que originalmente se iban a poder generar en la aplicación. Posteriormente, se decidió añadir una nueva, bajo el título de \textit{Generación Item Sets}. Para esta pregunta se vio que se necesitaba generar un conjunto de datos de la misma forma que para la pregunta anterior. Por lo que se decidio organizar de nuevo la estructura de paquetes de forma que dentro del paquete del generador haya dos subpaquetes, uno para generar los datos y otro para generar las preguntas. En el de preguntas se colocaron los tres subpaquetes que había para cada pregunta, y en el de datos se crearon dos subpaquetes nuevos, uno para generar el conjunto de item sets y otro para generar el conjunto de datos para reglas de asociación. De esta manera, ambas preguntas pueden utilizar el mismo generador de datos sin tener que escribir el mismo código.
+    \item Una vez se terminó el programa, se incluyó un tratamiento de excepciones creando para ello una nueva clase en el dominio llamada \textit{UnexpectedException}. Esta excepción se lanza cuando el programa se encuentra con una excepción que no extiende de \textit{RunTimeException} que no sabe como tratar. De esta forma, se traduce a \textit{UnexpectedException} que sí que extiende de \textit{RunTimeException}.
+    
+\end{enumerate}
+
+\section{Proceso de generación de pregunta de reglas de asociación}
+
+En este apartado se va a explicar cómo se genera una pregunta de tipo \textit{Generación Reglas de Asociación}, ya que es la más importante del programa. La estructura es similar para el resto de preguntas.
+
+Para generar una pregunta se necesita un generador, tanto datos como de preguntas. 
+
+El generador de datos se compone de dos clases:
+
+\begin{itemize}
+    \item \textbf{GeneradorConjuntoDatos}: esta clase recibe la configuración para crear un conjunto de datos. Tiene un método public llamado \textit{crearConjuntoDatos()}. Este método llama a otros métodos private para generar crear los atributos del conjunto de datos, crear las transacciones con sus respectivos datos (pueden ser T o F) y, además, tratar atributos numéricos en caso de que haya. Esta clase utiliza la librería \textit{Weka} para generar el conjunto de datos necesario. 
+    \item \textbf{ConjuntoDatos}: esta clase se compone de:
+    \begin{itemize}
+        \item \textit{datosEnunciado}: conjunto de datos de tipo \textit{Instances} en el que los valores de los atributos numéricos se muestran en formato decimal. Es el que se muestra en el enunciado.
+        \item \textit{datosCalculos}: conjunto de datos de tipo \textit{Instances} en el que los valores de los atributos numéricos se muestran en formato nominal. Es el que se usa en el código para las operaciones necesarias.
+        \item \textit{intervalos}: cadena de texto que contiene los intervalos en los que se discretizarán los atributos numéricos. Se usa en el enunciado.
+    \end{itemize}
+\end{itemize}
+
+El generador de preguntas se compone de tres clases:
+
+\begin{itemize}
+    \item \textbf{ConfigReglasAsociacion}: contiene todos los valores de los parámetros establecidos en la ventana de configuración de la pregunta. 
+    \item \textbf{GeneradorPreguntaReglasAsociacion}: tiene un metodo public llamado \textit{generarPregunta()}. Este metodo es muy importante, ya que en él se instancia el conjunto de datos y se genera toda la pregunta como tal. Este método llama a otras funciones private, de forma que, en total, realiza los siguientes pasos:
+    \begin{enumerate}
+        \item Inicializa un objeto \textit{random} de la clase \textit{Random}, que es utilizado para generar números aleatorios.
+        \item Calcula el número de respuestas verdaderas y el número de respuestas falsas en base al número de opciones. El número de respuestas verdaderas es igual a un número aleatorio entre 1 y (\textit{numOpciones}-1) y el número de respuestas falsas es igual a \textit{numOpciones} menos el número de respuestas verdaderas.
+        \item Inicializa una variable \textit{tieneSolucion} en false.
+        \item Se entra en un bucle \textit{while} que se repetirá hasta que \textit{tieneSolucion} sea igual a true.
+        \item Se crea un objeto \textit{apriori} de la clase \textit{Apriori}. Para ello se utiliza la librería \textit{Weka}.
+        \item Se crean dos listas, \textit{reglasVerdaderas} y \textit{reglasFalsas}, que almacenarán las reglas que cumplen ciertos criterios.
+        \item Se establecen los valores para el soporte mínimo, la confianza mínima y el número de reglas en \textit{apriori}. Esto se hace para que este objeto cree reglas en base a estos valores fijos, y son siempre menores que los valores de soporte y confianza que se establecen en la configuración.
+        \item Se crea un objeto \textit{conjuntoDatos} utilizando el método \textit{crearConjuntoDatos} en el objeto \textit{gcd}.
+        \item Se obtienen los datos de cálculo utilizando el método \textit{getDatosCalculos} en \textit{conjuntoDatos}.
+        \item Se ejecuta el método \textit{buildAssociations} en \textit{apriori} utilizando los datos de cálculo, de forma que construye reglas de asociación a partir de un conjunto de datos y de los valores mínimos fijos establecidos previamente.
+        \item Se obtienen las reglas asociadas utilizando el método \textit{getAssociationRules} en \textit{apriori}.
+        \item Se recorren las reglas y se evalúan su confianza y soporte. Si la confianza y el soporte cumplen con los criterios establecidos, la regla se añade a \textit{reglasVerdaderas}, de lo contrario se añade a \textit{reglasFalsas}.
+        \item Se ejecuta el método \textit{tieneSolucion} para verificar si hay suficientes reglas para generar una pregunta con opciones de respuesta.
+        \item Si \textit{tieneSolucion} es igual a true, se generan las opciones de respuesta utilizando el método \textit{generarOpciones}.
+        \item Se establece la puntuación de las opciones verdaderas y falsas.
+        \item Se crean las opciones verdaderas y falsas a partir de las reglas verdaderas y falsas y se le asigna un peso a cada una de ellas. 
+        \item El peso de las opciones verdaderas se establece con la función establecerPuntuacion y es igual a la puntuación que se le asigna a una opción verdadera, que se obtiene multiplicando el número de opciones verdaderas por una constante. El peso de las opciones falsas se establece restando la puntuación que se le asigna a una opción falsa (obtenida de la misma forma que la verdadera) de 0.
+        \item Por último, se crea un objeto \textit{Pregunta} con las opciones generadas, un enunciado obtenido de \textit{obtenerEnunciado} y un título obtenido de \textit{obtenerTítulo}, y se retorna.
+    \end{enumerate}
+    \item \textbf{GeneradorBancoPreguntasReglasAsociacion}: implementa el método \textit{generarBancoPreguntas(T)} de la interfaz. En este caso, \textit{T} toma el valor de \textit{ConfigReglasAsociacion}. Este método comienza declarando una variable \textit{contador} que se inicializa en 0 y una lista de preguntas \textit{listaPreguntas} que se inicializa como una lista vacía. Luego, dentro de un bucle \textit{while}, se crea un objeto \textit{GeneradorPreguntaReglasAsociacion} y se usa para generar una pregunta, llamando al método explicado anteriormente, \textit{generarPregunta()}. Si esta pregunta no está en la lista de preguntas, se agrega a la lista y se incrementa el contador. El bucle se repite hasta que el contador sea igual al número de preguntas especificado en la configuración. Finalmente, se devuelve un nuevo objeto de tipo \textit{BancoPreguntas} que contiene la lista de preguntas generadas.
+\end{itemize}
+
+\section{Pruebas}
+Se generaron varios bancos de preguntas con diferentes valores para sus parámetros de todos los tipos de preguntas, y se resolvieron a mano cada una de ellas, comprobando de esta forma el correcto funcionamiento de la aplicación. Se importaron estos bancos de preguntas en \textit{Moodle} para ir comprobando que las opciones que la apliación marcaba como verdaderas, realmente lo eran, de la misma forma que para las opciones falsas.
+
