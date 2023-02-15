@@ -97,7 +97,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(Main.this, "AssoQuiz-Generator\r\n"
 						+ "\r\n"
-						+ "MIT License\r\n"
+						+ "GPL-3.0 License\r\n"
 						+ "Copyright (c) 2023 Sergio Revilla\r\n"
 						+ "\r\n"
 						+ "Desarrollo de una aplicación para la Universidad de Burgos que\r\n"

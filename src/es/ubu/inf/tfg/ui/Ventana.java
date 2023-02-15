@@ -75,6 +75,12 @@ public abstract class Ventana <T> extends JFrame {
 				if (file != null) {
 					try {
 						File fileConExtension = new File(file.getAbsolutePath() + ".xml");
+					    if (fileConExtension.exists()) {
+					        int respuesta = JOptionPane.showConfirmDialog(Ventana.this, "El archivo ya existe. ¿Desea sobreescribirlo?", "Advertencia", JOptionPane.YES_NO_OPTION);
+					        if (respuesta != JOptionPane.YES_OPTION) {
+					            return;
+					        }
+					    }
 						fileConExtension.createNewFile();
 
 						// Mostrar la barra de progreso
